@@ -53,13 +53,13 @@ This fragmentation forces teams to maintain multiple configuration files with la
 
 After installation, your CLI agent can understand commands like:
 
-- **`wake up`** - Initialize session with project status
-- **`housekeeping`** - Clean temporary files and caches
-- **`spring clean`** - Deep cleanup with archiving
-- **`documentation check`** - Analyze documentation quality
-- **`sanity check`** - Emergency diagnostics when something's wrong
-- **`wind down`** - Save session state and commit changes
-- **`sign off`** - Quick commit and push
+- **`hey`** - Initialize session with project status
+- **`tidy up`** - Clean temporary files and caches
+- **`deep clean`** - Deep cleanup with archiving
+- **`check docs`** - Analyze documentation quality
+- **`health check`** - Emergency diagnostics when something's wrong
+- **`save work`** - Save session state and commit changes
+- **`all done`** - Quick commit and push
 
 ## Features
 
@@ -141,7 +141,7 @@ your-project/
 
 1. **Agent reads AGENTS.md** - Discovers available conversational command patterns
 2. **Pattern discovery** - Agent automatically identifies workflow patterns from configuration
-3. **Natural language triggers** - You say "wake up", agent executes the corresponding pattern
+3. **Natural language triggers** - You say "hey", agent executes the corresponding pattern
 4. **Safe-by-default** - Dry-run previews, rollback support, confirmation prompts
 5. **Session persistence** - Context preservation across agent restarts
 
@@ -149,7 +149,7 @@ your-project/
 
 ### Starting a Session
 ```
-You: wake up
+You: hey
 Agent: Running wake protocol...
        ✓ Working directory: /Users/you/project
        ✓ Git status: 3 uncommitted changes
@@ -196,7 +196,7 @@ Already using the template? See [UPGRADING.md](UPGRADING.md) for how to apply te
 This repository implements [dogfooding practices](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) - it uses its own patterns for self-maintenance. To contribute:
 
 1. Fork and clone
-2. Say "wake up" to your CLI agent
+2. Say "hey" to your CLI agent
 3. Make changes following existing patterns
 4. Say "test templates" to run tests
 5. Say "wind down" to save your session

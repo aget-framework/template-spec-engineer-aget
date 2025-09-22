@@ -2,7 +2,7 @@
 
 **Get your CLI coding agent up and running in under 5 minutes** 🚀
 
-This guide will help you install and use the CLI Agent Template to transform your codebase into a conversational development environment. By the end, you'll have AI agents that understand commands like "wake up", "housekeeping", and "wind down".
+This guide will help you install and use the CLI Agent Template to transform your codebase into a conversational development environment. By the end, you'll have AI agents that understand commands like "hey", "tidy up", and "save work".
 
 ## Prerequisites
 
@@ -88,7 +88,7 @@ Launch your preferred CLI coding assistant (Claude Code, Cursor, etc.) in the pr
 
 Tell your agent:
 ```
-wake up
+hey
 ```
 
 **What happens:** The agent reads AGENTS.md, checks your project status, shows recent changes, and prepares for work.
@@ -106,7 +106,7 @@ wake up
 
 Tell your agent:
 ```
-sanity check
+health check
 ```
 
 **What happens:** Runs diagnostics to ensure Python, Git, and dependencies are properly configured.
@@ -124,7 +124,7 @@ System Status: OK
 
 Tell your agent:
 ```
-housekeeping
+tidy up
 ```
 
 **What happens:** Identifies and optionally removes temporary files, caches, and other clutter.
@@ -143,7 +143,7 @@ Clean these files? [y/N]:
 
 Tell your agent:
 ```
-wind down
+save work
 ```
 
 **What happens:** Commits changes, creates session notes, and preserves your work context.
@@ -206,13 +206,13 @@ Once installed, your CLI agent understands these conversational commands:
 
 | Command | What it does |
 |---------|-------------|
-| `wake up` | Initialize session, show project status |
-| `wind down` | Save work, commit changes, create notes |
-| `sign off` | Quick commit and push |
-| `housekeeping` | Clean temporary files and caches |
-| `spring clean` | Deep cleanup with archiving |
-| `sanity check` | Run system diagnostics |
-| `documentation check` | Analyze documentation quality |
+| `hey` | Initialize session, show project status |
+| `save work` | Save work, commit changes, create notes |
+| `all done` | Quick commit and push |
+| `tidy up` | Clean temporary files and caches |
+| `deep clean` | Deep cleanup with archiving |
+| `health check` | Run system diagnostics |
+| `check docs` | Analyze documentation quality |
 
 ## Troubleshooting
 
@@ -287,9 +287,9 @@ Now that you're up and running:
 ## Quick Tips
 
 - 🎯 **Start small**: Use the minimal template first, upgrade later
-- 🔄 **Regular sessions**: Use "wake up" and "wind down" to maintain context
+- 🔄 **Regular sessions**: Use "hey" and "save work" to maintain context
 - 📝 **Document as you go**: The patterns help maintain good documentation
-- 🧹 **Clean regularly**: Run "housekeeping" weekly to keep projects tidy
+- 🧹 **Clean regularly**: Run "tidy up" weekly to keep projects tidy
 - 🚀 **Experiment**: Try creating your own patterns in the scripts/ directory
 
 ---
