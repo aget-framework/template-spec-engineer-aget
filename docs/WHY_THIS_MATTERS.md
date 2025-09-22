@@ -26,7 +26,7 @@ You: [Frustrated typing of specific commands...]
 
 **With Templates:**
 ```
-You: housekeeping
+You: tidy up
 Agent: Running housekeeping protocol (dry-run)...
        Would remove: 127 __pycache__ files
        Would remove: 23 .pyc files
@@ -38,10 +38,10 @@ Agent: Running housekeeping protocol (dry-run)...
 
 ### 1. Zero Learning Curve
 Your CLI agent already knows:
-- `wake up` - Start working
+- `hey` - Start working
 - `run tests` - Execute test suite
-- `spring clean` - Deep cleanup
-- `sanity check` - Fix problems
+- `deep clean` - Deep cleanup
+- `health check` - Fix problems
 
 ### 2. Safety by Default
 - **Dry-run first** - See changes before they happen
@@ -82,10 +82,10 @@ Session notes track:
 
 ```bash
 # Install with defaults (standard template)
-curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
 
 # Or choose your template level:
-curl -sSL https://raw.githubusercontent.com/yourusername/cli-agent-template/main/install.sh | bash -s . minimal
+curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s . minimal
 ```
 
-Then just say "wake up" to your CLI agent. That's it.
+Then just say "hey" to your CLI agent. That's it.

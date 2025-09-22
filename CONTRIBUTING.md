@@ -5,9 +5,9 @@ Thank you for your interest in contributing! This project uses its own patterns 
 ## Quick Start
 
 1. Fork and clone the repository
-2. Tell your CLI agent: "wake up"
+2. Tell your CLI agent: "hey"
 3. Make your changes
-4. Tell your CLI agent: "wind down"
+4. Tell your CLI agent: "save work"
 5. Submit a pull request
 
 ## Development Setup
@@ -21,7 +21,7 @@ cd cli-agent-template
 python3 installer/install.py . --template standard
 
 # Start developing
-# Tell your CLI agent: "wake up"
+# Tell your CLI agent: "hey"
 ```
 
 ## Code of Conduct
