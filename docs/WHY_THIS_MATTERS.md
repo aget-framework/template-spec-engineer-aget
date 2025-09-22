@@ -82,10 +82,10 @@ Session notes track:
 
 ```bash
 # Install with defaults (standard template)
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
 
 # Or choose your template level:
-curl -sSL https://raw.githubusercontent.com/aget-framework/cli-agent-template/main/install.sh | bash -s . minimal
+curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash -s . minimal
 ```
 
 Then just say "hey" to your CLI agent. That's it.
