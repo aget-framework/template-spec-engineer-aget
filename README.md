@@ -76,21 +76,39 @@ After installation, your CLI agent can understand commands like:
 Basic setup with session management only. Perfect for small projects.
 
 ```bash
+# After repository goes public:
 curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash -s . minimal
+
+# For now, use git clone method:
+git clone https://github.com/aget-framework/aget-cli-agent-template.git
+cd aget-cli-agent-template
+python3 installer/install.py /path/to/your/project --template minimal
 ```
 
 ### Standard (15+ patterns) - Recommended
 Full conversational interface with housekeeping and documentation checks.
 
 ```bash
+# After repository goes public:
 curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
+
+# For now, use git clone method:
+git clone https://github.com/aget-framework/aget-cli-agent-template.git
+cd aget-cli-agent-template
+python3 installer/install.py /path/to/your/project --template standard
 ```
 
 ### Advanced (25+ patterns)
 Everything including CI/CD integration, advanced testing, and compliance checks.
 
 ```bash
+# After repository goes public:
 curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash -s . advanced
+
+# For now, use git clone method:
+git clone https://github.com/aget-framework/aget-cli-agent-template.git
+cd aget-cli-agent-template
+python3 installer/install.py /path/to/your/project --template advanced
 ```
 
 ## Supported CLI Agents
