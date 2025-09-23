@@ -42,6 +42,7 @@ class ProjectScanner:
             "patterns_found": [],
             "migration_complexity": "unknown",
             "v1_adoption_level": 0,
+            "cross_project_risks": [],
             "notes": []
         }
 
@@ -57,13 +58,29 @@ class ProjectScanner:
             scan["v1_adoption_level"] += 30
             scan["patterns_found"].append("agents-config")
 
+            # Check for dangerous cross-project symlinks
+            if agents_md.is_symlink():
+                target = agents_md.resolve()
+                if not str(target).startswith(str(path)):
+                    scan["cross_project_risks"].append(
+                        f"⚠️ AGENTS.md symlinks to {target} (cross-project dependency!)"
+                    )
+                    scan["migration_complexity"] = "critical"
+
         if claude_md.exists():
             scan["has_claude_md"] = True
             scan["v1_adoption_level"] += 20
             scan["patterns_found"].append("claude-config")
             # Check if it's a symlink to AGENTS.md
             if claude_md.is_symlink():
-                scan["notes"].append("CLAUDE.md is symlink (good)")
+                target = claude_md.resolve()
+                if target.name == "AGENTS.md" and target.parent == path:
+                    scan["notes"].append("CLAUDE.md → AGENTS.md symlink (✅ correct)")
+                else:
+                    scan["cross_project_risks"].append(
+                        f"⚠️ CLAUDE.md symlinks to {target} (cross-project dependency!)"
+                    )
+                    scan["migration_complexity"] = "critical"
 
         if scripts_dir.exists() and scripts_dir.is_dir():
             scan["has_scripts_dir"] = True
@@ -188,6 +205,10 @@ class ProjectScanner:
             notes = project.get('notes', [])
             for note in notes:
                 print(f"   📝 {note}")
+
+            risks = project.get('cross_project_risks', [])
+            for risk in risks:
+                print(f"   🚨 RISK: {risk}")
 
         if "summary" in self.results:
             summary = self.results["summary"]
