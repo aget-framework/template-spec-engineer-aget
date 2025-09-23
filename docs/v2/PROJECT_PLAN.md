@@ -198,10 +198,11 @@ class AgetCLI:
 - User acceptance tests
 - **Subcommand routing tests (internal)**
 
-## 6. Go/No-Go Decision Gates
+## 6. Go/No-Go Decision Gates & Release Points
 
-### Gate 1: Core CLI Complete
+### Gate 1: Core CLI Complete → v2.0-alpha
 **When**: End of Phase 1
+**Release**: v2.0-alpha (internal use)
 **Go Criteria**:
 - [ ] All 5 commands execute without error
 - [ ] Backup/rollback mechanism works
@@ -209,32 +210,37 @@ class AgetCLI:
 - [ ] Clean error messages
 - [ ] Internal routing supports future expansion
 
-### Gate 2: Pattern System Ready
+### Gate 2: Pattern System Ready → v2.0-beta
 **When**: End of Phase 2
+**Release**: v2.0-beta (close collaborators)
 **Go Criteria**:
 - [ ] 10+ patterns validated
 - [ ] Conflicts detected correctly
 - [ ] Business rules enforced
 - [ ] Suggestion algorithm works
 
-### Gate 3: Migration Tested
+### Gate 3: Migration Tested → (Internal Checkpoint)
 **When**: End of Phase 2.5
+**Release**: None - internal validation only
+**Rationale**: Migration tools tested but not released publicly
 **Go Criteria**:
 - [ ] All 14 projects analyzed
 - [ ] Migration plans generated
 - [ ] CCB successfully migrated
 - [ ] No data loss
 
-### Gate 4: First User Test
+### Gate 4: First User Test → v2.0-rc
 **When**: Before Phase 5
+**Release**: v2.0-rc (release candidate, external testers)
 **Go Criteria**:
 - [ ] Internal dogfooding successful
 - [ ] 60-second onboarding achieved
 - [ ] All commands documented
 - [ ] Future expansion path validated
 
-### Gate 5: Release Candidate
+### Gate 5: Release Ready → v2.0
 **When**: End of Phase 5
+**Release**: v2.0 (public release)
 **Go Criteria**:
 - [ ] 5 external users successful
 - [ ] All tests passing
