@@ -48,13 +48,13 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 
 ## Implementation Phases - Unified Plan
 
-### Phase 1: Complete CLI Core (Week 1) ✅
+### Phase 1: Complete CLI Core (Week 1-2) ✅
 **Goal**: Finish original v2 charter commitments
-**Hours**: ~24 used (of 40 allocated)
+**Hours**: ~27.5 used (of 40 allocated)
 
 - [x] Gate 1: Core CLI foundation (alpha released)
-- [x] Gate 2: Pattern library (8 patterns, tests complete)
-- [ ] Gate 3: Migration tools
+- [x] Gate 2: Pattern library (8 patterns functional, apply/list working)
+- [ ] Gate 3: Migration tools (next priority)
 - [x] Success criteria: <60 second setup achieved
 
 ### Phase 2: Framework Documentation (Week 1-2) ✅
@@ -160,8 +160,8 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 ## Hours Tracking
 
 **Charter Commitment**: 120 hours total
-- Spent: ~29 hours (Gate 1: 19h, Gate 2: 10h)
-- Remaining: ~91 hours
+- Spent: ~32.5 hours (Gate 1: 19h, Gate 2: 13.5h)
+- Remaining: ~87.5 hours
 
 **Framework Addition**: ~40 hours estimated
 - Documentation: 10 hours

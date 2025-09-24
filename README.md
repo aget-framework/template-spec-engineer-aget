@@ -116,18 +116,19 @@ cd aget-cli-agent-template
 python3 installer/install.py /path/to/your/project --template advanced
 ```
 
-## What's New in v2 (Alpha)
+## What's New in v2 (Beta Ready - Gate 2 Complete)
 
-### 🚀 New CLI Commands
-- `aget init` - Initialize agent configuration with directory structure
-- `aget apply <pattern>` - Apply reusable patterns to your project
-- `aget rollback` - Safe rollback mechanism for configurations
+### 🚀 Working CLI Commands
+- `aget init` - Initialize agent configuration with directory structure ✅
+- `aget apply <pattern>` - Apply reusable patterns to your project ✅
+- `aget list` - Discover available patterns ✅
+- `aget rollback` - Safe rollback mechanism for configurations ✅
 
-### 📦 Pattern Library (8 patterns available)
-- **Session Patterns**: wake, wind_down, sign_off
-- **Housekeeping**: cleanup, doc_check, migration_cleanup
-- **Bridge Pattern**: extract_output (outputs→Outputs transformation)
-- **Meta**: project_scanner
+### 📦 Pattern Library (8 patterns functional)
+- **Session Patterns**: wake, wind_down, sign_off - Start and manage agent sessions
+- **Housekeeping**: cleanup, doc_check, migration_cleanup - Maintain project health
+- **Bridge Pattern**: extract_output - Transform private outputs→public Outputs
+- **Meta**: project_scanner - Multi-project management
 
 ### 🌉 Framework Vision
 - Transform agent outputs into public products
