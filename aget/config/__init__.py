@@ -55,9 +55,30 @@ Config Module Commands:
             return 1
 
     def cmd_validate(self, args: List[str]) -> int:
-        """Validate command - placeholder."""
-        print("Validate command - coming in Step 3")
-        return 0
+        """Validate command - validate AGET configuration."""
+        from aget.config.commands.validate import ValidateCommand
+        cmd = ValidateCommand()
+        result = cmd.execute(args=args)
+
+        if result['success']:
+            print(f"✅ Validation passed ({result['checks_passed']}/{result['checks_total']} checks)")
+            if result.get('warnings'):
+                print(f"⚠️  {len(result['warnings'])} warnings found")
+            if result.get('execution_time', 0) < 2.0:
+                print(f"⚡ Completed in {result.get('execution_time', 0):.2f}s")
+            return 0
+        else:
+            errors = result.get('errors', [])
+            if errors:
+                print(f"❌ Validation failed: {len(errors)} errors")
+                for error in errors[:3]:  # Show first 3 errors
+                    print(f"   • {error}")
+            else:
+                # Failed due to warnings in strict mode
+                print(f"❌ Validation failed (strict mode): {len(result.get('warnings', []))} warnings")
+                for warning in result.get('warnings', [])[:3]:
+                    print(f"   • {warning}")
+            return 1
 
     def cmd_apply(self, args: List[str]) -> int:
         """Apply command - apply patterns to configuration."""
