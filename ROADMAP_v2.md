@@ -50,12 +50,13 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 
 ### Phase 1: Complete CLI Core (Week 1-2) ✅
 **Goal**: Finish original v2 charter commitments
-**Hours**: ~27.5 used (of 40 allocated)
+**Hours**: ~42.5 used (Gate 1: 19h, Gate 2: 13.5h, Pattern Polish: 10h)
 
-- [x] Gate 1: Core CLI foundation (alpha released)
-- [x] Gate 2: Pattern library (8 patterns functional, apply/list working)
-- [ ] Gate 3: Migration tools (next priority)
-- [x] Success criteria: <60 second setup achieved
+- [x] Gate 1: Core CLI foundation (alpha released) ✅
+- [x] Gate 2: Pattern library (8 patterns functional, apply/list working) ✅
+- [x] Pattern Polish: 91 tests, aget validate, best practices ✅
+- [ ] Gate 3: Migration tools (next priority - REFINED PLAN BELOW)
+- [x] Success criteria: <60 second setup achieved ✅
 
 ### Phase 2: Framework Documentation (Week 1-2) ✅
 **Goal**: Codify the evolved vision
@@ -68,15 +69,58 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 - [ ] DIRECTORY_STANDARDS.md (tiered templates)
 - [ ] ORIGIN_STORY.md (the 90-minute sprint)
 
-### Phase 3: First Agent with CLI (Week 2) 🎯
+### Phase 3: First Agent with CLI (Week 2) ✅
 **Goal**: Use CLI to create first framework agent
-**Hours**: ~15
+**Hours**: ~15 (Actually: 2 hours)
 
-- [ ] Use `aget init` to create llm-manager-aget
-- [ ] Apply standard template pattern
-- [ ] Implement OpenAI spend tracking
-- [ ] Establish .aget/evolution/ pattern
-- [ ] Test CLI + Framework integration
+- [x] Use `aget init` to create llm-manager-aget ✅
+- [x] Apply standard template pattern ✅
+- [x] Implement OpenAI spend tracking ✅
+- [x] Establish .aget/evolution/ pattern ✅
+- [x] Test CLI + Framework integration ✅
+- [x] Successfully extracted public Output (llm-cost-analyzer) ✅
+
+**Lessons Learned**:
+- Directory scaffolding needed (src/, outputs/, Outputs/)
+- Bridge mechanism works but needs automation
+- Evolution tracking invaluable but needs templates
+
+### Gate 3: Migration Tools - REFINED PLAN (Week 3)
+**Goal**: Help users migrate to v2 with learnings from llm-manager-aget
+**Hours**: ~18 (increased from 15)
+
+#### Core Migration Tools (10 hours)
+- [ ] `aget migrate` - v1→v2 migration wizard
+- [ ] Compatibility checker for existing projects
+- [ ] CLAUDE.md → AGENTS.md intelligent converter
+- [ ] Migration report generator
+
+#### Scaffolding System (3 hours) - NEW
+- [ ] `aget init --template agent` - Full agent structure
+- [ ] `aget init --template tool` - Tool structure
+- [ ] `aget init --template hybrid` - Combined structure
+- [ ] Auto-create: src/, outputs/, Outputs/, .aget/evolution/
+- [ ] Add README.md in each directory explaining purpose
+
+#### Bridge Formalization (3 hours) - NEW
+- [ ] `aget extract --from outputs/ --to Outputs/` command
+- [ ] `aget extract --auto` - Scan and suggest extractions
+- [ ] Extraction rules engine (remove secrets, simplify APIs)
+- [ ] Auto-generate setup.py and README
+- [ ] Document extraction in evolution
+
+#### Evolution Templates (2 hours) - NEW
+- [ ] `aget evolution --type decision` - Decision tracking
+- [ ] `aget evolution --type discovery` - Pattern discovery
+- [ ] `aget evolution --type extraction` - Bridge records
+- [ ] Timestamped, formatted entries in .aget/evolution/
+- [ ] Evolution viewer command
+
+**Success Criteria**:
+- Second agent creation time: <30 minutes (vs 2 hours for first)
+- Zero manual directory creation needed
+- Bridge extraction automated
+- Evolution captured consistently
 
 ### Phase 4: Bridge Mechanism (Week 3)
 **Goal**: Prove private→public extraction
@@ -151,17 +195,18 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 - [ ] First 5 users successfully onboard
 
 ### Framework Goals (Aspirational)
-- [ ] 3+ agents using framework patterns
-- [ ] 1+ public Output extracted from agent
-- [ ] Bridge mechanism documented and proven
-- [ ] Evolution capture working
+- [x] 1+ agents using framework patterns (llm-manager-aget) ✅
+- [x] 1+ public Output extracted from agent (llm-cost-analyzer) ✅
+- [x] Bridge mechanism documented and proven ✅
+- [x] Evolution capture working ✅
+- [ ] 3+ agents total
 - [ ] Agent→Output registry established
 
 ## Hours Tracking
 
 **Charter Commitment**: 120 hours total
-- Spent: ~32.5 hours (Gate 1: 19h, Gate 2: 13.5h)
-- Remaining: ~87.5 hours
+- Spent: ~44.5 hours (Gate 1: 19h, Gate 2: 13.5h, Polish: 10h, Agent: 2h)
+- Remaining: ~75.5 hours
 
 **Framework Addition**: ~40 hours estimated
 - Documentation: 10 hours
@@ -193,7 +238,7 @@ For existing users of v1:
 - [ ] Output Registry
 
 ### Example Agents
-- [ ] llm-manager-aget (cost tracking)
+- [x] llm-manager-aget (cost tracking) ✅
 - [ ] datgen-aget (guardian/enhancer)
 - [ ] spotify-aget (renamed from agent-music)
 
