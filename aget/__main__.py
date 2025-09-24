@@ -50,7 +50,7 @@ class AgetCLI:
             return self.show_help()
 
         # v2.0: Direct command routing (backward compatible)
-        v2_commands = ['init', 'validate', 'apply', 'rollback', 'list', 'evolution']
+        v2_commands = ['init', 'validate', 'apply', 'rollback', 'list', 'evolution', 'extract']
         if command in v2_commands:
             return self.modules['config'].handle(command, args[1:])
 
@@ -79,6 +79,7 @@ Commands:
   rollback    Restore previous configuration
   list        List available patterns
   evolution   Track decisions and discoveries
+  extract     Bridge workspace tools to products
 
 Options:
   --version   Show version information

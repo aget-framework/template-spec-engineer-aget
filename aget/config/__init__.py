@@ -18,6 +18,7 @@ class ConfigModule:
             'rollback': self.cmd_rollback,
             'list': self.cmd_list,
             'evolution': self.cmd_evolution,
+            'extract': self.cmd_extract,
         }
 
     def handle(self, command: str, args: List[str]) -> int:
@@ -38,6 +39,7 @@ Config Module Commands:
   rollback    Restore previous configuration
   list        List available patterns
   evolution   Track decisions and discoveries
+  extract     Bridge workspace tools to products
 """)
         return 0
 
@@ -159,4 +161,32 @@ Config Module Commands:
             return 0
         else:
             print(f"❌ Error: {result.get('error', 'Unknown error')}")
+            return 1
+
+    def cmd_extract(self, args: List[str]) -> int:
+        """Extract command - bridge workspace tools to products."""
+        from aget.config.commands.extract import ExtractCommand
+        cmd = ExtractCommand()
+        result = cmd.execute(args=args)
+
+        if result['success']:
+            if 'message' in result:
+                print(result['message'])
+            if 'files_created' in result:
+                print(f"✅ Created {len(result['files_created'])} files")
+                for file in result['files_created']:
+                    print(f"   • {file}")
+            if 'warnings' in result and result['warnings']:
+                print(f"⚠️  {len(result['warnings'])} warnings:")
+                for warning in result['warnings']:
+                    print(f"   • {warning}")
+            if result.get('execution_time', 0) < 2.0 and 'execution_time' in result:
+                print(f"⚡ Completed in {result.get('execution_time', 0):.2f}s")
+            return 0
+        else:
+            print(f"❌ Error: {result.get('error', 'Unknown error')}")
+            if 'internal_deps' in result:
+                print(f"   Internal dependencies found:")
+                for dep in result['internal_deps']:
+                    print(f"   • {dep}")
             return 1
