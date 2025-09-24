@@ -15,12 +15,50 @@ class InitCommand(BaseCommand):
     """Initialize agent configuration with appropriate tier."""
 
     def __init__(self):
-        """Initialize with default template."""
+        """Initialize with template options."""
         super().__init__()
+
+        # Template configurations
+        # Note: Using 'workspace' for private and 'products' for public
+        # to avoid case sensitivity issues on macOS/Windows
+        self.templates = {
+            'minimal': {
+                'dirs': ['.aget', '.aget/evolution'],
+                'description': 'Basic agent configuration'
+            },
+            'standard': {
+                'dirs': ['.aget', '.aget/evolution', 'workspace', 'data'],
+                'description': 'Standard workspace with outputs and data'
+            },
+            'agent': {
+                'dirs': [
+                    '.aget', '.aget/evolution', '.aget/checkpoints',
+                    'src', 'workspace', 'products', 'data',
+                    'docs', 'tests'
+                ],
+                'description': 'Full autonomous agent structure'
+            },
+            'tool': {
+                'dirs': [
+                    '.aget', '.aget/evolution',
+                    'src', 'products', 'docs', 'tests'
+                ],
+                'description': 'Tool/library development structure'
+            },
+            'hybrid': {
+                'dirs': [
+                    '.aget', '.aget/evolution', '.aget/checkpoints',
+                    'src', 'workspace', 'products', 'data',
+                    'docs', 'tests', 'examples'
+                ],
+                'description': 'Combined agent and tool structure'
+            }
+        }
+
         self.default_template = """# Agent Configuration
 
 ## Project Context
-{project_name} - Created with AGET v2
+{project_name} - Created with AGET v2 ({template_type} template)
 
 ## Session Management Protocols
 
@@ -42,13 +80,13 @@ When user says "sign off" or "all done":
 - No questions
 
 ## Directory Structure
-- `outputs/` - Agent's internal workspace (private explorations)
-- `data/` - Persistent data storage
-- `.aget/evolution/` - Evolution and insights capture
+{directory_structure}
 
 ## Vocabulary Note
-- `outputs/` = Your agent's private workspace for exploration
-- `Outputs` = Public products your agent creates/maintains for others
+- `workspace/` = Your agent's private workspace for exploration
+- `products/` = Public products your agent creates/maintains for others
+- `src/` = Source code for your agent/tool
+- `.aget/evolution/` = Decision and discovery tracking
 
 ## Available Patterns
 Run `aget list` to see available patterns you can apply.
@@ -59,7 +97,7 @@ Run `aget list` to see available patterns you can apply.
 
     def tier_basic(self, **kwargs) -> Dict[str, Any]:
         """
-        Basic tier - Create AGENTS.md and .aget/ directory.
+        Basic tier - Create AGENTS.md and directories based on template.
         No external tools required.
         """
         args = kwargs.get('args', [])
@@ -67,8 +105,22 @@ Run `aget list` to see available patterns you can apply.
         # Determine project path
         project_path = Path.cwd()
         if args and len(args) > 0:
-            if args[0] != '.':
+            if args[0] != '.' and not args[0].startswith('--'):
                 project_path = Path(args[0])
+
+        # Parse template option
+        template_type = 'standard'  # default
+        for i, arg in enumerate(args):
+            if arg == '--template' and i + 1 < len(args):
+                template_type = args[i + 1]
+                break
+
+        # Validate template
+        if template_type not in self.templates:
+            return {
+                'success': False,
+                'error': f'Invalid template: {template_type}. Options: {", ".join(self.templates.keys())}'
+            }
 
         # Create AGENTS.md
         agents_file = project_path / "AGENTS.md"
@@ -78,33 +130,39 @@ Run `aget list` to see available patterns you can apply.
                 'error': 'AGENTS.md already exists. Use --force to overwrite.'
             }
 
-        # Create .aget directory for state
-        aget_dir = project_path / ".aget"
-        aget_dir.mkdir(exist_ok=True)
+        # Create directories based on template
+        template_config = self.templates[template_type]
+        created_dirs = []
+        for dir_path in template_config['dirs']:
+            full_path = project_path / dir_path
+            full_path.mkdir(parents=True, exist_ok=True)
+            created_dirs.append(dir_path)
 
-        # Create .aget/evolution directory for capturing insights
-        evolution_dir = aget_dir / "evolution"
-        evolution_dir.mkdir(exist_ok=True)
+            # Add README.md to key directories
+            readme_content = self._get_readme_content(dir_path)
+            if readme_content:
+                readme_file = full_path / "README.md"
+                if not readme_file.exists():
+                    readme_file.write_text(readme_content)
 
-        # Create outputs directory for agent's internal workspace
-        outputs_dir = project_path / "outputs"
-        outputs_dir.mkdir(exist_ok=True)
-
-        # Create data directory for persistent data storage
-        data_dir = project_path / "data"
-        data_dir.mkdir(exist_ok=True)
+        # Generate directory structure documentation
+        directory_docs = self._generate_directory_docs(template_type)
 
         # Write AGENTS.md
         content = self.default_template.format(
-            project_name=project_path.name
+            project_name=project_path.name,
+            template_type=template_type,
+            directory_structure=directory_docs
         )
         agents_file.write_text(content)
 
         # Create version tracking
+        aget_dir = project_path / ".aget"
         version_file = aget_dir / "version.json"
         version_data = {
             "aget_version": "2.0.0-alpha",
-            "created": "2025-09-22",
+            "created": "2025-09-24",
+            "template": template_type,
             "tier": "basic"
         }
         import json
@@ -124,16 +182,146 @@ Run `aget list` to see available patterns you can apply.
 
         return {
             'success': True,
-            'message': f'Created AGENTS.md in {project_path}',
-            'files_created': [
-                'AGENTS.md',
-                '.aget/',
-                '.aget/evolution/',
-                'outputs/',
-                'data/',
-                'CLAUDE.md'
-            ]
+            'message': f'Created {template_type} template in {project_path}',
+            'template': template_type,
+            'description': template_config['description'],
+            'files_created': ['AGENTS.md', 'CLAUDE.md'] + created_dirs
         }
+
+    def _get_readme_content(self, dir_path: str) -> str:
+        """Generate README content for specific directories."""
+        readmes = {
+            'workspace': """# Workspace Directory
+
+This is your agent's private workspace for exploration and experimentation.
+
+## Purpose
+- Internal tools and scripts
+- Work-in-progress code
+- Experimental features
+- Private explorations
+
+## Note
+Content here is NOT intended for public use. When ready to share,
+use `aget extract` to move to products/ directory.
+""",
+            'products': """# Products Directory (Public)
+
+This directory contains public products created and maintained by the agent.
+
+## Purpose
+- Standalone tools ready for public use
+- Extracted and sanitized utilities
+- Documentation and examples
+- Published packages
+
+## Publishing
+Use `aget extract --from workspace/ --to products/` to promote internal
+tools to public products.
+""",
+            'src': """# Source Code
+
+Main source code for this project.
+
+## Structure
+Organize by functionality or component as appropriate for your project.
+""",
+            '.aget/evolution': """# Evolution Tracking
+
+This directory captures the agent's decision-making process and discoveries.
+
+## Entry Types
+- **decisions/** - Architectural and design decisions
+- **discoveries/** - Patterns and insights found
+- **extractions/** - Records of outputs→Outputs promotions
+
+## Usage
+Use `aget evolution --type <type>` to add entries.
+""",
+            'data': """# Data Directory
+
+Persistent data storage for the agent.
+
+## Usage
+- Configuration files
+- Cached data
+- Training data
+- Results and metrics
+""",
+            'tests': """# Tests Directory
+
+Test suite for this project.
+
+## Running Tests
+```bash
+python -m pytest tests/
+```
+""",
+            'docs': """# Documentation
+
+Project documentation and guides.
+
+## Contents
+- Architecture documentation
+- API references
+- User guides
+- Development notes
+""",
+            'examples': """# Examples
+
+Example usage and demonstrations.
+
+## Purpose
+- Show how to use the tools/agent
+- Provide templates for common tasks
+- Demonstrate best practices
+"""
+        }
+
+        # Return content if we have it, otherwise None
+        return readmes.get(dir_path)
+
+    def _generate_directory_docs(self, template_type: str) -> str:
+        """Generate directory structure documentation for AGENTS.md."""
+        docs = {
+            'minimal': """- `.aget/` - Framework metadata and configuration
+- `.aget/evolution/` - Decision and discovery tracking""",
+
+            'standard': """- `.aget/` - Framework metadata and configuration
+- `.aget/evolution/` - Decision and discovery tracking
+- `workspace/` - Agent's internal workspace (private explorations)
+- `data/` - Persistent data storage""",
+
+            'agent': """- `.aget/` - Framework metadata and configuration
+- `.aget/evolution/` - Decision and discovery tracking
+- `.aget/checkpoints/` - Agent state checkpoints
+- `src/` - Agent source code
+- `workspace/` - Internal workspace for explorations
+- `products/` - Public products the agent maintains
+- `data/` - Persistent data storage
+- `docs/` - Documentation
+- `tests/` - Test suite""",
+
+            'tool': """- `.aget/` - Framework metadata and configuration
+- `.aget/evolution/` - Decision and discovery tracking
+- `src/` - Tool source code
+- `products/` - Public tool/library
+- `docs/` - Documentation
+- `tests/` - Test suite""",
+
+            'hybrid': """- `.aget/` - Framework metadata and configuration
+- `.aget/evolution/` - Decision and discovery tracking
+- `.aget/checkpoints/` - Agent state checkpoints
+- `src/` - Source code for agent and tools
+- `workspace/` - Internal workspace for explorations
+- `products/` - Public products maintained
+- `data/` - Persistent data storage
+- `docs/` - Documentation
+- `tests/` - Test suite
+- `examples/` - Usage examples"""
+        }
+
+        return docs.get(template_type, docs['standard'])
 
     def tier_git(self, **kwargs) -> Dict[str, Any]:
         """
@@ -146,8 +334,11 @@ Run `aget list` to see available patterns you can apply.
 
         args = kwargs.get('args', [])
         project_path = Path.cwd()
-        if args and len(args) > 0 and args[0] != '.':
+        if args and len(args) > 0 and args[0] != '.' and not args[0].startswith('--'):
             project_path = Path(args[0])
+
+        # Get template type to add appropriate ignores
+        template_type = result.get('template', 'standard')
 
         # Update .gitignore
         gitignore = project_path / ".gitignore"
@@ -155,13 +346,35 @@ Run `aget list` to see available patterns you can apply.
             "# AGET files",
             ".aget/backups/",
             ".aget/cache/",
-            ".session_state.json"
+            ".aget/checkpoints/",
+            ".session_state.json",
+            "",
+            "# Python",
+            "__pycache__/",
+            "*.py[cod]",
+            "*$py.class",
+            ".pytest_cache/",
+            "",
+            "# Environment",
+            ".env",
+            "venv/",
+            "env/",
         ]
+
+        # Add template-specific ignores
+        if template_type in ['agent', 'hybrid']:
+            ignore_lines.extend([
+                "",
+                "# Agent workspace",
+                "workspace/.tmp/",
+                "workspace/*.log",
+                "workspace/__pycache__/",
+            ])
 
         if gitignore.exists():
             content = gitignore.read_text()
             for line in ignore_lines:
-                if line not in content:
+                if line and line not in content:
                     content += f"\n{line}"
             gitignore.write_text(content)
         else:
@@ -197,7 +410,7 @@ Run `aget list` to see available patterns you can apply.
 
         args = kwargs.get('args', [])
         project_path = Path.cwd()
-        if args and len(args) > 0 and args[0] != '.':
+        if args and len(args) > 0 and args[0] != '.' and not args[0].startswith('--'):
             project_path = Path(args[0])
 
         # Create .github/ISSUE_TEMPLATE for agent error reporting

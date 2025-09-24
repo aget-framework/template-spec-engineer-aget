@@ -5,6 +5,40 @@ All notable changes to AGET will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0-beta.1] - 2025-09-24
+
+### Gate 3: Migration Tools - Scaffolding System
+
+#### Added
+- **Template-based Scaffolding System**:
+  - Five templates: `minimal`, `standard` (default), `agent`, `tool`, `hybrid`
+  - `aget init --template <type>` creates appropriate directory structure
+  - Auto-generates README.md files in key directories
+  - Template-specific .gitignore patterns
+  - Version tracking includes template information
+
+- **Directory Structure Improvements**:
+  - Renamed `outputs/` → `workspace/` (private exploration)
+  - Renamed `Outputs/` → `products/` (public products)
+  - Fixes case-sensitivity issues on macOS/Windows
+  - Clear vocabulary distinction between private and public
+
+- **Template Features**:
+  - **Minimal**: Basic .aget/ and AGENTS.md only
+  - **Standard**: Adds workspace/ and data/ directories
+  - **Agent**: Full structure with checkpoints, src, tests, docs
+  - **Tool**: Focused on products/ without workspace/
+  - **Hybrid**: Combines agent and tool with examples/
+
+#### Testing
+- 13 new scaffolding tests covering all templates
+- Validates directory creation, README generation, and configuration
+
+#### Documentation
+- Added comprehensive [SCAFFOLDING.md](docs/SCAFFOLDING.md)
+- Updated vocabulary throughout codebase
+- Clear migration path from v1 naming conventions
+
 ## [2.0.0-alpha.2] - 2025-09-24
 
 ### Gate 2: Pattern Library Complete
