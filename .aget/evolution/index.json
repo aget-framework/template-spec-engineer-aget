@@ -1,6 +1,18 @@
 {
   "entries": [
     {
+      "filename": "2025-09-24-164324-679361-DISC.md",
+      "type": "discovery",
+      "title": "Template system enables 30-second setup",
+      "created": "2025-09-24T16:43:24.679832"
+    },
+    {
+      "filename": "2025-09-24-164251-880253-DEC.md",
+      "type": "decision",
+      "title": "Completed scaffolding system and evolution templat...",
+      "created": "2025-09-24T16:42:51.881252"
+    },
+    {
       "filename": "2025-09-24-160542-871674-DISC.md",
       "type": "discovery",
       "title": "Claude Code architecture reveals: 90% self-written...",
@@ -20,10 +32,10 @@
     }
   ],
   "stats": {
-    "total": 3,
+    "total": 5,
     "by_type": {
-      "decision": 1,
-      "discovery": 2
+      "decision": 2,
+      "discovery": 3
     }
   }
 }
