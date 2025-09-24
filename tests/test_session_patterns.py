@@ -10,6 +10,8 @@ import time
 
 sys.path.insert(0, '.')
 from patterns.session.wake import WakeProtocol
+from patterns.session.wind_down import WindDownProtocol
+from patterns.session.sign_off import SignOffProtocol
 
 
 def create_test_project(tmpdir: Path):
@@ -179,6 +181,135 @@ def test_wake_protocol_performance():
         print(f"✅ Performance: {duration:.3f}s (requirement: <2s)")
 
 
+def test_wind_down_protocol():
+    """Test wind down protocol."""
+    print("\nTesting wind down protocol...")
+    print("-" * 40)
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        project = create_test_project(Path(tmpdir))
+
+        # First run wake
+        wake = WakeProtocol(project)
+        wake_result = wake.execute()
+        assert wake_result['session_number'] == 1
+
+        # Create a change to commit
+        (project / "test_file.txt").write_text("test content")
+
+        # Run wind down
+        wind_down = WindDownProtocol(project)
+        result = wind_down.execute()
+
+        assert result['status'] == 'completed'
+        assert 'actions' in result
+
+        # Check that actions were taken
+        actions = {a['action']: a for a in result['actions']}
+        assert 'git_commit' in actions
+        assert 'session_notes' in actions
+        assert 'run_tests' in actions
+
+        # Check session notes were created
+        session_notes = project / "SESSION_NOTES"
+        assert session_notes.exists(), "SESSION_NOTES directory should exist"
+
+        # Check state was updated
+        state_file = project / ".session_state.json"
+        state = json.loads(state_file.read_text())
+        assert 'last_wind_down' in state
+        assert 'end_time' in state['current_session']
+
+        print("✅ Wind down protocol works")
+
+
+def test_wind_down_no_changes():
+    """Test wind down with no uncommitted changes."""
+    print("\nTesting wind down with clean repo...")
+    print("-" * 40)
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        project = create_test_project(Path(tmpdir))
+
+        wind_down = WindDownProtocol(project)
+        result = wind_down.execute()
+
+        # Should still complete successfully
+        assert result['status'] == 'completed'
+
+        # Check git commit action shows no changes
+        actions = {a['action']: a for a in result['actions']}
+        git_action = actions.get('git_commit', {})
+        assert git_action.get('reason') == 'no changes' or git_action.get('success')
+
+        print("✅ Handles clean repository correctly")
+
+
+def test_session_lifecycle():
+    """Test complete session lifecycle: wake → work → wind_down."""
+    print("\nTesting complete session lifecycle...")
+    print("-" * 40)
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        project = create_test_project(Path(tmpdir))
+
+        # 1. Wake up
+        wake = WakeProtocol(project)
+        wake_result = wake.execute()
+        assert wake_result['session_number'] == 1
+        assert wake_result['status'] == 'ready'
+
+        # 2. Do some work (simulate)
+        time.sleep(0.1)  # Brief pause to have measurable duration
+        (project / "work.txt").write_text("work done")
+
+        # 3. Wind down
+        wind_down = WindDownProtocol(project)
+        wind_result = wind_down.execute()
+        assert wind_result['status'] == 'completed'
+        assert wind_result['session_number'] == 1
+
+        # 4. Check state consistency
+        state_file = project / ".session_state.json"
+        state = json.loads(state_file.read_text())
+        assert state['session_count'] == 1
+        assert state['last_wake'] is not None
+        assert state['last_wind_down'] is not None
+
+        print("✅ Complete lifecycle works correctly")
+
+
+def test_sign_off_protocol():
+    """Test sign off protocol - quick save and exit."""
+    print("\nTesting sign off protocol...")
+    print("-" * 40)
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        project = create_test_project(Path(tmpdir))
+
+        # Create a change
+        (project / "quick_work.txt").write_text("quick save needed")
+
+        # Run sign off
+        sign_off = SignOffProtocol(project)
+        result = sign_off.execute()
+
+        assert result['status'] == 'signed_off'
+        assert 'actions' in result
+
+        # Check that quick commit was attempted
+        actions = {a['action']: a for a in result['actions'] if 'action' in a}
+        assert 'quick_commit' in actions or 'push' in actions
+
+        # Check state was updated
+        state_file = project / ".session_state.json"
+        if state_file.exists():
+            state = json.loads(state_file.read_text())
+            assert 'last_sign_off' in state
+
+        print("✅ Sign off protocol works")
+
+
 if __name__ == "__main__":
     print("🌅 Session Pattern Tests")
     print("=" * 40)
@@ -188,6 +319,10 @@ if __name__ == "__main__":
     test_session_state_persistence()
     test_git_dirty_detection()
     test_wake_protocol_performance()
+    test_wind_down_protocol()
+    test_wind_down_no_changes()
+    test_session_lifecycle()
+    test_sign_off_protocol()
 
     print("\n" + "=" * 40)
     print("✅ ALL SESSION PATTERN TESTS PASSED")

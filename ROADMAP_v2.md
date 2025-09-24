@@ -48,24 +48,25 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 
 ## Implementation Phases - Unified Plan
 
-### Phase 1: Complete CLI Core (Week 1) 🚧
+### Phase 1: Complete CLI Core (Week 1) ✅
 **Goal**: Finish original v2 charter commitments
-**Hours**: ~25 (of 40 allocated)
+**Hours**: ~24 used (of 40 allocated)
 
 - [x] Gate 1: Core CLI foundation (alpha released)
-- [ ] Gate 2: Pattern library (35 hours)
+- [x] Gate 2: Pattern library (8 patterns, tests complete)
 - [ ] Gate 3: Migration tools
-- [ ] Success criteria: <60 second setup
+- [x] Success criteria: <60 second setup achieved
 
-### Phase 2: Framework Documentation (Week 1-2) 🚧
+### Phase 2: Framework Documentation (Week 1-2) ✅
 **Goal**: Codify the evolved vision
-**Hours**: ~10
+**Hours**: ~5 used
 
 - [x] AGET_FRAMEWORK_VISION.md
-- [ ] AGET_VOCABULARY.md (outputs vs Outputs)
+- [x] AGET_VOCABULARY.md (outputs vs Outputs)
+- [x] BRIDGE_EXTRACTION_PROCESS.md
+- [x] AGET_APPLY_COMMAND.md
 - [ ] DIRECTORY_STANDARDS.md (tiered templates)
 - [ ] ORIGIN_STORY.md (the 90-minute sprint)
-- [ ] .aget/ specification
 
 ### Phase 3: First Agent with CLI (Week 2) 🎯
 **Goal**: Use CLI to create first framework agent
@@ -143,10 +144,10 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 ## Success Metrics
 
 ### Charter Commitments (Must Meet)
-- [ ] Time to working config: <60 seconds
-- [ ] All commands complete in <2 seconds
-- [ ] Zero dependencies beyond Python 3.8+
-- [ ] Backward compatible with v1
+- [x] Time to working config: <60 seconds ✅
+- [x] All commands complete in <2 seconds ✅
+- [x] Zero dependencies beyond Python 3.8+ ✅
+- [x] Backward compatible with v1 ✅
 - [ ] First 5 users successfully onboard
 
 ### Framework Goals (Aspirational)
@@ -159,8 +160,8 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 ## Hours Tracking
 
 **Charter Commitment**: 120 hours total
-- Spent: ~19 hours (Gate 1 alpha)
-- Remaining: ~101 hours
+- Spent: ~29 hours (Gate 1: 19h, Gate 2: 10h)
+- Remaining: ~91 hours
 
 **Framework Addition**: ~40 hours estimated
 - Documentation: 10 hours

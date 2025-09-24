@@ -27,6 +27,11 @@ git clone https://github.com/aget-framework/aget-cli-agent-template.git
 cd aget-cli-agent-template
 python3 installer/install.py /path/to/your/project
 
+# Or use the new aget commands (v2 Alpha):
+aget init                    # Initialize agent configuration
+aget apply session/wake      # Apply session patterns
+aget apply housekeeping/cleanup  # Apply cleanup patterns
+
 # Tell your AI: "hey"
 # AI responds with project status and is ready to work
 
@@ -110,6 +115,24 @@ git clone https://github.com/aget-framework/aget-cli-agent-template.git
 cd aget-cli-agent-template
 python3 installer/install.py /path/to/your/project --template advanced
 ```
+
+## What's New in v2 (Alpha)
+
+### 🚀 New CLI Commands
+- `aget init` - Initialize agent configuration with directory structure
+- `aget apply <pattern>` - Apply reusable patterns to your project
+- `aget rollback` - Safe rollback mechanism for configurations
+
+### 📦 Pattern Library (8 patterns available)
+- **Session Patterns**: wake, wind_down, sign_off
+- **Housekeeping**: cleanup, doc_check, migration_cleanup
+- **Bridge Pattern**: extract_output (outputs→Outputs transformation)
+- **Meta**: project_scanner
+
+### 🌉 Framework Vision
+- Transform agent outputs into public products
+- Bridge private exploration to community value
+- Evolution tracking in `.aget/evolution/`
 
 ## Supported CLI Agents
 
