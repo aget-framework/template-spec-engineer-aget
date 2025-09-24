@@ -1,6 +1,18 @@
 {
   "entries": [
     {
+      "filename": "2025-09-24-160542-871674-DISC.md",
+      "type": "discovery",
+      "title": "Claude Code architecture reveals: 90% self-written...",
+      "created": "2025-09-24T16:05:42.872074"
+    },
+    {
+      "filename": "2025-09-24-160320-659702-DISC.md",
+      "type": "discovery",
+      "title": "Best practices document validates AGET approach an...",
+      "created": "2025-09-24T16:03:20.660277"
+    },
+    {
       "filename": "2025-09-24-144310-088364-DEC.md",
       "type": "decision",
       "title": "Completed scaffolding system and evolution templat...",
@@ -8,9 +20,10 @@
     }
   ],
   "stats": {
-    "total": 1,
+    "total": 3,
     "by_type": {
-      "decision": 1
+      "decision": 1,
+      "discovery": 2
     }
   }
 }
