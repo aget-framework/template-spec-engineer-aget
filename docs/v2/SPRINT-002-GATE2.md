@@ -26,14 +26,14 @@ Deliver the first 5-7 working patterns that agents can use immediately, making A
 ## Success Criteria (Gate 2)
 
 **MUST PASS ALL**:
-- [ ] At least 5 patterns working and installable
-- [ ] Pattern discovery mechanism functional (`aget list` shows available patterns)
-- [ ] Pattern application works (`aget apply <pattern>`)
-- [ ] Pattern validation prevents broken configs (`aget validate`)
-- [ ] Documentation for each pattern exists
-- [ ] <2 second performance maintained
-- [ ] **NEW**: ≥1 real test per pattern (no test theater)
-- [ ] **NEW**: Data corruption test mandatory
+- [x] At least 5 patterns working and installable (8 patterns available)
+- [x] Pattern discovery mechanism functional (`aget list` shows available patterns)
+- [x] Pattern application works (`aget apply <pattern>`)
+- [ ] Pattern validation prevents broken configs (`aget validate`) - basic validation only
+- [x] Documentation for each pattern exists (docstrings present)
+- [x] <2 second performance maintained (all <0.5s)
+- [x] **NEW**: ≥1 real test per pattern (no test theater) - 13 tests created
+- [x] **NEW**: Data corruption test mandatory - file system tests included
 
 ## Sprint Backlog with Checkpoints
 
@@ -71,12 +71,12 @@ Transform placeholders into working commands:
 ## Definition of Done
 
 ### Code Deliverables
-- [ ] `aget/patterns/registry.py` - Pattern discovery
-- [ ] `aget/patterns/validator.py` - Pattern validation
-- [ ] `aget/config/commands/validate.py` - Working command
-- [ ] `aget/config/commands/apply.py` - Working command
-- [ ] `aget/config/commands/list.py` - Working command
-- [ ] 5+ patterns in `patterns/` directory
+- [x] `aget/patterns/__init__.py` - Pattern registry and discovery
+- [ ] `aget/patterns/validator.py` - Pattern validation (deferred)
+- [ ] `aget/config/commands/validate.py` - Working command (placeholder)
+- [x] `aget/config/commands/apply.py` - Working command
+- [x] `aget/config/commands/list.py` - Working command
+- [x] 5+ patterns in `patterns/` directory (8 patterns available)
 
 ### Test Coverage
 - [ ] Unit tests for pattern system

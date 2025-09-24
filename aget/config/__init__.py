@@ -60,9 +60,28 @@ Config Module Commands:
         return 0
 
     def cmd_apply(self, args: List[str]) -> int:
-        """Apply command - placeholder."""
-        print("Apply command - coming in Phase 2")
-        return 0
+        """Apply command - apply patterns to configuration."""
+        from aget.config.commands.apply import ApplyCommand
+        cmd = ApplyCommand()
+        result = cmd.execute(args=args)
+
+        if result['success']:
+            if 'patterns' in result:
+                # Listed patterns successfully
+                return 0
+            else:
+                # Applied pattern successfully
+                print(f"✅ Pattern '{result['pattern']}' applied successfully")
+                if result.get('execution_time', 0) < 2.0:
+                    print(f"⚡ Completed in {result.get('execution_time', 0):.2f}s")
+                return 0
+        else:
+            print(f"❌ Error: {result.get('error', 'Unknown error')}")
+            if 'available' in result:
+                print(f"   Available patterns: {', '.join(result['available'])}")
+            if 'hint' in result:
+                print(f"   {result['hint']}")
+            return 1
 
     def cmd_rollback(self, args: List[str]) -> int:
         """Rollback command - restore previous configuration."""
@@ -91,6 +110,15 @@ Config Module Commands:
             return 1
 
     def cmd_list(self, args: List[str]) -> int:
-        """List command - placeholder."""
-        print("List command - coming in Phase 2")
-        return 0
+        """List command - show available patterns."""
+        from aget.config.commands.list import ListCommand
+        cmd = ListCommand()
+        result = cmd.execute(args=args)
+
+        if result['success']:
+            if result.get('execution_time', 0) < 2.0:
+                print(f"⚡ Completed in {result.get('execution_time', 0):.2f}s")
+            return 0
+        else:
+            print(f"❌ Error: {result.get('error', 'Unknown error')}")
+            return 1
