@@ -17,6 +17,7 @@ class ConfigModule:
             'apply': self.cmd_apply,
             'rollback': self.cmd_rollback,
             'list': self.cmd_list,
+            'evolution': self.cmd_evolution,
         }
 
     def handle(self, command: str, args: List[str]) -> int:
@@ -36,6 +37,7 @@ Config Module Commands:
   apply       Apply a pattern to configuration
   rollback    Restore previous configuration
   list        List available patterns
+  evolution   Track decisions and discoveries
 """)
         return 0
 
@@ -138,6 +140,21 @@ Config Module Commands:
 
         if result['success']:
             if result.get('execution_time', 0) < 2.0:
+                print(f"⚡ Completed in {result.get('execution_time', 0):.2f}s")
+            return 0
+        else:
+            print(f"❌ Error: {result.get('error', 'Unknown error')}")
+            return 1
+
+    def cmd_evolution(self, args: List[str]) -> int:
+        """Evolution command - track decisions and discoveries."""
+        from aget.config.commands.evolution import EvolutionCommand
+        cmd = EvolutionCommand()
+        result = cmd.execute(args=args)
+
+        if result['success']:
+            print(result['message'])
+            if result.get('execution_time', 0) < 2.0 and 'execution_time' in result:
                 print(f"⚡ Completed in {result.get('execution_time', 0):.2f}s")
             return 0
         else:
