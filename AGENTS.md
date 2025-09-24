@@ -56,6 +56,16 @@ When user says "health check" or "sanity check", execute:
 - Checks Python, git, critical files, imports
 - Reports system status: OK/DEGRADED/CRITICAL
 
+### Deep Introspection (Context Loading)
+When user says "introspect", "deep context", or "catch me up", execute:
+- Read recent `.aget/evolution/*.md` files (last 3-5 entries)
+- Read ROADMAP_v2.md for current phase and progress
+- Read docs/MILESTONES.md if exists
+- Check recent ADRs in docs/adr/
+- Review todo list or pending tasks
+- Summarize: Current state, recent breakthroughs, next priorities
+- End with: "Context loaded. Ready for deep work."
+
 ## Template Management Commands
 
 ### Check Template Status
