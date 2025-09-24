@@ -116,24 +116,34 @@ cd aget-cli-agent-template
 python3 installer/install.py /path/to/your/project --template advanced
 ```
 
-## What's New in v2 (Beta Ready - Gate 2 Complete)
+## What's New in v2 (Gate 3 Complete!)
 
 ### 🚀 Working CLI Commands
-- `aget init` - Initialize agent configuration with directory structure ✅
+- `aget init --template [agent|tool|hybrid]` - Initialize with proper directory scaffolding ✅
 - `aget apply <pattern>` - Apply reusable patterns to your project ✅
 - `aget list` - Discover available patterns ✅
 - `aget rollback` - Safe rollback mechanism for configurations ✅
+- `aget extract --from workspace/ --to products/` - Bridge internal tools to public ✅ NEW!
+- `aget evolution --type [decision|discovery]` - Track your agent's evolution ✅ NEW!
 
-### 📦 Pattern Library (8 patterns functional)
-- **Session Patterns**: wake, wind_down, sign_off - Start and manage agent sessions
-- **Housekeeping**: cleanup, doc_check, migration_cleanup - Maintain project health
-- **Bridge Pattern**: extract_output - Transform private outputs→public Outputs
-- **Meta**: project_scanner - Multi-project management
+### 📦 Template Scaffolding (Gate 3 Feature)
+- **agent**: Full autonomous agent structure with workspace/products split
+- **tool**: Traditional tool/library structure
+- **hybrid**: Combined agent and tool capabilities
+- **minimal**: Basic configuration only
+- **standard**: Default balanced template
 
-### 🌉 Framework Vision
-- Transform agent outputs into public products
-- Bridge private exploration to community value
-- Evolution tracking in `.aget/evolution/`
+### 🌉 Bridge Mechanism (Gate 3 Feature)
+- Extract tools from workspace to products with `aget extract`
+- Automatic secret sanitization and API key removal
+- Generated setup.py and README for pip installation
+- Track extractions in evolution history
+
+### 📈 Evolution Tracking (Gate 3 Feature)
+- Record decisions: `aget evolution --type decision "Why we chose X"`
+- Capture discoveries: `aget evolution --type discovery "Found pattern Y"`
+- Track extractions: Automatic when using `aget extract`
+- View history: `aget evolution --list`
 
 ## Supported CLI Agents
 

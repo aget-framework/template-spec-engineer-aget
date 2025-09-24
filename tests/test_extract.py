@@ -19,7 +19,11 @@ class TestExtract:
         """Set up test environment."""
         self.extract_cmd = ExtractCommand()
         self.temp_dir = tempfile.mkdtemp()
-        self.original_cwd = os.getcwd()
+        try:
+            self.original_cwd = os.getcwd()
+        except FileNotFoundError:
+            # Handle case where current directory doesn't exist
+            self.original_cwd = Path.home()
         os.chdir(self.temp_dir)
 
         # Create workspace directory
