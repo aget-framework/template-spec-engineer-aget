@@ -41,6 +41,15 @@ When user says "sign off" or "all done":
 - Quick save and exit
 - No questions
 
+## Directory Structure
+- `outputs/` - Agent's internal workspace (private explorations)
+- `data/` - Persistent data storage
+- `.aget/evolution/` - Evolution and insights capture
+
+## Vocabulary Note
+- `outputs/` = Your agent's private workspace for exploration
+- `Outputs` = Public products your agent creates/maintains for others
+
 ## Available Patterns
 Run `aget list` to see available patterns you can apply.
 
@@ -73,6 +82,18 @@ Run `aget list` to see available patterns you can apply.
         aget_dir = project_path / ".aget"
         aget_dir.mkdir(exist_ok=True)
 
+        # Create .aget/evolution directory for capturing insights
+        evolution_dir = aget_dir / "evolution"
+        evolution_dir.mkdir(exist_ok=True)
+
+        # Create outputs directory for agent's internal workspace
+        outputs_dir = project_path / "outputs"
+        outputs_dir.mkdir(exist_ok=True)
+
+        # Create data directory for persistent data storage
+        data_dir = project_path / "data"
+        data_dir.mkdir(exist_ok=True)
+
         # Write AGENTS.md
         content = self.default_template.format(
             project_name=project_path.name
@@ -104,7 +125,14 @@ Run `aget list` to see available patterns you can apply.
         return {
             'success': True,
             'message': f'Created AGENTS.md in {project_path}',
-            'files_created': ['AGENTS.md', '.aget/', 'CLAUDE.md']
+            'files_created': [
+                'AGENTS.md',
+                '.aget/',
+                '.aget/evolution/',
+                'outputs/',
+                'data/',
+                'CLAUDE.md'
+            ]
         }
 
     def tier_git(self, **kwargs) -> Dict[str, Any]:
