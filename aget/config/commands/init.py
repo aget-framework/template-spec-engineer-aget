@@ -111,11 +111,14 @@ Run `aget list` to see available patterns you can apply.
         # Parse template option
         template_type = 'standard'  # default
         with_patterns = False
+        separate_mode = False  # New v2.0 include architecture
         for i, arg in enumerate(args):
             if arg == '--template' and i + 1 < len(args):
                 template_type = args[i + 1]
             elif arg == '--with-patterns':
                 with_patterns = True
+            elif arg == '--separate':
+                separate_mode = True  # Use include architecture
 
         # Validate template
         if template_type not in self.templates:
@@ -150,13 +153,45 @@ Run `aget list` to see available patterns you can apply.
         # Generate directory structure documentation
         directory_docs = self._generate_directory_docs(template_type)
 
-        # Write AGENTS.md
-        content = self.default_template.format(
-            project_name=project_path.name,
-            template_type=template_type,
-            directory_structure=directory_docs
-        )
-        agents_file.write_text(content)
+        # Create content based on mode
+        if separate_mode:
+            # v2.0 Include Architecture - Create both files
+            agents_aget_file = project_path / "AGENTS_AGET.md"
+
+            # 1. Create AGENTS_AGET.md with framework protocols
+            aget_template_path = Path(__file__).parent.parent.parent.parent / 'templates' / 'AGENTS_AGET.md'
+            if aget_template_path.exists():
+                agents_aget_file.write_text(aget_template_path.read_text())
+            else:
+                # Fallback if template not found
+                agents_aget_file.write_text(self._get_default_aget_content())
+
+            # 2. Create AGENTS.md with procedural instructions
+            agents_template_path = Path(__file__).parent.parent.parent.parent / 'templates' / 'AGENTS_v2.md'
+            if agents_template_path.exists():
+                content = agents_template_path.read_text()
+                # Replace placeholders
+                content = content.replace('[Project Name]', project_path.name)
+                content = content.replace('[Your project description here]',
+                                        f'{project_path.name} - Created with AGET v2 ({template_type} template)')
+                content = content.replace('[Your coding standards, conventions, etc.]',
+                                        f'Directory structure:\n{directory_docs}')
+            else:
+                # Fallback to inline template
+                content = self._get_separate_mode_template(project_path.name, template_type, directory_docs)
+
+            agents_file.write_text(content)
+            print("✅ Created AGENTS_AGET.md (framework protocols)")
+            print("✅ Created AGENTS.md (project config with include instructions)")
+
+        else:
+            # Traditional single-file mode
+            content = self.default_template.format(
+                project_name=project_path.name,
+                template_type=template_type,
+                directory_structure=directory_docs
+            )
+            agents_file.write_text(content)
 
         # Create version tracking
         aget_dir = project_path / ".aget"
@@ -243,16 +278,23 @@ read-only-files:
                     patterns_applied.append(pattern)
 
         message = f'Created {template_type} template in {project_path}'
+        if separate_mode:
+            message += ' (v2.0 include architecture)'
         if patterns_applied:
             message += f' with {len(patterns_applied)} patterns applied'
+
+        files_created = ['AGENTS.md', 'CLAUDE.md']
+        if separate_mode:
+            files_created.append('AGENTS_AGET.md')
 
         return {
             'success': True,
             'message': message,
             'template': template_type,
             'description': template_config['description'],
-            'files_created': ['AGENTS.md', 'CLAUDE.md'] + created_dirs,
-            'patterns_applied': patterns_applied if with_patterns else []
+            'files_created': files_created + created_dirs,
+            'patterns_applied': patterns_applied if with_patterns else [],
+            'separate_mode': separate_mode
         }
 
     def _get_patterns_for_template(self, template_type: str) -> List[str]:
@@ -271,6 +313,87 @@ read-only-files:
             ]
         }
         return pattern_map.get(template_type, [])
+
+    def _get_separate_mode_template(self, project_name: str, template_type: str, dir_tree: str) -> str:
+        """Get AGENTS.md content for separate mode."""
+        return f"""# Agent Configuration - {project_name}
+
+## 🚨 CRITICAL: INITIALIZATION PROCEDURE (REQUIRED)
+
+**You MUST follow these steps IMMEDIATELY:**
+
+**Step 1:** Check if file `AGENTS_AGET.md` exists in this directory
+**Step 2:** If it exists, **READ IT IMMEDIATELY** for all AGET protocols
+**Step 3:** Use the protocols from AGENTS_AGET.md for all standard commands
+**Step 4:** Return here for project-specific configuration
+
+> ⚠️ **IMPORTANT**: If you skip reading AGENTS_AGET.md, you will not have access to session management, housekeeping, or other AGET commands.
+
+---
+
+## Project Context
+
+{project_name} - Created with AGET v2 ({template_type} template)
+
+## Directory Structure
+{dir_tree}
+
+## Project-Specific Commands
+
+[Add your custom commands and workflows here]
+
+## Development Workflow
+
+[Your specific development process]
+
+---
+
+## ✅ VERIFICATION CHECKLIST
+
+Before proceeding, confirm you have:
+- [ ] Read AGENTS_AGET.md for AGET protocols
+- [ ] Understood the session management commands
+- [ ] Understood the housekeeping commands
+- [ ] Noted the project-specific configuration above
+
+**Remember**: AGENTS_AGET.md = Framework protocols, This file = Your project config
+
+---
+*Project configured with AGET v2.0 - Include Architecture*
+"""
+
+    def _get_default_aget_content(self) -> str:
+        """Fallback AGENTS_AGET.md content if template not found."""
+        return """# AGET Standard Protocols v2.0.0
+
+**Framework File** - Maintained by AGET, not project-specific
+**Version**: 2.0.0
+
+## Session Management Protocols
+
+### Wake Up
+When user says "wake up" or "hey": Run wake protocol
+
+### Wind Down
+When user says "wind down" or "save work": Save and create notes
+
+### Sign Off
+When user says "sign off" or "all done": Quick save and push
+
+## Housekeeping Protocols
+
+### Tidy Up
+When user says "tidy up" or "housekeeping": Clean temporary files
+
+### Check Docs
+When user says "check docs": Analyze documentation quality
+
+### Health Check
+When user says "health check" or "sanity check": Run diagnostics
+
+---
+*This file is part of AGET v2.0*
+"""
 
     def _get_readme_content(self, dir_path: str) -> str:
         """Generate README content for specific directories."""
