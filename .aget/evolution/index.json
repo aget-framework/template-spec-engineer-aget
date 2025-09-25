@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-013644-189386-DEC.md",
+      "type": "decision",
+      "title": "v2...",
+      "created": "2025-09-25T01:36:44.190101"
+    },
+    {
       "filename": "2025-09-25-005024-939525-DEC.md",
       "type": "decision",
       "title": "AGET's mission defined: 'Help software creators ac...",
@@ -146,9 +152,9 @@
     }
   ],
   "stats": {
-    "total": 24,
+    "total": 25,
     "by_type": {
-      "decision": 6,
+      "decision": 7,
       "discovery": 6,
       "extraction": 12
     }
