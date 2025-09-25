@@ -110,6 +110,38 @@ class MigrationCleanup:
         return '\n'.join(report_lines)
 
 
+def apply_pattern(project_path: Path = None):
+    """
+    Apply the migration cleanup pattern.
+
+    This function is called by `aget apply housekeeping/migration_cleanup`.
+    """
+    try:
+        if project_path is None:
+            project_path = Path.cwd()
+
+        cleanup = MigrationCleanup(project_path, dry_run=True)
+
+        print("🔍 Migration Artifact Cleanup")
+        print("=" * 50)
+
+        # Scan for artifacts
+        cleanup.scan_for_artifacts()
+
+        # Show report
+        print(cleanup.report())
+
+        if cleanup.artifacts_found:
+            print("\n💡 Run with --no-dry-run to archive these artifacts")
+            return {"status": "success", "artifacts_found": len(cleanup.artifacts_found)}
+        else:
+            return {"status": "success", "artifacts_found": 0}
+
+    except Exception as e:
+        print(f"❌ Error in migration cleanup: {e}")
+        return {"status": "error", "message": str(e)}
+
+
 def main():
     parser = argparse.ArgumentParser(description='Clean up AGET migration artifacts')
     parser.add_argument('--dry-run', action='store_true', default=True,

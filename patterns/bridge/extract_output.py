@@ -256,31 +256,36 @@ def apply_pattern(project_path: Path = Path.cwd()):
 
     This function is called by `aget apply bridge`.
     """
-    extractor = OutputExtractor(project_path)
+    try:
+        extractor = OutputExtractor(project_path)
 
-    print("🌉 Bridge Pattern: Output Extraction")
-    print("-" * 40)
+        print("🌉 Bridge Pattern: Output Extraction")
+        print("-" * 40)
 
-    # Scan for candidates
-    candidates = extractor.scan_outputs()
+        # Scan for candidates
+        candidates = extractor.scan_outputs()
 
-    if not candidates:
-        print("No outputs found to extract.")
-        print("\nTip: Create valuable outputs in the outputs/ directory first.")
-        return
+        if not candidates:
+            print("No outputs found to extract.")
+            print("\nTip: Create valuable outputs in the outputs/ directory first.")
+            return {"status": "success", "candidates": []}
 
-    print(f"Found {len(candidates)} candidate outputs:\n")
+        print(f"Found {len(candidates)} candidate outputs:\n")
 
-    # Show top 5 candidates
-    for i, candidate in enumerate(candidates[:5], 1):
-        print(f"{i}. {candidate['name']} ({candidate['category']})")
-        print(f"   Path: {candidate['path']}")
-        print(f"   Value Score: {candidate['value_score']}")
-        print()
+        # Show top 5 candidates
+        for i, candidate in enumerate(candidates[:5], 1):
+            print(f"{i}. {candidate['name']} ({candidate['category']})")
+            print(f"   Path: {candidate['path']}")
+            print(f"   Value Score: {candidate['value_score']}")
+            print()
 
-    print("\nUse `aget extract <output_path>` to extract an output as a public Output.")
+        print("\nUse `aget extract <output_path>` to extract an output as a public Output.")
 
-    return candidates
+        return {"status": "success", "candidates": candidates}
+
+    except Exception as e:
+        print(f"❌ Error applying bridge pattern: {e}")
+        return {"status": "error", "message": str(e)}
 
 
 if __name__ == "__main__":

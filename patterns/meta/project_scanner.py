@@ -304,6 +304,36 @@ class ProjectScanner:
         
         return report_file
 
+
+def apply_pattern(project_path: Path = None):
+    """
+    Apply the project scanner pattern.
+
+    This function is called by `aget apply meta/project_scanner`.
+    """
+    try:
+        if project_path is None:
+            project_path = Path.cwd()
+
+        scanner = ProjectScanner(project_path)
+        scanner.scan()
+
+        print("🔍 AGET Migration Scanner")
+        print("=" * 50)
+        print(scanner.generate_report('text'))
+
+        return {
+            "status": "success",
+            "projects_scanned": scanner.summary['total_projects'],
+            "migrated": scanner.summary['migrated'],
+            "partial": scanner.summary['partial']
+        }
+
+    except Exception as e:
+        print(f"❌ Error scanning projects: {e}")
+        return {"status": "error", "message": str(e)}
+
+
 def main():
     parser = argparse.ArgumentParser(description='Scan projects for AGET migration status')
     parser.add_argument('path', nargs='?', default='.',
