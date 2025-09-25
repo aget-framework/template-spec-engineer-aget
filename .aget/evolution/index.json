@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-005024-939525-DEC.md",
+      "type": "decision",
+      "title": "AGET's mission defined: 'Help software creators ac...",
+      "created": "2025-09-25T00:50:24.940303"
+    },
+    {
       "filename": "2025-09-25-000244-575015-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -140,9 +146,9 @@
     }
   ],
   "stats": {
-    "total": 23,
+    "total": 24,
     "by_type": {
-      "decision": 5,
+      "decision": 6,
       "discovery": 6,
       "extraction": 12
     }
