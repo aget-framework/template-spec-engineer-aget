@@ -3,31 +3,63 @@
 ## Overview
 Before releasing v2.0 on October 7, we need to validate AGET works with real projects. This plan covers testing with 3 projects and finalizing the release.
 
+## Testing Strategy: Private -aget Versions
+
+To avoid affecting production/public repositories, we create private `-aget` versions:
+- **Original repos remain untouched** (llm-judge stays public)
+- **Test versions are private** (llm-judge-aget for experiments)
+- **Follows naming convention** (*-aget = AGET-enabled agents/tools)
+- **Safe experimentation** (can break things without consequences)
+
 ## Test Projects
 
-### 1. spotify-aget (formerly music-agent) - Primary Test
+### 1. spotify-aget (formerly agent-music) - Primary Test
 **Why**: Complex project with existing CLAUDE.md, perfect for migration testing
-**Rename**: agent-music → spotify-aget (follows *-aget convention for agents)
+**Action**: Rename agent-music → spotify-aget (follows *-aget convention)
+**Visibility**: Private repo
 
-### 2. llm-judge - Secondary Test
-**Why**: Different project type, tests versatility
-**Type**: Tool project (not agent)
+### 2. llm-judge-aget (fork of llm-judge) - Secondary Test
+**Why**: Tests tool template without affecting public repo
+**Action**: Fork public llm-judge → private llm-judge-aget
+**Visibility**: Private fork for testing
 
-### 3. agentic-planner-cli - Final Validation
-**Why**: CLI tool, different requirements
-**Type**: Hybrid (tool + agent capabilities)
+### 3. planner-aget (fork of agentic-planner-cli) - Final Validation
+**Why**: CLI tool with different requirements
+**Action**: Copy agentic-planner-cli → private planner-aget
+**Visibility**: Private copy for testing
 
 ## Detailed Test Plan
 
 ### Phase 1: Prepare Test Environment (30 mins)
 
-#### Step 1.1: Create Test Backup
+#### Step 1.1: Create Test Environments
 ```bash
-# Backup all test projects first
+# Create private test versions to avoid affecting originals
 cd ~/github
+
+# Backup originals first
 for project in agent-music llm-judge agentic-planner-cli; do
   cp -r $project ${project}-backup-$(date +%Y%m%d)
 done
+
+# Create private -aget versions
+# 1. Fork llm-judge to private llm-judge-aget
+gh repo fork aget-framework/llm-judge --clone
+mv llm-judge llm-judge-aget
+cd llm-judge-aget
+gh repo create llm-judge-aget --private --source .
+git remote set-url origin git@github.com:aget-framework/llm-judge-aget.git
+cd ..
+
+# 2. Copy agentic-planner-cli to private planner-aget
+cp -r agentic-planner-cli planner-aget
+cd planner-aget
+rm -rf .git
+git init
+gh repo create planner-aget --private --source .
+git add . && git commit -m "Initial copy from agentic-planner-cli"
+git push -u origin main
+cd ..
 ```
 
 #### Step 1.2: Verify AGET v2 is Ready
@@ -91,11 +123,11 @@ Create `MIGRATION_REPORT.md`:
 - Patterns working: X/8
 - AI tool compatibility: Pass/Fail
 
-### Phase 3: Test llm-judge (30 mins)
+### Phase 3: Test llm-judge-aget (30 mins)
 
 #### Step 3.1: Different Template Type
 ```bash
-cd ~/github/llm-judge
+cd ~/github/llm-judge-aget
 
 # This is a tool, not agent - use tool template
 python3 ~/github/aget-cli-agent-template/installer/install.py . --template tool
@@ -117,11 +149,11 @@ python3 -m aget apply documentation/check
 - Test with AI coding assistant
 - Document in MIGRATION_REPORT.md
 
-### Phase 4: Test agentic-planner-cli (30 mins)
+### Phase 4: Test planner-aget (30 mins)
 
 #### Step 4.1: Hybrid Template
 ```bash
-cd ~/github/agentic-planner-cli
+cd ~/github/planner-aget
 
 # Hybrid = tool + agent capabilities
 python3 ~/github/aget-cli-agent-template/installer/install.py . --template hybrid
@@ -153,7 +185,7 @@ python3 patterns/meta/project_scanner.py ~/github
 
 #### Step 5.2: Pattern Validation Across Projects
 ```bash
-for project in spotify-aget llm-judge agentic-planner-cli; do
+for project in spotify-aget llm-judge-aget planner-aget; do
   echo "Testing $project..."
   cd ~/github/$project
   python3 ~/github/aget-cli-agent-template/scripts/validate_patterns.py patterns/
@@ -181,8 +213,8 @@ Test each project with:
 
 ### Test Results
 - [ ] spotify-aget: ___/10 success
-- [ ] llm-judge: ___/10 success
-- [ ] agentic-planner-cli: ___/10 success
+- [ ] llm-judge-aget: ___/10 success
+- [ ] planner-aget: ___/10 success
 
 ### Documentation
 - [ ] GET_STARTED.md accurate
@@ -224,9 +256,9 @@ cat > RELEASE_NOTES_V2.md << EOF
 See MIGRATE_TO_V2.md for upgrade instructions
 
 ## Tested With
-- spotify-aget (complex agent)
-- llm-judge (tool project)
-- agentic-planner-cli (hybrid)
+- spotify-aget (complex agent, private)
+- llm-judge-aget (tool project, private fork)
+- planner-aget (hybrid, private copy)
 EOF
 
 # Commit release prep
