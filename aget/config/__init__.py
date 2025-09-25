@@ -19,6 +19,7 @@ class ConfigModule:
             'list': self.cmd_list,
             'evolution': self.cmd_evolution,
             'extract': self.cmd_extract,
+            'migrate': self.cmd_migrate,
         }
 
     def handle(self, command: str, args: List[str]) -> int:
@@ -189,4 +190,20 @@ Config Module Commands:
                 print(f"   Internal dependencies found:")
                 for dep in result['internal_deps']:
                     print(f"   • {dep}")
+            return 1
+
+    def cmd_migrate(self, args: List[str]) -> int:
+        """Migrate command - intelligent migration to AGET v2."""
+        from aget.config.commands.migrate import MigrateCommand
+        cmd = MigrateCommand()
+        result = cmd.execute(args)
+
+        if result['success']:
+            print(result['message'])
+            if result.get('requires_agent'):
+                print("\n⚠️  This migration requires agent intelligence.")
+                print("Follow the instructions above to complete migration.")
+            return 0
+        else:
+            print(f"❌ Error: {result.get('error', 'Unknown error')}")
             return 1
