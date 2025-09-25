@@ -1,6 +1,54 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-140921-728134-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T14:09:21.729953"
+    },
+    {
+      "filename": "2025-09-25-140921-726750-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T14:09:21.727136"
+    },
+    {
+      "filename": "2025-09-25-140921-723544-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T14:09:21.723957"
+    },
+    {
+      "filename": "2025-09-25-140921-717742-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T14:09:21.718032"
+    },
+    {
+      "filename": "2025-09-25-140921-713322-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T14:09:21.713628"
+    },
+    {
+      "filename": "2025-09-25-140921-706255-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T14:09:21.706756"
+    },
+    {
+      "filename": "2025-09-25-140510-333538-DEC.md",
+      "type": "decision",
+      "title": "Created incremental test coverage improvement plan...",
+      "created": "2025-09-25T14:05:10.334162"
+    },
+    {
+      "filename": "2025-09-25-132606-037040-DEC.md",
+      "type": "decision",
+      "title": "Enhanced test coverage to 70% with new tests for m...",
+      "created": "2025-09-25T13:26:06.037862"
+    },
+    {
       "filename": "2025-09-25-132528-264989-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -551,62 +599,14 @@
       "type": "extraction",
       "title": "Extracted single...",
       "created": "2025-09-24T18:52:03.565878"
-    },
-    {
-      "filename": "2025-09-24-185203-562713-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to with-deps/",
-      "created": "2025-09-24T18:52:03.563032"
-    },
-    {
-      "filename": "2025-09-24-185203-557317-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to sanitized/",
-      "created": "2025-09-24T18:52:03.557548"
-    },
-    {
-      "filename": "2025-09-24-185203-553472-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to nested-package/",
-      "created": "2025-09-24T18:52:03.553742"
-    },
-    {
-      "filename": "2025-09-24-185203-548532-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to test-package/",
-      "created": "2025-09-24T18:52:03.548778"
-    },
-    {
-      "filename": "2025-09-24-183909-725375-DEC.md",
-      "type": "decision",
-      "title": "Checkpoint after major enhancements: directory ext...",
-      "created": "2025-09-24T18:39:09.725922"
-    },
-    {
-      "filename": "2025-09-24-173433-409029-DEC.md",
-      "type": "decision",
-      "title": "Enhanced extract command to support directories, m...",
-      "created": "2025-09-24T17:34:33.409556"
-    },
-    {
-      "filename": "2025-09-24-173306-722918-DISC.md",
-      "type": "discovery",
-      "title": "Migration revealed two-step gap: init creates stru...",
-      "created": "2025-09-24T17:33:06.723637"
-    },
-    {
-      "filename": "2025-09-24-164324-679361-DISC.md",
-      "type": "discovery",
-      "title": "Template system enables 30-second setup",
-      "created": "2025-09-24T16:43:24.679832"
     }
   ],
   "stats": {
-    "total": 104,
+    "total": 112,
     "by_type": {
-      "decision": 8,
+      "decision": 10,
       "discovery": 6,
-      "extraction": 90
+      "extraction": 96
     }
   }
 }
