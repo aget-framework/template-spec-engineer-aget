@@ -1,8 +1,9 @@
 # ADR-004: aget-aget as Framework Contribution Gateway
 
 **Date**: 2025-09-24
-**Status**: Proposed
+**Status**: Accepted (Private Development)
 **Deciders**: Gabor Melli (first Path 2 user), AGET development team
+**Repository Status**: Private (planned as aget-framework/aget-aget)
 
 ## Context
 
@@ -86,21 +87,25 @@ aget-aget becomes the bridge between individual innovation and community benefit
 
 ## Implementation Approach
 
-### Phase 1: Manual Process Documentation
-- Document how Gabor manually contributes patterns
-- Identify automation opportunities
-- Create contribution templates
+### Stage 1: Private Innovation Lab (Current → v3.0)
+**Repository**: Private (aget-framework/aget-aget)
+- Gabor experiments with contribution workflows
+- Extract patterns from real projects
+- Build tools without public pressure
+- Create pattern library as proof of value
+- Document learnings for future release
 
-### Phase 2: Semi-Automated Tools
-- Scripts to extract and generalize patterns
-- Automated test generation
-- PR template creation
+### Stage 2: Selective Reveal (v3.0 Release)
+- Announce aget-aget's existence
+- Show patterns it enabled
+- Demonstrate framework improvements
+- Create anticipation for public release
 
-### Phase 3: aget-aget Agent
-- Full autonomous agent for contribution
-- Pattern quality validation
-- Community voting integration
-- Attribution tracking
+### Stage 3: Public Innovation Gateway (Post v3.0)
+- Open source aget-aget repository
+- Release battle-tested tools
+- Enable community contributions
+- Full documentation and support
 
 ## Governance Model
 
@@ -173,19 +178,35 @@ aget-aget could implement:
 
 ## Next Steps
 
-1. Gabor will test manual contribution flow
-2. Document pain points and automation opportunities
-3. Create initial extraction scripts
-4. Design attribution system
-5. Prototype pattern generalization logic
+1. Create private aget-aget repository
+2. Gabor tests manual contribution flow
+3. Build extraction tools privately
+4. Accumulate 10-20 proven patterns
+5. Document process for eventual release
+6. Reveal with AGET v3.0 as "one more thing"
+
+## Strategic Advantage
+
+**Private-first development** allows:
+- Freedom to experiment without public scrutiny
+- Building valuable IP before sharing
+- Releasing proven tool vs experiment
+- Creating success stories before launch
+- Maintaining competitive advantage during development
 
 ---
 
 ## Decision
 
-We will build aget-aget as a framework contribution gateway, enabling the community to easily share their discoveries back to AGET. This creates a virtuous cycle where individual innovations become community benefits.
+We will build aget-aget as a framework contribution gateway, **initially as a private repository** for experimentation and value creation. Once proven through real usage, it will be released publicly to enable community contributions.
 
-Gabor Melli commits to being the first Path 2 user, testing and refining the contribution flow.
+This staged approach allows us to:
+1. Build and test without premature optimization
+2. Create a valuable pattern library as proof
+3. Release a mature tool rather than an experiment
+4. Maintain strategic advantage during development
+
+Gabor Melli commits to being the first Path 2 user, testing and refining the contribution flow in the private repository before public release.
 
 ---
 *"The best patterns come from real usage, not theoretical design."*
