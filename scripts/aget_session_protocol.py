@@ -33,7 +33,18 @@ class SessionState:
         if self.state_file.exists():
             try:
                 with open(self.state_file, 'r') as f:
-                    return json.load(f)
+                    loaded_state = json.load(f)
+                    # Ensure all required keys exist
+                    default = self.default_state()
+                    for key in default:
+                        if key not in loaded_state:
+                            loaded_state[key] = default[key]
+                    # Ensure current_session has all required keys
+                    if 'current_session' in loaded_state:
+                        for key in default['current_session']:
+                            if key not in loaded_state['current_session']:
+                                loaded_state['current_session'][key] = default['current_session'][key]
+                    return loaded_state
             except (json.JSONDecodeError, IOError):
                 return self.default_state()
         return self.default_state()
