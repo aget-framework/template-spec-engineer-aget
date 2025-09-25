@@ -34,8 +34,13 @@ class WindDownProtocol:
 
         print(f"{self._bold()}{self._blue()}## Wind Down - {datetime.now():%Y-%m-%d %H:%M}{self._reset()}")
 
-        # Load session state
+        # Load session state with safe fallback
         state = self._load_state()
+
+        # Ensure current_session exists
+        if 'current_session' not in state:
+            state['current_session'] = {'start_time': datetime.now().isoformat()}
+
         session_duration = self._get_session_duration(state)
         print(f"⏱️ Session duration: {session_duration}")
 
@@ -71,11 +76,19 @@ class WindDownProtocol:
         else:
             print("ℹ️ No tests found")
 
-        # 4. Update session state
+        # 4. Update session state safely
         state['last_wind_down'] = datetime.now().isoformat()
+
+        # Ensure current_session exists before updating
+        if 'current_session' not in state:
+            state['current_session'] = {}
+
         state['current_session']['end_time'] = datetime.now().isoformat()
         state['current_session']['duration'] = session_duration
-        self._save_state(state)
+
+        # Save with error handling
+        if not self._save_state(state):
+            print(f"{self._yellow()}⚠ Could not save session state{self._reset()}")
 
         # Final message
         print(f"{self._green()}✅ Session preserved.{self._reset()}")
@@ -96,24 +109,49 @@ class WindDownProtocol:
             'current_session': {'start_time': datetime.now().isoformat()}
         }
 
-    def _save_state(self, state: Dict[str, Any]):
-        """Save session state to disk."""
+    def _save_state(self, state: Dict[str, Any]) -> bool:
+        """Save session state to disk.
+
+        Returns:
+            True if successful, False otherwise
+        """
         try:
             self.state_file.write_text(json.dumps(state, indent=2, default=str))
-        except IOError:
-            pass
+            return True
+        except (IOError, OSError) as e:
+            # Log error for debugging but don't crash
+            try:
+                error_log = self.project_path / ".aget" / "errors.log"
+                error_log.parent.mkdir(exist_ok=True)
+                with open(error_log, 'a') as f:
+                    f.write(f"{datetime.now()}: wind_down save_state error: {e}\n")
+            except:
+                pass
+            return False
 
     def _get_session_duration(self, state: Dict[str, Any]) -> str:
         """Calculate session duration."""
-        if 'current_session' in state and 'start_time' in state['current_session']:
-            start = datetime.fromisoformat(state['current_session']['start_time'])
-            duration = datetime.now() - start
-            hours = int(duration.seconds // 3600)
-            minutes = int((duration.seconds % 3600) // 60)
-            if hours > 0:
-                return f"{hours}h {minutes}m"
-            else:
-                return f"{minutes}m"
+        try:
+            if 'current_session' in state and 'start_time' in state['current_session']:
+                start = datetime.fromisoformat(state['current_session']['start_time'])
+                duration = datetime.now() - start
+
+                # Handle multi-day sessions
+                if duration.days > 0:
+                    return f"{duration.days}d {duration.seconds // 3600}h"
+
+                hours = int(duration.seconds // 3600)
+                minutes = int((duration.seconds % 3600) // 60)
+
+                if hours > 0:
+                    return f"{hours}h {minutes}m"
+                elif minutes > 0:
+                    return f"{minutes}m"
+                else:
+                    return "<1m"
+        except (ValueError, TypeError):
+            pass
+
         return "unknown"
 
     def _check_git_status(self) -> Dict[str, Any]:
@@ -180,7 +218,7 @@ class WindDownProtocol:
             return {
                 'action': 'git_commit',
                 'success': False,
-                'reason': str(e)
+                'reason': f"Git error: {e.__class__.__name__}"
             }
 
     def _create_session_notes(self, state: Dict[str, Any]) -> Dict[str, Any]:

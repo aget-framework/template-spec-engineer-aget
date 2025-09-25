@@ -41,6 +41,10 @@ class WakeProtocol:
             last_time = datetime.fromisoformat(last_wake)
             time_diff = datetime.now() - last_time
             result['last_session'] = self._format_timedelta(time_diff)
+
+            # Warn if last session was very recent (possible crash)
+            if time_diff.total_seconds() < 60:
+                print(f"{self._yellow()}⚠ Previous session ended < 1 minute ago{self._reset()}")
         else:
             result['last_session'] = 'First session'
 
@@ -59,15 +63,20 @@ class WakeProtocol:
         state['current_session'] = {
             'start_time': datetime.now().isoformat(),
             'tasks_completed': [],
-            'files_modified': [],
+            'files_modified': git_status.get('changes', []) if not git_status['clean'] else [],
             'tests_run': 0
         }
-        self._save_state(state)
+
+        # Save state with error handling
+        if not self._save_state(state):
+            print(f"{self._yellow()}⚠ Could not save session state (continuing anyway){self._reset()}")
+
         result['checks']['git'] = git_status
         if git_status['clean']:
             print(f"{self._green()}✓ Git repository clean{self._reset()}")
         else:
-            print(f"{self._yellow()}⚠ Git has uncommitted changes{self._reset()}")
+            change_count = len(git_status.get('changes', []))
+            print(f"{self._yellow()}🔄 {change_count} uncommitted changes{self._reset()}")
 
         # Check for patterns
         patterns = self._check_patterns()
@@ -94,24 +103,65 @@ class WakeProtocol:
         return result
 
     def _load_state(self) -> Dict[str, Any]:
-        """Load session state from disk."""
+        """Load session state from disk with recovery."""
         if self.state_file.exists():
             try:
-                return json.loads(self.state_file.read_text())
-            except (json.JSONDecodeError, IOError):
-                pass
+                content = self.state_file.read_text()
+                if content.strip():
+                    return json.loads(content)
+            except (json.JSONDecodeError, IOError) as e:
+                # Try to recover from backup
+                backup_file = self.state_file.with_suffix('.backup')
+                if backup_file.exists():
+                    try:
+                        return json.loads(backup_file.read_text())
+                    except:
+                        pass
+
+                # Log error for debugging
+                try:
+                    error_log = self.project_path / ".aget" / "errors.log"
+                    error_log.parent.mkdir(exist_ok=True)
+                    with open(error_log, 'a') as f:
+                        f.write(f"{datetime.now()}: wake load_state error: {e}\n")
+                except:
+                    pass
+
+        # Return fresh state
         return {
             'session_count': 0,
             'last_wake': None,
             'last_wind_down': None
         }
 
-    def _save_state(self, state: Dict[str, Any]):
-        """Save session state to disk."""
+    def _save_state(self, state: Dict[str, Any]) -> bool:
+        """Save session state to disk with backup.
+
+        Returns:
+            True if successful, False otherwise
+        """
         try:
+            # Create backup of existing state
+            if self.state_file.exists():
+                try:
+                    backup_file = self.state_file.with_suffix('.backup')
+                    backup_file.write_text(self.state_file.read_text())
+                except:
+                    pass
+
+            # Write new state
             self.state_file.write_text(json.dumps(state, indent=2, default=str))
-        except IOError:
-            pass  # Silently fail if can't save state
+            return True
+        except (IOError, OSError) as e:
+            # Log error but don't crash
+            try:
+                error_log = self.project_path / ".aget" / "errors.log"
+                error_log.parent.mkdir(exist_ok=True)
+                with open(error_log, 'a') as f:
+                    f.write(f"{datetime.now()}: wake save_state error: {e}\n")
+            except:
+                pass
+            return False
 
     def _check_git(self) -> Dict[str, Any]:
         """Check git repository status."""
@@ -195,16 +245,25 @@ class WakeProtocol:
 
     def _format_timedelta(self, td: timedelta) -> str:
         """Format timedelta in human-readable form."""
-        if td.days > 0:
-            return f"{td.days} days ago"
-        elif td.seconds > 3600:
-            hours = td.seconds // 3600
-            return f"{hours} hours ago"
-        elif td.seconds > 60:
-            minutes = td.seconds // 60
-            return f"{minutes} minutes ago"
-        else:
+        seconds = int(td.total_seconds())
+
+        if seconds < 60:
             return "Just now"
+        elif seconds < 3600:
+            minutes = seconds // 60
+            return f"{minutes} minute{'s' if minutes != 1 else ''} ago"
+        elif seconds < 86400:
+            hours = seconds // 3600
+            minutes = (seconds % 3600) // 60
+            if minutes > 0:
+                return f"{hours}h {minutes}m ago"
+            return f"{hours} hour{'s' if hours != 1 else ''} ago"
+        else:
+            days = seconds // 86400
+            if days > 7:
+                weeks = days // 7
+                return f"{weeks} week{'s' if weeks != 1 else ''} ago"
+            return f"{days} day{'s' if days != 1 else ''} ago"
 
     # ANSI color helpers
     def _blue(self) -> str:

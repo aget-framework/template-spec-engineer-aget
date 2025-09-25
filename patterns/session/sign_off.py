@@ -38,7 +38,9 @@ class SignOffProtocol:
         if git_status['has_changes']:
             # Quick commit without detailed message
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
-            message = f"checkpoint: Quick save at {timestamp}"
+            # Add file count to message for better tracking
+            change_count = git_status.get('count', 0)
+            message = f"checkpoint: Quick save at {timestamp} ({change_count} files)"
 
             try:
                 # Stage and commit
@@ -63,11 +65,12 @@ class SignOffProtocol:
                     'changes': git_status['count']
                 })
 
-            except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
-                print(f"{self._yellow()}⚠ Could not save changes{self._reset()}")
+            except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as e:
+                print(f"{self._yellow()}⚠ Could not save changes: {e.__class__.__name__}{self._reset()}")
                 result['actions'].append({
                     'action': 'quick_commit',
-                    'success': False
+                    'success': False,
+                    'error': e.__class__.__name__
                 })
         else:
             print(f"{self._green()}✓ No changes to save{self._reset()}")
@@ -84,12 +87,22 @@ class SignOffProtocol:
             if push_result['success']:
                 print(f"{self._green()}✓ Pushed to remote{self._reset()}")
             else:
-                print(f"ℹ️ Not pushed (no remote or offline)")
+                reason = push_result.get('reason', 'network issue')
+                print(f"ℹ️ Push failed ({reason}) - changes saved locally")
+        elif push_result.get('reason') == 'no_remote':
+            print(f"ℹ️ No remote configured (local only)")
 
-        # Quick state update
+        # Quick state update with error handling
         state = self._load_state()
         state['last_sign_off'] = datetime.now().isoformat()
-        self._save_state(state)
+
+        # Track quick saves for metrics
+        if 'quick_saves' not in state:
+            state['quick_saves'] = 0
+        state['quick_saves'] += 1
+
+        if not self._save_state(state):
+            print(f"{self._yellow()}⚠ Could not save state (continuing anyway){self._reset()}")
 
         # Final message - always brief
         print(f"{self._green()}✅ Signed off.{self._reset()}")
@@ -97,20 +110,42 @@ class SignOffProtocol:
         return result
 
     def _load_state(self) -> Dict[str, Any]:
-        """Load session state from disk."""
+        """Load session state from disk with recovery."""
         if self.state_file.exists():
             try:
-                return json.loads(self.state_file.read_text())
-            except (json.JSONDecodeError, IOError):
-                pass
+                content = self.state_file.read_text()
+                if content.strip():
+                    return json.loads(content)
+            except (json.JSONDecodeError, IOError) as e:
+                # Try backup recovery
+                backup_file = self.state_file.with_suffix('.backup')
+                if backup_file.exists():
+                    try:
+                        return json.loads(backup_file.read_text())
+                    except:
+                        pass
         return {}
 
-    def _save_state(self, state: Dict[str, Any]):
-        """Save session state to disk."""
+    def _save_state(self, state: Dict[str, Any]) -> bool:
+        """Save session state to disk with backup.
+
+        Returns:
+            True if successful, False otherwise
+        """
         try:
+            # Create backup if state exists
+            if self.state_file.exists():
+                try:
+                    backup_file = self.state_file.with_suffix('.backup')
+                    backup_file.write_text(self.state_file.read_text())
+                except:
+                    pass
+
+            # Save new state
             self.state_file.write_text(json.dumps(state, indent=2, default=str))
-        except IOError:
-            pass
+            return True
+        except (IOError, OSError):
+            return False
 
     def _check_git_status(self) -> Dict[str, Any]:
         """Quick check for uncommitted changes."""
@@ -155,6 +190,22 @@ class SignOffProtocol:
                     'action': 'push',
                     'attempted': False,
                     'reason': 'no_remote'
+                }
+
+            # Check if we have anything to push first
+            status_result = subprocess.run(
+                ['git', 'status', '-sb'],
+                cwd=self.project_path,
+                capture_output=True,
+                text=True,
+                timeout=1
+            )
+
+            if 'ahead' not in status_result.stdout:
+                return {
+                    'action': 'push',
+                    'attempted': False,
+                    'reason': 'nothing_to_push'
                 }
 
             # Try to push (with short timeout)
