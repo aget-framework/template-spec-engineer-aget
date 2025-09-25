@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-144503-711304-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T14:45:03.711563"
+    },
+    {
+      "filename": "2025-09-25-144503-709452-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T14:45:03.709704"
+    },
+    {
+      "filename": "2025-09-25-144503-705628-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T14:45:03.705919"
+    },
+    {
+      "filename": "2025-09-25-144503-698532-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T14:45:03.698982"
+    },
+    {
+      "filename": "2025-09-25-144503-692269-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T14:45:03.692962"
+    },
+    {
+      "filename": "2025-09-25-144503-685475-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T14:45:03.686206"
+    },
+    {
+      "filename": "2025-09-25-141037-298633-DEC.md",
+      "type": "decision",
+      "title": "Milestone 1 progress: Fixed majority of failing te...",
+      "created": "2025-09-25T14:10:37.299172"
+    },
+    {
       "filename": "2025-09-25-140956-634445-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -557,56 +599,14 @@
       "type": "extraction",
       "title": "Extracted src from workspace/ to test-package/",
       "created": "2025-09-25T01:48:00.012419"
-    },
-    {
-      "filename": "2025-09-25-013644-189386-DEC.md",
-      "type": "decision",
-      "title": "v2...",
-      "created": "2025-09-25T01:36:44.190101"
-    },
-    {
-      "filename": "2025-09-25-005024-939525-DEC.md",
-      "type": "decision",
-      "title": "AGET's mission defined: 'Help software creators ac...",
-      "created": "2025-09-25T00:50:24.940303"
-    },
-    {
-      "filename": "2025-09-25-000244-575015-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to full-dir/",
-      "created": "2025-09-25T00:02:44.575404"
-    },
-    {
-      "filename": "2025-09-25-000244-573647-EXT.md",
-      "type": "extraction",
-      "title": "Extracted single...",
-      "created": "2025-09-25T00:02:44.574002"
-    },
-    {
-      "filename": "2025-09-25-000244-570579-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to with-deps/",
-      "created": "2025-09-25T00:02:44.570808"
-    },
-    {
-      "filename": "2025-09-25-000244-565763-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to sanitized/",
-      "created": "2025-09-25T00:02:44.565985"
-    },
-    {
-      "filename": "2025-09-25-000244-561814-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to nested-package/",
-      "created": "2025-09-25T00:02:44.562086"
     }
   ],
   "stats": {
-    "total": 118,
+    "total": 125,
     "by_type": {
-      "decision": 10,
+      "decision": 11,
       "discovery": 6,
-      "extraction": 102
+      "extraction": 108
     }
   }
 }
