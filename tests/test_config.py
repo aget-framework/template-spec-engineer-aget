@@ -177,10 +177,10 @@ class TestConfigModule(unittest.TestCase):
         """Test successful apply command."""
         mock_apply = Mock()
         mock_apply.execute.return_value = {
-            'status': 'success',
+            'success': True,
             'pattern': 'session/wake',
             'message': 'Pattern applied successfully',
-            'elapsed': 0.2
+            'execution_time': 0.2
         }
         mock_apply_class.return_value = mock_apply
 
@@ -198,7 +198,8 @@ class TestConfigModule(unittest.TestCase):
         """Test successful rollback command."""
         mock_rollback = Mock()
         mock_rollback.execute.return_value = {
-            'status': 'success',
+            'success': True,
+            'tier_used': 'gh',
             'message': 'Rolled back to previous version'
         }
         mock_rollback_class.return_value = mock_rollback
@@ -217,7 +218,7 @@ class TestConfigModule(unittest.TestCase):
         """Test successful list command."""
         mock_list = Mock()
         mock_list.execute.return_value = {
-            'status': 'success',
+            'success': True,
             'patterns': ['session/wake', 'session/wind_down'],
             'count': 2
         }
@@ -233,7 +234,7 @@ class TestConfigModule(unittest.TestCase):
         """Test successful evolution command."""
         mock_evolution = Mock()
         mock_evolution.execute.return_value = {
-            'status': 'success',
+            'success': True,
             'type': 'decision',
             'message': 'Decision recorded'
         }
@@ -249,7 +250,7 @@ class TestConfigModule(unittest.TestCase):
         """Test successful extract command."""
         mock_extract = Mock()
         mock_extract.execute.return_value = {
-            'status': 'success',
+            'success': True,
             'source': 'workspace/',
             'target': 'products/',
             'package': 'my-tool'
@@ -281,7 +282,7 @@ class TestConfigModule(unittest.TestCase):
         """Test successful migrate command."""
         mock_migrate = Mock()
         mock_migrate.execute.return_value = {
-            'status': 'success',
+            'success': True,
             'message': 'Migration completed'
         }
         mock_migrate_class.return_value = mock_migrate

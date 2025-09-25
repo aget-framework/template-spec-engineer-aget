@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-161238-979797-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T16:12:38.980754"
+    },
+    {
+      "filename": "2025-09-25-161238-978334-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T16:12:38.978587"
+    },
+    {
+      "filename": "2025-09-25-161238-975296-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T16:12:38.975569"
+    },
+    {
+      "filename": "2025-09-25-161238-969182-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T16:12:38.970280"
+    },
+    {
+      "filename": "2025-09-25-161238-965053-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T16:12:38.965316"
+    },
+    {
+      "filename": "2025-09-25-161238-960494-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T16:12:38.960805"
+    },
+    {
+      "filename": "2025-09-25-161004-694457-DEC.md",
+      "type": "decision",
+      "title": "Test coverage checkpoint: 76% achieved with 268 te...",
+      "created": "2025-09-25T16:10:04.695126"
+    },
+    {
       "filename": "2025-09-25-152703-727276-DEC.md",
       "type": "decision",
       "title": "Achieved 76% test coverage milestone - added 58 ne...",
@@ -557,56 +599,14 @@
       "type": "extraction",
       "title": "Extracted src from workspace/ to with-deps/",
       "created": "2025-09-25T02:50:15.318935"
-    },
-    {
-      "filename": "2025-09-25-025015-313597-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to sanitized/",
-      "created": "2025-09-25T02:50:15.313841"
-    },
-    {
-      "filename": "2025-09-25-025015-309277-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to nested-package/",
-      "created": "2025-09-25T02:50:15.309592"
-    },
-    {
-      "filename": "2025-09-25-025015-304193-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to test-package/",
-      "created": "2025-09-25T02:50:15.304530"
-    },
-    {
-      "filename": "2025-09-25-022019-477306-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to full-dir/",
-      "created": "2025-09-25T02:20:19.477671"
-    },
-    {
-      "filename": "2025-09-25-022019-476169-EXT.md",
-      "type": "extraction",
-      "title": "Extracted single...",
-      "created": "2025-09-25T02:20:19.476390"
-    },
-    {
-      "filename": "2025-09-25-022019-473201-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to with-deps/",
-      "created": "2025-09-25T02:20:19.473423"
-    },
-    {
-      "filename": "2025-09-25-022019-468496-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to sanitized/",
-      "created": "2025-09-25T02:20:19.468729"
     }
   ],
   "stats": {
-    "total": 145,
+    "total": 152,
     "by_type": {
-      "decision": 13,
+      "decision": 14,
       "discovery": 6,
-      "extraction": 126
+      "extraction": 132
     }
   }
 }
