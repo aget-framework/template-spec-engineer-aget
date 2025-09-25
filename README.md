@@ -41,7 +41,7 @@ aget extract --from src/ --to products/ --name my-library
 # That's it! Your project is now AI-agent ready
 ```
 
-For more installation options and customization, see [docs/QUICK_START.md](docs/QUICK_START.md)
+For more installation options and customization, see [docs/GET_STARTED.md](docs/GET_STARTED.md)
 
 ## Why Universal Standards?
 

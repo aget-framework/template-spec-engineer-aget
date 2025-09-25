@@ -19,8 +19,8 @@ These files are managed by the CLI Agent Template and should not be modified dir
 
 ### Core Documentation
 - `docs/FILE_OWNERSHIP.md` - This file
-- `docs/PATTERNS_EXPLAINED.md` - Pattern documentation
-- `docs/QUICK_START.md` - Getting started guide
+- `docs/WRITE_PATTERNS.md` - Pattern documentation
+- `docs/GET_STARTED.md` - Getting started guide
 
 ## User Files (Project-Owned)
 These files belong to the user's project and can be freely customized:
