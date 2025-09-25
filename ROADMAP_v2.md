@@ -26,10 +26,10 @@ AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a *
 - Remaining: Pattern library, migration tools
 
 ### Goal 2: Framework (Evolved Vision - New)
-**Enable agents to bridge private innovation to public value**
-- Core Promise: Private exploration → Public manifestation
+**Enable agents to evolve from exploration to value creation**
+- Core Promise: Private exploration → Value manifestation (public or private)
 - Status: Conceptualized, ready to implement
-- Key Innovation: Agents that create and maintain public products
+- Key Innovation: Agents that create and maintain their own products
 
 ## Core Breakthroughs
 
