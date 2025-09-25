@@ -286,7 +286,7 @@ class TestEndToEndWorkflow(unittest.TestCase):
         self.assertTrue(result['success'])
 
         # Verify directories created
-        self.assertTrue((self.test_dir / "outputs").exists())
+        self.assertTrue((self.test_dir / "workspace").exists())
         self.assertTrue((self.test_dir / "data").exists())
         self.assertTrue((self.test_dir / ".aget" / "evolution").exists())
 

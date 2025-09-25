@@ -80,23 +80,17 @@ echo -e "${BLUE}Step 2: Migrating test documentation${NC}"
 echo "--------------------------------------"
 
 # Migration mapping: source -> target
-declare -A MIGRATIONS=(
-    # Day status and plans (with renaming)
-    ["DAY_1_STATUS.md"]="testing/v2_release/DAY_01_RESULTS.md"
-    ["DAY_1_TEST_PLAN.md"]="testing/v2_release/DAY_01_TEST_PLAN.md"
-    ["DAY_2_STATUS.md"]="testing/v2_release/DAY_02_RESULTS.md"
-    ["DAY_2_TEST_PLAN.md"]="testing/v2_release/DAY_02_TEST_PLAN.md"
-    ["DAY_3_PREVIEW.md"]="testing/v2_release/DAY_03_PREVIEW.md"
-
-    # Test matrices and plans
-    ["MIGRATION_TEST_MATRIX.md"]="testing/v2_release/TEST_MATRIX.md"
-    ["V2_INCREMENTAL_TEST_PLAN.md"]="testing/plans/V2_INCREMENTAL_PLAN.md"
-    ["docs/V2_RELEASE_TEST_PLAN.md"]="testing/plans/V2_RELEASE_PLAN.md"
-
-    # Protocols
-    ["CURSOR_TEST_PROTOCOL.md"]="testing/protocols/CURSOR_TESTING_PROTOCOL.md"
-    ["TRANSITION_TEST_SUITE.md"]="testing/protocols/TRANSITION_SUITE.md"
-)
+declare -A MIGRATIONS
+MIGRATIONS["DAY_1_STATUS.md"]="testing/v2_release/DAY_01_RESULTS.md"
+MIGRATIONS["DAY_1_TEST_PLAN.md"]="testing/v2_release/DAY_01_TEST_PLAN.md"
+MIGRATIONS["DAY_2_STATUS.md"]="testing/v2_release/DAY_02_RESULTS.md"
+MIGRATIONS["DAY_2_TEST_PLAN.md"]="testing/v2_release/DAY_02_TEST_PLAN.md"
+MIGRATIONS["DAY_3_PREVIEW.md"]="testing/v2_release/DAY_03_PREVIEW.md"
+MIGRATIONS["MIGRATION_TEST_MATRIX.md"]="testing/v2_release/TEST_MATRIX.md"
+MIGRATIONS["V2_INCREMENTAL_TEST_PLAN.md"]="testing/plans/V2_INCREMENTAL_PLAN.md"
+MIGRATIONS["docs/V2_RELEASE_TEST_PLAN.md"]="testing/plans/V2_RELEASE_PLAN.md"
+MIGRATIONS["CURSOR_TEST_PROTOCOL.md"]="testing/protocols/CURSOR_TESTING_PROTOCOL.md"
+MIGRATIONS["TRANSITION_TEST_SUITE.md"]="testing/protocols/TRANSITION_SUITE.md"
 
 for source in "${!MIGRATIONS[@]}"; do
     target="${MIGRATIONS[$source]}"
