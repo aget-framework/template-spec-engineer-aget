@@ -55,11 +55,7 @@ Coming soon: Small examples for different project types
 
 ## For AGET Framework Development
 
-The AGET framework's own specifications:
-- [`FUNCTIONAL_REQUIREMENTS_AGET.md`](FUNCTIONAL_REQUIREMENTS_AGET.md) - AGET's requirements
-- [`BUSINESS_RULES_AGET.md`](BUSINESS_RULES_AGET.md) - AGET's rules
-
-For complete reference implementation, see the private `aget-aget` repository.
+The AGET framework's complete specifications have been moved to the private `aget-aget` repository for reference implementation.
 
 ## Philosophy
 
