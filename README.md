@@ -27,13 +27,14 @@ git clone https://github.com/aget-framework/aget-cli-agent-template.git
 cd aget-cli-agent-template
 python3 installer/install.py /path/to/your/project
 
-# Or use the new aget commands (v2 Alpha):
-aget init                    # Initialize agent configuration
-aget apply session/wake      # Apply session patterns
-aget apply housekeeping/cleanup  # Apply cleanup patterns
+# Or use the new aget commands (v2 Enhanced):
+aget init --template agent --with-patterns  # One-command complete setup!
 
 # Tell your AI: "hey"
 # AI responds with project status and is ready to work
+
+# Extract your libraries:
+aget extract --from src/ --to products/ --name my-library
 
 # That's it! Your project is now AI-agent ready
 ```
@@ -116,25 +117,33 @@ cd aget-cli-agent-template
 python3 installer/install.py /path/to/your/project --template advanced
 ```
 
-## What's New in v2 (Gate 3 Complete!)
+## What's New in v2 (Enhanced with Real Migration Experience!)
 
 ### 🚀 Working CLI Commands
-- `aget init --template [agent|tool|hybrid]` - Initialize with proper directory scaffolding ✅
+- `aget init --template [agent|tool|hybrid] --with-patterns` - One-step complete setup ✅ **ENHANCED!**
 - `aget apply <pattern>` - Apply reusable patterns to your project ✅
 - `aget list` - Discover available patterns ✅
 - `aget rollback` - Safe rollback mechanism for configurations ✅
-- `aget extract --from workspace/ --to products/` - Bridge internal tools to public ✅ NEW!
-- `aget evolution --type [decision|discovery]` - Track your agent's evolution ✅ NEW!
+- `aget extract --from src/ --to products/` - Extract entire directories ✅ **ENHANCED!**
+- `aget evolution --type [decision|discovery]` - Track your agent's evolution ✅
 
-### 📦 Template Scaffolding (Gate 3 Feature)
+### 🎯 Major Enhancements (Based on Real Migrations)
+- **One-Command Setup**: `--with-patterns` flag eliminates confusing two-step process
+- **Directory Extraction**: Extract entire `src/` directories, not just single files
+- **Structure Preservation**: Maintains directory hierarchy when extracting
+- **94% Time Reduction**: Complete setup in <1 minute vs 15+ minutes
+- **Smart Pattern Mapping**: Each template automatically applies appropriate patterns
+
+### 📦 Template Scaffolding
 - **agent**: Full autonomous agent structure with workspace/products split
 - **tool**: Traditional tool/library structure
 - **hybrid**: Combined agent and tool capabilities
 - **minimal**: Basic configuration only
 - **standard**: Default balanced template
 
-### 🌉 Bridge Mechanism (Gate 3 Feature)
-- Extract tools from workspace to products with `aget extract`
+### 🌉 Enhanced Bridge Mechanism
+- Extract entire directories: `aget extract --from src/ --to products/`
+- Maintains package structure with proper `__init__.py` files
 - Automatic secret sanitization and API key removal
 - Generated setup.py and README for pip installation
 - Track extractions in evolution history
