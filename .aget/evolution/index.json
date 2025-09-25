@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-120409-446204-DEC.md",
+      "type": "decision",
+      "title": "Established formal documentation structure with sp...",
+      "created": "2025-09-25T12:04:09.446723"
+    },
+    {
       "filename": "2025-09-25-120337-005666-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -548,9 +554,9 @@
     }
   ],
   "stats": {
-    "total": 91,
+    "total": 92,
     "by_type": {
-      "decision": 7,
+      "decision": 8,
       "discovery": 6,
       "extraction": 78
     }
