@@ -1,6 +1,6 @@
 # AGET: CLI Agent Template
 
-> **"Our Universe, a little more beautiful"** - Making human-AI collaboration beautiful through simplicity, patterns, and shared evolution.
+> **Mission: Help software creators achieve their vision (with their linguistic AI collaborator)**
 
 **Agent Template (AGET)** - The universal standard for making any codebase instantly CLI agent-ready. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 

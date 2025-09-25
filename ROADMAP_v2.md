@@ -5,20 +5,28 @@
 *Original Charter: 2025-09-22 (120 hours committed)*
 *Framework Evolution: 2025-09-24*
 
+## Mission Statement
+
+**"Help software creators achieve their vision (with their linguistic AI collaborator)"**
+
+- Primary mission: Help software creators achieve their vision
+- Amplified mission: With AI collaborator when awakened
+- See [docs/MISSION.md](docs/MISSION.md) for full mission details
+
 ## Vision Statement
 
 AGET v2 delivers both a **practical CLI tool** for configuring AI agents AND a **conceptual framework** for agents that bridge private innovation to public value.
 
-## v2.0 Dual Mission
+## v2.0 Implementation Goals
 
-### Mission 1: CLI Tool (Original Charter - In Progress)
-**Help individual developers configure AI coding agents through simple, local, file-based patterns**
-- Core Promise: Working config in <60 seconds
+### Goal 1: CLI Tool (Original Charter - In Progress)
+**Make any codebase AI-agent ready in <60 seconds**
+- Core Promise: Working config instantly
 - Status: Alpha released with `aget init`, `aget rollback`
 - Remaining: Pattern library, migration tools
 
-### Mission 2: Framework (Evolved Vision - New)
-**Enable personal agents to become co-creators of community tools**
+### Goal 2: Framework (Evolved Vision - New)
+**Enable agents to bridge private innovation to public value**
 - Core Promise: Private exploration → Public manifestation
 - Status: Conceptualized, ready to implement
 - Key Innovation: Agents that create and maintain public products
