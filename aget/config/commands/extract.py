@@ -88,7 +88,7 @@ Notes:
         }
 
     def extract_file(self, args: List[str]) -> Dict[str, Any]:
-        """Extract a file from workspace to products."""
+        """Extract a file or directory from workspace to products."""
         # Parse arguments
         from_idx = args.index('--from')
         to_idx = args.index('--to')
@@ -105,20 +105,28 @@ Notes:
             name_idx = args.index('--name')
             package_name = args[name_idx + 1]
         else:
-            # Auto-detect package name from filename
-            package_name = source_path.stem.replace('_', '-')
+            # Auto-detect package name from filename or directory
+            if source_path.is_dir():
+                package_name = source_path.name.replace('_', '-')
+            else:
+                package_name = source_path.stem.replace('_', '-')
 
-        # Validate source file
+        # Validate source
         if not source_path.exists():
             return {
                 'success': False,
-                'error': f'Source file not found: {source_path}'
+                'error': f'Source not found: {source_path}'
             }
 
+        # Handle directory extraction
+        if source_path.is_dir():
+            return self.extract_directory(source_path, target_dir, package_name, force, dry_run)
+
+        # Handle file extraction (existing logic)
         if not source_path.suffix == '.py':
             return {
                 'success': False,
-                'error': 'Only Python files can be extracted currently'
+                'error': 'Only Python files or directories can be extracted'
             }
 
         # Analyze the file
@@ -184,6 +192,164 @@ Notes:
             ],
             'warnings': analysis.get('warnings', [])
         }
+
+    def extract_directory(self, source_dir: Path, target_dir: Path,
+                          package_name: str, force: bool, dry_run: bool) -> Dict[str, Any]:
+        """Extract a directory structure to products."""
+        # Find all Python files in directory
+        py_files = list(source_dir.glob('**/*.py'))
+
+        if not py_files:
+            return {
+                'success': False,
+                'error': f'No Python files found in {source_dir}'
+            }
+
+        # Analyze all files
+        all_internal_deps = set()
+        all_external_deps = set()
+        has_issues = False
+
+        for py_file in py_files:
+            if '__pycache__' in str(py_file):
+                continue
+            analysis = self.analyze_file(py_file)
+            all_internal_deps.update(analysis['internal_deps'])
+            all_external_deps.update(analysis['external_deps'])
+            if analysis['has_internal_deps'] and not force:
+                has_issues = True
+
+        if has_issues and not force:
+            return {
+                'success': False,
+                'error': 'Directory has files with internal dependencies. Use --force to extract anyway.',
+                'internal_deps': list(all_internal_deps)
+            }
+
+        if dry_run:
+            return {
+                'success': True,
+                'message': f'[DRY RUN] Would extract {source_dir} to {target_dir}/{package_name}/',
+                'files': len(py_files),
+                'structure': f'{len(set(f.parent for f in py_files))} directories'
+            }
+
+        # Create target package directory
+        package_dir = target_dir / package_name
+        package_dir.mkdir(parents=True, exist_ok=True)
+
+        # Create package subdirectory (Python convention)
+        package_subdir = package_dir / package_name.replace('-', '_')
+        package_subdir.mkdir(exist_ok=True)
+
+        # Copy and sanitize all Python files maintaining structure
+        files_created = []
+        for py_file in py_files:
+            if '__pycache__' in str(py_file):
+                continue
+
+            # Maintain relative structure
+            relative_path = py_file.relative_to(source_dir)
+            target_file = package_subdir / relative_path
+            target_file.parent.mkdir(parents=True, exist_ok=True)
+
+            # Sanitize and write
+            sanitized_content = self.sanitize_content(py_file.read_text())
+            target_file.write_text(sanitized_content)
+            files_created.append(str(relative_path))
+
+            # Create __init__.py files for all directories
+            for parent in relative_path.parents:
+                if parent != Path('.'):
+                    init_file = package_subdir / parent / '__init__.py'
+                    if not init_file.exists():
+                        init_file.write_text('"""Package module."""\n')
+
+        # Create root __init__.py
+        (package_subdir / '__init__.py').write_text(
+            f'"""Package extracted from {source_dir.name}/"""\n'
+        )
+
+        # Generate setup.py
+        setup_content = self.generate_setup_py(
+            package_name=package_name,
+            description=f'Library extracted from {source_dir.name}',
+            dependencies=list(all_external_deps)
+        )
+        (package_dir / 'setup.py').write_text(setup_content)
+
+        # Generate comprehensive README
+        readme_content = self.generate_directory_readme(
+            package_name=package_name,
+            source_dir=source_dir.name,
+            file_count=len(py_files),
+            modules=[f.stem for f in py_files if f.parent == source_dir]
+        )
+        (package_dir / 'README.md').write_text(readme_content)
+
+        # Track in evolution
+        self.track_extraction(source_dir, package_dir)
+
+        return {
+            'success': True,
+            'message': f'Extracted directory {source_dir} to {package_dir}',
+            'files_extracted': len(files_created),
+            'package_structure': f'{package_name}/\n├── setup.py\n├── README.md\n└── {package_name.replace("-", "_")}/\n    └── {len(files_created)} Python files',
+            'warnings': ['Internal dependencies commented out'] if all_internal_deps else []
+        }
+
+    def generate_directory_readme(self, package_name: str, source_dir: str,
+                                 file_count: int, modules: List[str]) -> str:
+        """Generate README for directory extraction."""
+        readme = f"""# {package_name}
+
+Library extracted from `{source_dir}/` directory.
+
+## Overview
+
+This package contains {file_count} Python modules originally developed in the workspace.
+It has been sanitized and prepared for public use.
+
+## Installation
+
+```bash
+pip install -e .
+```
+
+## Modules
+
+"""
+        for module in modules[:10]:  # List first 10 modules
+            readme += f"- `{module}` - Extracted module\n"
+
+        if len(modules) > 10:
+            readme += f"- ... and {len(modules) - 10} more\n"
+
+        readme += f"""
+
+## Usage
+
+```python
+from {package_name.replace('-', '_')} import *
+
+# Import specific modules
+from {package_name.replace('-', '_')}.module_name import ClassName
+```
+
+## Development
+
+This package was automatically extracted using AGET's enhanced bridge mechanism.
+Original internal dependencies have been removed or refactored.
+
+## License
+
+See the main project license.
+
+---
+
+*Extracted on {datetime.now().strftime('%Y-%m-%d')} using AGET extract*
+"""
+        return readme
 
     def auto_discover(self, args: List[str]) -> Dict[str, Any]:
         """Auto-discover extractable tools in workspace."""

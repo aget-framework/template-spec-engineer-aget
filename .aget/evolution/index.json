@@ -1,6 +1,18 @@
 {
   "entries": [
     {
+      "filename": "2025-09-24-173433-409029-DEC.md",
+      "type": "decision",
+      "title": "Enhanced extract command to support directories, m...",
+      "created": "2025-09-24T17:34:33.409556"
+    },
+    {
+      "filename": "2025-09-24-173306-722918-DISC.md",
+      "type": "discovery",
+      "title": "Migration revealed two-step gap: init creates stru...",
+      "created": "2025-09-24T17:33:06.723637"
+    },
+    {
       "filename": "2025-09-24-164324-679361-DISC.md",
       "type": "discovery",
       "title": "Template system enables 30-second setup",
@@ -32,10 +44,10 @@
     }
   ],
   "stats": {
-    "total": 5,
+    "total": 7,
     "by_type": {
-      "decision": 2,
-      "discovery": 3
+      "decision": 3,
+      "discovery": 4
     }
   }
 }

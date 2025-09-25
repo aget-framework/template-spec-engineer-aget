@@ -110,10 +110,12 @@ Run `aget list` to see available patterns you can apply.
 
         # Parse template option
         template_type = 'standard'  # default
+        with_patterns = False
         for i, arg in enumerate(args):
             if arg == '--template' and i + 1 < len(args):
                 template_type = args[i + 1]
-                break
+            elif arg == '--with-patterns':
+                with_patterns = True
 
         # Validate template
         if template_type not in self.templates:
@@ -180,13 +182,51 @@ Run `aget list` to see available patterns you can apply.
                     "Please see AGENTS.md for agent configuration.\n"
                 )
 
+        # Apply patterns if requested
+        patterns_applied = []
+        if with_patterns:
+            # Import apply command
+            from aget.config.commands.apply import ApplyCommand
+            apply_cmd = ApplyCommand()
+
+            # Determine which patterns to apply based on template
+            patterns_to_apply = self._get_patterns_for_template(template_type)
+
+            for pattern in patterns_to_apply:
+                # Call tier_basic directly with kwargs
+                result = apply_cmd.tier_basic(args=[pattern])
+                if result.get('success'):
+                    patterns_applied.append(pattern)
+
+        message = f'Created {template_type} template in {project_path}'
+        if patterns_applied:
+            message += f' with {len(patterns_applied)} patterns applied'
+
         return {
             'success': True,
-            'message': f'Created {template_type} template in {project_path}',
+            'message': message,
             'template': template_type,
             'description': template_config['description'],
-            'files_created': ['AGENTS.md', 'CLAUDE.md'] + created_dirs
+            'files_created': ['AGENTS.md', 'CLAUDE.md'] + created_dirs,
+            'patterns_applied': patterns_applied if with_patterns else []
         }
+
+    def _get_patterns_for_template(self, template_type: str) -> List[str]:
+        """Get list of patterns to apply for each template type."""
+        pattern_map = {
+            'minimal': ['session/wake'],
+            'standard': ['session/wake', 'session/wind_down', 'housekeeping/cleanup'],
+            'agent': [
+                'session/wake', 'session/wind_down', 'session/sign_off',
+                'housekeeping/cleanup', 'housekeeping/sanity_check'
+            ],
+            'tool': ['session/wake', 'housekeeping/cleanup'],
+            'hybrid': [
+                'session/wake', 'session/wind_down', 'session/sign_off',
+                'housekeeping/cleanup', 'housekeeping/sanity_check'
+            ]
+        }
+        return pattern_map.get(template_type, [])
 
     def _get_readme_content(self, dir_path: str) -> str:
         """Generate README content for specific directories."""
