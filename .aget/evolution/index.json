@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-140956-634445-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T14:09:56.634711"
+    },
+    {
+      "filename": "2025-09-25-140956-632551-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T14:09:56.632816"
+    },
+    {
+      "filename": "2025-09-25-140956-628769-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T14:09:56.629040"
+    },
+    {
+      "filename": "2025-09-25-140956-622630-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T14:09:56.622918"
+    },
+    {
+      "filename": "2025-09-25-140956-617729-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T14:09:56.618015"
+    },
+    {
+      "filename": "2025-09-25-140956-611969-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T14:09:56.612326"
+    },
+    {
       "filename": "2025-09-25-140921-728134-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -563,50 +599,14 @@
       "type": "extraction",
       "title": "Extracted src from workspace/ to nested-package/",
       "created": "2025-09-25T00:02:44.562086"
-    },
-    {
-      "filename": "2025-09-25-000244-555068-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to test-package/",
-      "created": "2025-09-25T00:02:44.555393"
-    },
-    {
-      "filename": "2025-09-24-235440-021811-DISC.md",
-      "type": "discovery",
-      "title": "AGET's deeper mission revealed: 'Our Universe, a l...",
-      "created": "2025-09-24T23:54:40.022494"
-    },
-    {
-      "filename": "2025-09-24-234000-370137-DEC.md",
-      "type": "decision",
-      "title": "aget-aget will be developed privately first, relea...",
-      "created": "2025-09-24T23:40:00.370993"
-    },
-    {
-      "filename": "2025-09-24-232723-453312-DISC.md",
-      "type": "discovery",
-      "title": "aget-aget vision clarified: Not for maintenance bu...",
-      "created": "2025-09-24T23:27:23.454269"
-    },
-    {
-      "filename": "2025-09-24-185203-566635-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to full-dir/",
-      "created": "2025-09-24T18:52:03.567560"
-    },
-    {
-      "filename": "2025-09-24-185203-565681-EXT.md",
-      "type": "extraction",
-      "title": "Extracted single...",
-      "created": "2025-09-24T18:52:03.565878"
     }
   ],
   "stats": {
-    "total": 112,
+    "total": 118,
     "by_type": {
       "decision": 10,
       "discovery": 6,
-      "extraction": 96
+      "extraction": 102
     }
   }
 }
