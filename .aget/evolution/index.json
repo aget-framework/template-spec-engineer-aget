@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-161411-960476-DEC.md",
+      "type": "decision",
+      "title": "Fixed 11 failing tests (24\u219213), achieved 77% cover...",
+      "created": "2025-09-25T16:14:11.961161"
+    },
+    {
       "filename": "2025-09-25-161325-815541-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -593,18 +599,12 @@
       "type": "extraction",
       "title": "Extracted single...",
       "created": "2025-09-25T11:35:59.184777"
-    },
-    {
-      "filename": "2025-09-25-113559-181227-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to with-deps/",
-      "created": "2025-09-25T11:35:59.181493"
     }
   ],
   "stats": {
-    "total": 158,
+    "total": 159,
     "by_type": {
-      "decision": 14,
+      "decision": 15,
       "discovery": 6,
       "extraction": 138
     }
