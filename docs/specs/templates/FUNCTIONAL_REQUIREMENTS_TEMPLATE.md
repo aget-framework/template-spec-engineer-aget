@@ -1,9 +1,16 @@
 # [PROJECT NAME] Functional Requirements
 
-> What your system must do - fill this in as you discover functionality
+> What happens here - document as you discover, design, or teach
 
 ## Getting Started
-<!-- Start by listing the 3-5 most important things your system does -->
+
+**Choose your perspective:**
+- 🔍 **Discovering**: "I'm finding out what this does"
+- 🚀 **Designing**: "I'm planning what this will do"
+- 📊 **Analyzing**: "I'm documenting what I can do with this data"
+- 🎓 **Learning**: "I'm understanding what this teaches me"
+
+<!-- Start by listing the 3-5 most important things -->
 
 ### FR-001: [Primary Purpose]
 **Description**: <!-- What is the main thing your system does? -->

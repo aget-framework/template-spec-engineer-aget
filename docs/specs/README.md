@@ -1,8 +1,27 @@
 # Specifications Directory
 
-## For Users: Start Here
+## Choose Your Path
 
-If you're using AGET to understand and document your project, start with these templates:
+### 🔍 "I'm analyzing existing code"
+→ Use templates to document what you discover
+- Start with [`guides/DISCOVERING_YOUR_SPECS.md`](guides/DISCOVERING_YOUR_SPECS.md)
+
+### 📊 "I'm working with data"
+→ Use templates to document your data and insights
+- Start with [`templates/DATA_SPECIFICATIONS_TEMPLATE.md`](templates/DATA_SPECIFICATIONS_TEMPLATE.md)
+- Document schemas, transformations, analysis patterns
+
+### 🚀 "I'm building something new"
+→ Use templates to plan before you code
+- Start with requirements first
+- Let specs guide your implementation
+
+### 🎓 "I'm learning/teaching"
+→ Use templates to track understanding
+- Document what each part teaches
+- Track learning objectives and progress
+
+## Templates for All Use Cases
 
 ### 📝 Templates (Start Empty, Fill As You Learn)
 - [`templates/FUNCTIONAL_REQUIREMENTS_TEMPLATE.md`](templates/FUNCTIONAL_REQUIREMENTS_TEMPLATE.md) - What your system does
