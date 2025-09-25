@@ -172,15 +172,59 @@ Run `aget list` to see available patterns you can apply.
 
         # Create CLAUDE.md symlink for backward compatibility
         claude_file = project_path / "CLAUDE.md"
+
+        # Handle existing CLAUDE.md with content preservation
+        if claude_file.exists():
+            if '--force' in args and '--no-preserve' in args:
+                # Only with explicit no-preserve flag do we destroy content
+                claude_file.unlink()
+            elif claude_file.exists() and not claude_file.is_symlink():
+                # Preserve existing custom content and merge with AGET
+                from aget.config.commands.merge_content import ContentMerger
+                merger = ContentMerger()
+
+                # Backup original
+                backup_file = project_path / "CLAUDE.md.backup"
+                backup_file.write_text(claude_file.read_text())
+
+                # Merge contents
+                merged_content = merger.merge_contents(
+                    existing_content=claude_file.read_text(),
+                    aget_content=agents_file.read_text()
+                )
+
+                # Write merged content
+                claude_file.write_text(merged_content)
+
+                # Also update AGENTS.md to match
+                agents_file.write_text(merged_content)
+            else:
+                # Already a symlink, update AGENTS.md will update both
+                pass
+
+        # Create symlink or copy content (only if doesn't exist)
         if not claude_file.exists():
             try:
                 claude_file.symlink_to("AGENTS.md")
-            except OSError:
-                # Windows might not support symlinks
-                claude_file.write_text(
-                    "# This file redirects to AGENTS.md\n"
-                    "Please see AGENTS.md for agent configuration.\n"
-                )
+            except (OSError, FileExistsError):
+                # Windows or permission issues - copy content instead
+                claude_file.write_text(agents_file.read_text())
+
+        # Create other agent tool configs for universal compatibility
+        # Cursor
+        cursor_file = project_path / ".cursorrules"
+        if not cursor_file.exists() or '--force' in args:
+            cursor_file.write_text(agents_file.read_text())
+
+        # Aider (basic config pointing to AGENTS.md)
+        aider_file = project_path / ".aider.conf.yml"
+        if not aider_file.exists() or '--force' in args:
+            aider_config = """# Aider configuration
+# See AGENTS.md for detailed instructions
+read-only-files:
+  - AGENTS.md
+"""
+            aider_file.write_text(aider_config)
 
         # Apply patterns if requested
         patterns_applied = []
