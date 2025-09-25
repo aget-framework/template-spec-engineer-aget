@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-152703-727276-DEC.md",
+      "type": "decision",
+      "title": "Achieved 76% test coverage milestone - added 58 ne...",
+      "created": "2025-09-25T15:27:03.727723"
+    },
+    {
       "filename": "2025-09-25-152627-237535-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -593,18 +599,12 @@
       "type": "extraction",
       "title": "Extracted src from workspace/ to sanitized/",
       "created": "2025-09-25T02:20:19.468729"
-    },
-    {
-      "filename": "2025-09-25-022019-464399-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to nested-package/",
-      "created": "2025-09-25T02:20:19.464681"
     }
   ],
   "stats": {
-    "total": 144,
+    "total": 145,
     "by_type": {
-      "decision": 12,
+      "decision": 13,
       "discovery": 6,
       "extraction": 126
     }
