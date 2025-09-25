@@ -1,6 +1,48 @@
 {
   "entries": [
     {
+      "filename": "2025-09-24-185203-566635-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-24T18:52:03.567560"
+    },
+    {
+      "filename": "2025-09-24-185203-565681-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-24T18:52:03.565878"
+    },
+    {
+      "filename": "2025-09-24-185203-562713-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-24T18:52:03.563032"
+    },
+    {
+      "filename": "2025-09-24-185203-557317-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-24T18:52:03.557548"
+    },
+    {
+      "filename": "2025-09-24-185203-553472-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-24T18:52:03.553742"
+    },
+    {
+      "filename": "2025-09-24-185203-548532-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-24T18:52:03.548778"
+    },
+    {
+      "filename": "2025-09-24-183909-725375-DEC.md",
+      "type": "decision",
+      "title": "Checkpoint after major enhancements: directory ext...",
+      "created": "2025-09-24T18:39:09.725922"
+    },
+    {
       "filename": "2025-09-24-173433-409029-DEC.md",
       "type": "decision",
       "title": "Enhanced extract command to support directories, m...",
@@ -44,10 +86,11 @@
     }
   ],
   "stats": {
-    "total": 7,
+    "total": 14,
     "by_type": {
-      "decision": 3,
-      "discovery": 4
+      "decision": 4,
+      "discovery": 4,
+      "extraction": 6
     }
   }
 }
