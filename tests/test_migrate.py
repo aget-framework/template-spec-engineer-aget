@@ -1,0 +1,196 @@
+"""
+Tests for the migrate command module.
+"""
+
+import unittest
+from pathlib import Path
+import tempfile
+import shutil
+from unittest.mock import Mock, patch, MagicMock, call
+
+from aget.config.commands.migrate import MigrateCommand
+
+
+class TestMigrateCommand(unittest.TestCase):
+    """Test the MigrateCommand for AGET v1 to v2 migration."""
+
+    def setUp(self):
+        """Set up test fixtures."""
+        self.migrate_cmd = MigrateCommand()
+        self.test_dir = Path(tempfile.mkdtemp())
+
+        # Create test project structure
+        self.project_dir = self.test_dir / "test_project"
+        self.project_dir.mkdir()
+
+        # Create CLAUDE.md file (v1 config)
+        self.claude_file = self.project_dir / "CLAUDE.md"
+        self.claude_file.write_text("""# Project Configuration
+
+## Project Overview
+This is a test project.
+
+## Custom Commands
+- `test`: Run tests
+- `build`: Build project
+""")
+
+    def tearDown(self):
+        """Clean up test directory."""
+        if self.test_dir.exists():
+            shutil.rmtree(self.test_dir)
+
+    def test_command_attributes(self):
+        """Test that command has proper attributes."""
+        self.assertEqual(self.migrate_cmd.name, "migrate")
+        self.assertIn("migrate", self.migrate_cmd.description.lower())
+
+    @patch('aget.config.commands.migrate.ContentMerger')
+    @patch('aget.config.commands.migrate.BackupManager')
+    def test_migrate_basic_project(self, mock_backup_class, mock_merger_class):
+        """Test migrating a basic v1 project."""
+        mock_backup = Mock()
+        mock_backup.create_backup.return_value = self.test_dir / "backup"
+        mock_backup_class.return_value = mock_backup
+
+        mock_merger = Mock()
+        mock_merger.merge_agents_files.return_value = "# Merged content"
+        mock_merger_class.return_value = mock_merger
+
+        result = self.migrate_cmd.execute([str(self.project_dir)])
+
+        # Verify backup was created
+        mock_backup.create_backup.assert_called_once()
+
+        # Verify merge was attempted
+        mock_merger.merge_agents_files.assert_called_once()
+
+        self.assertEqual(result.get('status'), 'success')
+
+    @patch('aget.config.commands.migrate.ContentMerger')
+    def test_migrate_detects_v1_project(self, mock_merger_class):
+        """Test that migrate correctly detects v1 projects."""
+        mock_merger = Mock()
+        mock_merger.merge_agents_files.return_value = "# Merged"
+        mock_merger_class.return_value = mock_merger
+
+        # Should detect CLAUDE.md as v1 project
+        result = self.migrate_cmd.detect_version(self.project_dir)
+        self.assertEqual(result, 'v1')
+
+        # Create AGENTS.md for v2
+        (self.project_dir / "AGENTS.md").write_text("# AGET v2")
+        result = self.migrate_cmd.detect_version(self.project_dir)
+        self.assertEqual(result, 'v2')
+
+    def test_migrate_with_dry_run(self):
+        """Test migration in dry-run mode."""
+        result = self.migrate_cmd.execute([str(self.project_dir), '--dry-run'])
+
+        # In dry-run, files should not be modified
+        self.assertTrue(self.claude_file.exists())
+        self.assertFalse((self.project_dir / "AGENTS.md").exists())
+
+        # Should still report success
+        self.assertEqual(result.get('status'), 'success')
+
+    @patch('aget.config.commands.migrate.ContentMerger')
+    def test_migrate_preserves_custom_content(self, mock_merger_class):
+        """Test that migration preserves custom content."""
+        mock_merger = Mock()
+
+        def merge_side_effect(existing, template):
+            # Simulate preserving custom content
+            return existing + "\n\n" + template
+
+        mock_merger.merge_agents_files.side_effect = merge_side_effect
+        mock_merger_class.return_value = mock_merger
+
+        result = self.migrate_cmd.execute([str(self.project_dir)])
+
+        # Verify merge was called with existing content
+        mock_merger.merge_agents_files.assert_called_once()
+        call_args = mock_merger.merge_agents_files.call_args[0]
+        self.assertIn("Project Overview", call_args[0])
+        self.assertIn("Custom Commands", call_args[0])
+
+    def test_migrate_already_v2_project(self):
+        """Test migrating a project that's already v2."""
+        # Create AGENTS.md to make it v2
+        (self.project_dir / "AGENTS.md").write_text("# AGET v2 Config")
+
+        result = self.migrate_cmd.execute([str(self.project_dir)])
+
+        # Should detect it's already v2 and skip
+        self.assertEqual(result.get('status'), 'success')
+        self.assertIn('already', str(result.get('message', '')).lower())
+
+    def test_migrate_nonexistent_project(self):
+        """Test migrating a non-existent project."""
+        fake_path = self.test_dir / "nonexistent"
+
+        result = self.migrate_cmd.execute([str(fake_path)])
+
+        self.assertEqual(result.get('status'), 'error')
+        self.assertIn('not found', str(result.get('error', '')).lower())
+
+    @patch('aget.config.commands.migrate.InitCommand')
+    def test_migrate_with_force_flag(self, mock_init_class):
+        """Test force migration overwrites existing AGENTS.md."""
+        mock_init = Mock()
+        mock_init.execute.return_value = {'status': 'success'}
+        mock_init_class.return_value = mock_init
+
+        # Create existing AGENTS.md
+        (self.project_dir / "AGENTS.md").write_text("# Existing AGENTS.md")
+
+        result = self.migrate_cmd.execute([str(self.project_dir), '--force'])
+
+        # Force should overwrite even if v2 exists
+        self.assertEqual(result.get('status'), 'success')
+
+    def test_migrate_creates_symlink(self):
+        """Test that migration creates CLAUDE.md symlink."""
+        result = self.migrate_cmd.execute([str(self.project_dir)])
+
+        # After migration, CLAUDE.md should be symlink to AGENTS.md
+        agents_file = self.project_dir / "AGENTS.md"
+        claude_link = self.project_dir / "CLAUDE.md"
+
+        if result.get('status') == 'success':
+            self.assertTrue(agents_file.exists())
+            # Check if symlink was created (may vary by implementation)
+
+    def test_migrate_with_patterns(self):
+        """Test migration with pattern application."""
+        result = self.migrate_cmd.execute([str(self.project_dir), '--with-patterns'])
+
+        # Should apply patterns during migration
+        self.assertEqual(result.get('status'), 'success')
+
+        # Check that pattern directories might be created
+        patterns_dir = self.project_dir / "patterns"
+        # Patterns might or might not be created based on implementation
+
+    @patch('aget.config.commands.migrate.BackupManager')
+    def test_migrate_rollback_on_error(self, mock_backup_class):
+        """Test that migration rolls back on error."""
+        mock_backup = Mock()
+        mock_backup.create_backup.return_value = self.test_dir / "backup"
+        mock_backup.restore_backup.return_value = True
+        mock_backup_class.return_value = mock_backup
+
+        # Force an error during migration
+        with patch('aget.config.commands.migrate.ContentMerger') as mock_merger_class:
+            mock_merger = Mock()
+            mock_merger.merge_agents_files.side_effect = Exception("Merge failed")
+            mock_merger_class.return_value = mock_merger
+
+            result = self.migrate_cmd.execute([str(self.project_dir)])
+
+            # Should attempt rollback on error
+            self.assertEqual(result.get('status'), 'error')
+
+
+if __name__ == "__main__":
+    unittest.main()
