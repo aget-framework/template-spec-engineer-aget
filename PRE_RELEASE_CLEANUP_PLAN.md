@@ -17,35 +17,22 @@ Internal development documentation has been successfully migrated to the private
 **Audience**: AGET maintainers only
 **Content**: Internal development, test plans, migration tracking
 
-## Files to Move (aget-cli-agent-template → aget-aget)
+## Files Moved (aget-cli-agent-template → aget-aget) ✅
 
-### Phase 1: Test Documentation (HIGH PRIORITY)
-```bash
-# Day-by-day test documentation
-DAY_1_STATUS.md
-DAY_1_TEST_PLAN.md
-DAY_2_STATUS.md
-DAY_2_TEST_PLAN.md
-DAY_3_PREVIEW.md
-V2_INCREMENTAL_TEST_PLAN.md
+### Phase 1: Test Documentation (COMPLETED)
+- ✅ DAY_1_STATUS.md → testing/v2_release/DAY_01_RESULTS.md
+- ✅ DAY_1_TEST_PLAN.md → testing/v2_release/DAY_01_TEST_PLAN.md
+- ✅ DAY_2_STATUS.md → testing/v2_release/DAY_02_RESULTS.md
+- ✅ DAY_2_TEST_PLAN.md → testing/v2_release/DAY_02_TEST_PLAN.md
+- ✅ DAY_3_PREVIEW.md → testing/v2_release/DAY_03_PREVIEW.md
+- ✅ V2_INCREMENTAL_TEST_PLAN.md → testing/plans/V2_INCREMENTAL_PLAN.md
+- ✅ MIGRATION_TEST_MATRIX.md → testing/v2_release/TEST_MATRIX.md
+- ✅ TRANSITION_TEST_SUITE.md → testing/protocols/TRANSITION_SUITE.md
+- ✅ CURSOR_TEST_PROTOCOL.md → testing/protocols/CURSOR_TESTING_PROTOCOL.md
+- ✅ docs/V2_RELEASE_TEST_PLAN.md → testing/plans/V2_RELEASE_PLAN.md
 
-# Test matrices and suites
-MIGRATION_TEST_MATRIX.md
-TRANSITION_TEST_SUITE.md
-SCRIPT_FIX_REPORT.md
-
-# Release test plan (internal version)
-docs/V2_RELEASE_TEST_PLAN.md
-```
-
-### Phase 2: Session Notes (MEDIUM PRIORITY)
-```bash
-SESSION_NOTES/
-├── 2025-09-21/
-├── 2025-09-22/
-├── 2025-09-24/
-└── 2025-09-25/
-```
+### Phase 2: Session Notes (COMPLETED)
+- ✅ SESSION_NOTES/ → sessions/ (all historical notes migrated)
 
 ### Phase 3: Internal Sections (LOW PRIORITY)
 Remove from public docs:
