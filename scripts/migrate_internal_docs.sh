@@ -79,24 +79,14 @@ echo ""
 echo -e "${BLUE}Step 2: Migrating test documentation${NC}"
 echo "--------------------------------------"
 
-# Migration mapping: source -> target
-declare -A MIGRATIONS
-MIGRATIONS["DAY_1_STATUS.md"]="testing/v2_release/DAY_01_RESULTS.md"
-MIGRATIONS["DAY_1_TEST_PLAN.md"]="testing/v2_release/DAY_01_TEST_PLAN.md"
-MIGRATIONS["DAY_2_STATUS.md"]="testing/v2_release/DAY_02_RESULTS.md"
-MIGRATIONS["DAY_2_TEST_PLAN.md"]="testing/v2_release/DAY_02_TEST_PLAN.md"
-MIGRATIONS["DAY_3_PREVIEW.md"]="testing/v2_release/DAY_03_PREVIEW.md"
-MIGRATIONS["MIGRATION_TEST_MATRIX.md"]="testing/v2_release/TEST_MATRIX.md"
-MIGRATIONS["V2_INCREMENTAL_TEST_PLAN.md"]="testing/plans/V2_INCREMENTAL_PLAN.md"
-MIGRATIONS["docs/V2_RELEASE_TEST_PLAN.md"]="testing/plans/V2_RELEASE_PLAN.md"
-MIGRATIONS["CURSOR_TEST_PROTOCOL.md"]="testing/protocols/CURSOR_TESTING_PROTOCOL.md"
-MIGRATIONS["TRANSITION_TEST_SUITE.md"]="testing/protocols/TRANSITION_SUITE.md"
+# Migration function for each file
+migrate_file() {
+    local source=$1
+    local target=$2
 
-for source in "${!MIGRATIONS[@]}"; do
-    target="${MIGRATIONS[$source]}"
     if [ -f "$SOURCE_REPO/$source" ]; then
         show_action "Move" "$source" "$TARGET_REPO/$target"
-        run_command "cp $SOURCE_REPO/$source $TARGET_REPO/$target"
+        run_command "cp '$SOURCE_REPO/$source' '$TARGET_REPO/$target'"
 
         # Create redirect note in original location
         if [ "$DRY_RUN" != "--dry-run" ]; then
@@ -108,7 +98,19 @@ for source in "${!MIGRATIONS[@]}"; do
     else
         echo -e "${YELLOW}Warning: Source file not found: $source${NC}"
     fi
-done
+}
+
+# Perform migrations
+migrate_file "DAY_1_STATUS.md" "testing/v2_release/DAY_01_RESULTS.md"
+migrate_file "DAY_1_TEST_PLAN.md" "testing/v2_release/DAY_01_TEST_PLAN.md"
+migrate_file "DAY_2_STATUS.md" "testing/v2_release/DAY_02_RESULTS.md"
+migrate_file "DAY_2_TEST_PLAN.md" "testing/v2_release/DAY_02_TEST_PLAN.md"
+migrate_file "DAY_3_PREVIEW.md" "testing/v2_release/DAY_03_PREVIEW.md"
+migrate_file "MIGRATION_TEST_MATRIX.md" "testing/v2_release/TEST_MATRIX.md"
+migrate_file "V2_INCREMENTAL_TEST_PLAN.md" "testing/plans/V2_INCREMENTAL_PLAN.md"
+migrate_file "docs/V2_RELEASE_TEST_PLAN.md" "testing/plans/V2_RELEASE_PLAN.md"
+migrate_file "CURSOR_TEST_PROTOCOL.md" "testing/protocols/CURSOR_TESTING_PROTOCOL.md"
+migrate_file "TRANSITION_TEST_SUITE.md" "testing/protocols/TRANSITION_SUITE.md"
 
 echo ""
 echo -e "${BLUE}Step 3: Migrating SESSION_NOTES${NC}"
@@ -139,9 +141,16 @@ if [ "$DRY_RUN" != "--dry-run" ]; then
 ## Files Migrated from aget-cli-agent-template
 
 ### Test Documentation
-$(for source in "${!MIGRATIONS[@]}"; do
-    echo "- $source → ${MIGRATIONS[$source]}"
-done)
+- DAY_1_STATUS.md → testing/v2_release/DAY_01_RESULTS.md
+- DAY_1_TEST_PLAN.md → testing/v2_release/DAY_01_TEST_PLAN.md
+- DAY_2_STATUS.md → testing/v2_release/DAY_02_RESULTS.md
+- DAY_2_TEST_PLAN.md → testing/v2_release/DAY_02_TEST_PLAN.md
+- DAY_3_PREVIEW.md → testing/v2_release/DAY_03_PREVIEW.md
+- MIGRATION_TEST_MATRIX.md → testing/v2_release/TEST_MATRIX.md
+- V2_INCREMENTAL_TEST_PLAN.md → testing/plans/V2_INCREMENTAL_PLAN.md
+- docs/V2_RELEASE_TEST_PLAN.md → testing/plans/V2_RELEASE_PLAN.md
+- CURSOR_TEST_PROTOCOL.md → testing/protocols/CURSOR_TESTING_PROTOCOL.md
+- TRANSITION_TEST_SUITE.md → testing/protocols/TRANSITION_SUITE.md
 
 ### Session Notes
 - SESSION_NOTES/ → sessions/
@@ -212,6 +221,6 @@ fi
 
 echo ""
 echo "Summary:"
-echo "- Files to migrate: ${#MIGRATIONS[@]}"
+echo "- Files to migrate: 10 documents + SESSION_NOTES/"
 echo "- Target repo: $TARGET_REPO"
 echo "- Mode: $DRY_RUN"
