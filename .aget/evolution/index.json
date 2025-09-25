@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-131319-547508-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T13:13:19.547927"
+    },
+    {
+      "filename": "2025-09-25-131319-546287-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T13:13:19.546534"
+    },
+    {
+      "filename": "2025-09-25-131319-543186-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T13:13:19.543537"
+    },
+    {
+      "filename": "2025-09-25-131319-537663-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T13:13:19.537925"
+    },
+    {
+      "filename": "2025-09-25-131319-533645-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T13:13:19.533927"
+    },
+    {
+      "filename": "2025-09-25-131319-528216-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T13:13:19.528916"
+    },
+    {
       "filename": "2025-09-25-120409-446204-DEC.md",
       "type": "decision",
       "title": "Established formal documentation structure with sp...",
@@ -554,11 +590,11 @@
     }
   ],
   "stats": {
-    "total": 92,
+    "total": 98,
     "by_type": {
       "decision": 8,
       "discovery": 6,
-      "extraction": 78
+      "extraction": 84
     }
   }
 }
