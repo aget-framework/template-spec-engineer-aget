@@ -1,5 +1,7 @@
 # AGET: CLI Agent Template
 
+> **"Our Universe, a little more beautiful"** - Making human-AI collaboration beautiful through simplicity, patterns, and shared evolution.
+
 **Agent Template (AGET)** - The universal standard for making any codebase instantly CLI agent-ready. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
 A reference implementation of the [CLI Agent Template Framework](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) - transform any codebase into a CLI coding agent-ready collaborative environment through conversational command patterns.
@@ -268,4 +270,10 @@ Patterns evolved from real-world usage in production codebases, especially the R
 
 ---
 
-*Making CLI coding agents better collaborators, one pattern at a time.*
+## Mission
+
+**"Our Universe, a little more beautiful"** - Every pattern shared, every workflow refined, every collaboration enhanced makes our universe a little more beautiful. [Read our full mission](MISSION.md).
+
+---
+
+*Making human-AI collaboration more beautiful, one pattern at a time.*

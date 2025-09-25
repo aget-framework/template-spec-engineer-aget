@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "filename": "2025-09-24-235440-021811-DISC.md",
+      "type": "discovery",
+      "title": "AGET's deeper mission revealed: 'Our Universe, a l...",
+      "created": "2025-09-24T23:54:40.022494"
+    },
+    {
       "filename": "2025-09-24-234000-370137-DEC.md",
       "type": "decision",
       "title": "aget-aget will be developed privately first, relea...",
@@ -98,10 +104,10 @@
     }
   ],
   "stats": {
-    "total": 16,
+    "total": 17,
     "by_type": {
       "decision": 5,
-      "discovery": 5,
+      "discovery": 6,
       "extraction": 6
     }
   }

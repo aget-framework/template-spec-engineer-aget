@@ -178,4 +178,7 @@ If protocols don't work:
 - Version: Run `aget --version` to check AGET version
 
 ---
-*This file is part of AGET v2.0 - Making CLI coding agents better collaborators*
+
+> **"Our Universe, a little more beautiful"**
+
+*This file is part of AGET v2.0 - Making human-AI collaboration more beautiful, one pattern at a time.*
