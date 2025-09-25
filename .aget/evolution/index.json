@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-014800-030598-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T01:48:00.031051"
+    },
+    {
+      "filename": "2025-09-25-014800-029311-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T01:48:00.029545"
+    },
+    {
+      "filename": "2025-09-25-014800-026079-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T01:48:00.026314"
+    },
+    {
+      "filename": "2025-09-25-014800-021003-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T01:48:00.021227"
+    },
+    {
+      "filename": "2025-09-25-014800-016919-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T01:48:00.017229"
+    },
+    {
+      "filename": "2025-09-25-014800-012175-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T01:48:00.012419"
+    },
+    {
       "filename": "2025-09-25-013644-189386-DEC.md",
       "type": "decision",
       "title": "v2...",
@@ -152,11 +188,11 @@
     }
   ],
   "stats": {
-    "total": 25,
+    "total": 31,
     "by_type": {
       "decision": 7,
       "discovery": 6,
-      "extraction": 12
+      "extraction": 18
     }
   }
 }
