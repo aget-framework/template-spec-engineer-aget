@@ -78,20 +78,16 @@ def test_pattern_detection():
             (patterns_dir / pattern / 'README.md').touch()
 
         # Run wake in the temp directory
-        original_cwd = os.getcwd()
-        try:
-            os.chdir(tmpdir)
-            result = subprocess.run(
-                [sys.executable, Path(original_cwd) / 'scripts' / 'aget_session_protocol.py', 'wake'],
-                capture_output=True,
-                text=True
-            )
+        script_path = Path(__file__).parent.parent / 'scripts' / 'aget_session_protocol.py'
+        result = subprocess.run(
+            [sys.executable, str(script_path), 'wake'],
+            capture_output=True,
+            text=True,
+            cwd=tmpdir
+        )
 
-            # Should detect the patterns we created
-            assert "session" in result.stdout or "housekeeping" in result.stdout
-
-        finally:
-            os.chdir(original_cwd)
+        # Should detect the patterns we created
+        assert "session" in result.stdout or "housekeeping" in result.stdout
 
 
 if __name__ == '__main__':

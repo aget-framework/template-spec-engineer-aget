@@ -27,6 +27,16 @@ archive/
 *.log
 .cli-agent-state.json
 
+# Internal documentation (moved to aget-aget)
+DAY_*.md
+DAY_*_*.md
+*_TEST_PLAN.md
+*_STATUS.md
+MIGRATION_TEST_MATRIX.md
+TRANSITION_TEST_SUITE.md
+CURSOR_TEST_PROTOCOL.md
+V2_INCREMENTAL_TEST_PLAN.md
+
 # Testing
 test_output/
 *.test.md
