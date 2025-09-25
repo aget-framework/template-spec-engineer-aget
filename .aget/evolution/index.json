@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "filename": "2025-09-24-232723-453312-DISC.md",
+      "type": "discovery",
+      "title": "aget-aget vision clarified: Not for maintenance bu...",
+      "created": "2025-09-24T23:27:23.454269"
+    },
+    {
       "filename": "2025-09-24-185203-566635-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -86,10 +92,10 @@
     }
   ],
   "stats": {
-    "total": 14,
+    "total": 15,
     "by_type": {
       "decision": 4,
-      "discovery": 4,
+      "discovery": 5,
       "extraction": 6
     }
   }
