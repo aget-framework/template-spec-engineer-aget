@@ -1,25 +1,27 @@
 # AGET: CLI Agent Template
 
-> **Mission: Help software creators achieve their vision (with their linguistic AI collaborator)**
+> **Mission: Help software creators achieve their vision with AI**
 
-**Agent Template (AGET)** - The universal standard for making any codebase instantly CLI agent-ready. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
+**Agent Template (AGET)** - The specification-driven development framework for the AI era. Define what you want, let AI build it. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
 A reference implementation of the [CLI Agent Template Framework](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) - transform any codebase into a CLI coding agent-ready collaborative environment through conversational command patterns.
 
 ## Who This Is For
 
-- **Developers** using AI coding assistants (Claude Code, Cursor, Aider, Windsurf)
-- **Teams** wanting consistent AI workflows across projects
-- **Open source maintainers** making projects more contributor-friendly
-- **Solo developers** tired of repeating setup instructions to AI
+- **Creators** building new software with AI assistance
+- **Developers** modernizing existing systems with AI
+- **Teams** wanting consistent AI collaboration patterns
+- **Data Scientists** creating persistent AI analysis partners
+- **Learners** using AI to understand and build software
 
 ## What This Provides
 
-AGET implements a [workflow automation framework](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) with:
+AGET implements a specification-driven development framework with:
+- **Spec templates**: Define what you want before building
 - **Session management**: `hey` → work → `wind down` → `sign off`
-- **Universal compatibility**: One config works for ALL AI agents
-- **Self-documenting patterns**: AI agents understand your workflow instantly
-- **Zero lock-in**: Just Python scripts, no proprietary tools
+- **AI collaboration**: Specs become the contract with your AI partner
+- **Progressive understanding**: Start empty, grow knowledge over time
+- **Universal compatibility**: Works with all major AI assistants
 
 ## Quick Start (30 Seconds)
 

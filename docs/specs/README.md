@@ -2,24 +2,43 @@
 
 ## Choose Your Path
 
-### 🔍 "I'm analyzing existing code"
-→ Use templates to document what you discover
+### 🚀 "I'm creating new software"
+→ **Most common use case** - AI makes quality software affordable
+- Start with requirements and let AI implement
+- Define what you want before how to build it
+- Specs become the contract with your AI collaborator
+- See [`guides/SPEC_DRIVEN_DEVELOPMENT.md`](guides/SPEC_DRIVEN_DEVELOPMENT.md)
+
+### 🔄 "I'm modernizing/rebuilding existing software"
+→ Document current state, design future state
+- Capture existing behavior in specs
+- Plan improvements and new features
+- AI helps migrate from old to new
+- Bridge between legacy and modern
+
+### 🔍 "I inherited unknown code"
+→ Reverse-engineer specifications from code
 - Start with [`guides/DISCOVERING_YOUR_SPECS.md`](guides/DISCOVERING_YOUR_SPECS.md)
+- Document as you explore
+- Build understanding progressively
 
-### 📊 "I'm working with data"
-→ Use templates to document your data and insights
+### 📊 "I'm working with data/analytics"
+→ Create a persistent data conversation partner
 - Start with [`templates/DATA_SPECIFICATIONS_TEMPLATE.md`](templates/DATA_SPECIFICATIONS_TEMPLATE.md)
-- Document schemas, transformations, analysis patterns
+- Document schemas, queries, insights
+- Build analytical memory over time
 
-### 🚀 "I'm building something new"
-→ Use templates to plan before you code
-- Start with requirements first
-- Let specs guide your implementation
+### 🛠️ "I'm organizing tools/scripts"
+→ Create unified interface for disparate tools
+- Document what each tool does
+- Define common patterns
+- Build orchestration layer
 
 ### 🎓 "I'm learning/teaching"
-→ Use templates to track understanding
-- Document what each part teaches
-- Track learning objectives and progress
+→ Track knowledge as it grows
+- Document understanding (even if incomplete)
+- Track learning objectives
+- Create structured learning paths
 
 ## Templates for All Use Cases
 
