@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-000244-575015-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T00:02:44.575404"
+    },
+    {
+      "filename": "2025-09-25-000244-573647-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T00:02:44.574002"
+    },
+    {
+      "filename": "2025-09-25-000244-570579-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T00:02:44.570808"
+    },
+    {
+      "filename": "2025-09-25-000244-565763-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T00:02:44.565985"
+    },
+    {
+      "filename": "2025-09-25-000244-561814-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T00:02:44.562086"
+    },
+    {
+      "filename": "2025-09-25-000244-555068-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T00:02:44.555393"
+    },
+    {
       "filename": "2025-09-24-235440-021811-DISC.md",
       "type": "discovery",
       "title": "AGET's deeper mission revealed: 'Our Universe, a l...",
@@ -104,11 +140,11 @@
     }
   ],
   "stats": {
-    "total": 17,
+    "total": 23,
     "by_type": {
       "decision": 5,
       "discovery": 6,
-      "extraction": 6
+      "extraction": 12
     }
   }
 }
