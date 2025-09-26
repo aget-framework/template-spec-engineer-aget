@@ -2,16 +2,17 @@
 
 > **Mission: Help software creators achieve their vision with AI**
 
-**Agent Template (AGET)** - The specification-driven development framework for the AI era. Define what you want, let AI build it. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
+**Agent Template (AGET)** - Cognitive augmentation framework for software and data work. Transform any project into a CLI agent-ready environment with conversational command patterns. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
-A reference implementation of the [CLI Agent Template Framework](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) - transform any codebase into a CLI coding agent-ready collaborative environment through conversational command patterns.
+**v2.0 Expansion**: AGET now supports five cognitive modalities - from standalone data analysis to meta-governance of multiple projects. See [Cognitive Spectrum](docs/AGET_COGNITIVE_SPECTRUM.md) for the full vision.
 
 ## Who This Is For
 
-- **Creators** building new software with AI assistance
-- **Developers** modernizing existing systems with AI
+- **Software Owners** governing their project's evolution
+- **Contributors** needing private workspace for external projects
+- **Analysts** examining codebases without modifying
+- **Data Scientists** organizing standalone analysis (Spotify, financial, etc.)
 - **Teams** wanting consistent AI collaboration patterns
-- **Data Scientists** creating persistent AI analysis partners
 - **Learners** using AI to understand and build software
 
 ## What This Provides
