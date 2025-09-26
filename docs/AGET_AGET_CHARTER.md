@@ -1,12 +1,15 @@
-# Charter for aget-aget Repository (Reference Laboratory)
+# Charter for AGET-AGET (Strategic Governance & Reference Laboratory)
 
 ## Identity
-**aget-aget** is the private reference laboratory for AGET framework development, serving as the first adopter and experimentation ground.
+**AGET-AGET** is the governing intelligence and strategic decision-maker for the official aget-cli-agent-template. It embodies Gabor Melli's vision and ownership of where the framework should evolve.
 
 ## Mission
-Validate, experiment, and dogfood AGET framework changes before they impact the broader community.
+Define the future direction of aget-cli-agent-template while serving as the reference laboratory for validating these decisions through experimentation and dogfooding.
 
-## What aget-aget IS
+## What AGET-AGET IS
+- ✅ **Strategic Decision Maker** - Decides the future direction of aget-cli-agent-template
+- ✅ **Vision Holder** - Maintains coherent philosophy and architecture
+- ✅ **Gatekeeper** - Approves what goes into official aget-cli-agent-template
 - ✅ **Reference Laboratory** - Shows how to run a private AGET lab
 - ✅ **First Adopter** - Always running latest/beta versions
 - ✅ **Experiment Ground** - Tests risky changes safely
@@ -19,14 +22,36 @@ Validate, experiment, and dogfood AGET framework changes before they impact the 
 - ❌ **Not Authoritative** - Experiments may fail or be abandoned
 - ❌ **Not Public Standards** - Those belong in aget-cli-agent-template
 
+## Governance Model
+
+### Strategic Decision Flow
+```
+AGET-AGET (Gabor's Vision)
+    ↓
+Decides Future Direction
+    ↓
+Experiments & Validates
+    ↓
+Implements in aget-cli-agent-template
+    ↓
+Others Fork & Diverge (their choice)
+```
+
+### Key Decisions AGET-AGET Makes
+- **Architecture Changes** - How the framework evolves
+- **Pattern Acceptance** - What becomes "official"
+- **Philosophy Updates** - Core principles and values
+- **Breaking Changes** - When and how to evolve
+- **Version Strategy** - Release timing and versioning
+
 ## Relationship to aget-cli-agent-template
 ```
-aget-cli-agent-template              aget-aget
-(Public Framework)          ←→        (Private Lab)
+aget-cli-agent-template              AGET-AGET
+(Public Framework)          ←→        (Strategic Brain + Lab)
      ↑                                    ↓
-  Stable Patterns                    Experiments
+  Implementation                    Vision & Direction
      ↑                                    ↓
-  PR if Successful          Try Risky Changes First
+  Receives Decisions          Makes Strategic Choices
 ```
 
 ## Lab Protocols
@@ -65,15 +90,32 @@ aget-cli-agent-template              aget-aget
 - ❌ **Auto-commit on Edit** - Failed, too aggressive
 - 🧪 **AI Review Pattern** - Under development
 
-## For Other Private Labs
+## For Other Forks and Labs
 
-This charter serves as a template. Your private lab might focus on:
-- Security-first patterns (security-aget)
-- Data science workflows (ds-aget-lab)
-- Enterprise compliance (corp-aget-private)
-- Educational patterns (edu-aget-lab)
+### Understanding the Model
+When you fork aget-cli-agent-template:
+- **You get**: The framework as it exists at that moment
+- **You decide**: Your own future direction
+- **You can**: Diverge completely from AGET-AGET's vision
+- **You own**: Your fork's strategic decisions
 
-The beauty: Each lab can have its own charter while following the AGET protocol!
+### Relationship Examples
+```
+aget-framework/aget-cli-agent-template ← Governed by → AGET-AGET
+         ↓ Fork
+company-x/aget-framework ← Governed by → Company X's Vision
+         ↓ Fork
+team-y/agent-tools ← Governed by → Team Y's Needs
+```
+
+### Your Lab Options
+Your private lab might:
+- Follow AGET-AGET's direction (stay synchronized)
+- Diverge partially (cherry-pick updates)
+- Diverge completely (independent evolution)
+- Contribute back (if universally useful)
+
+The beauty: **AGET-AGET governs aget-framework/aget-cli-agent-template, not your fork!**
 
 ---
 *Last Updated: 2025-09-25*
