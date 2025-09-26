@@ -4,7 +4,9 @@
 
 **Agent Template (AGET)** - Cognitive augmentation framework for software and data work. Transform any project into a CLI agent-ready environment with conversational command patterns. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
-**v2.0 Expansion**: AGET now supports five cognitive modalities - from standalone data analysis to meta-governance of multiple projects. See [Cognitive Spectrum](docs/AGET_COGNITIVE_SPECTRUM.md) for the full vision.
+**v2.0 Expansion**: AGET now supports five cognitive modalities - from standalone data analysis to meta-governance of multiple projects.
+
+> **📍 Strategic Vision & Governance**: Vision and governance documents now live in [aget-aget](https://github.com/aget-framework/aget-aget). This repository focuses on stable implementation. See [GOVERNANCE_POINTER.md](GOVERNANCE_POINTER.md) for details.
 
 ## Who This Is For
 
