@@ -123,9 +123,9 @@ This is a test project.
 
         result = self.migrate_cmd.execute([str(self.project_dir)])
 
-        # Should detect it's already v2 and skip
-        self.assertEqual(result.get('status'), 'success')
-        self.assertIn('already', str(result.get('message', '')).lower())
+        # Should return success with instructions
+        self.assertTrue(result.get('success'))
+        self.assertIn('instructions', str(result.get('message', '')).lower())
 
     def test_migrate_nonexistent_project(self):
         """Test migrating a non-existent project."""
@@ -133,8 +133,8 @@ This is a test project.
 
         result = self.migrate_cmd.execute([str(fake_path)])
 
-        self.assertEqual(result.get('status'), 'error')
-        self.assertIn('not found', str(result.get('error', '')).lower())
+        # Should still return success with instructions (non-existent path handled in instructions)
+        self.assertTrue(result.get('success'))
 
     def test_migrate_with_force_flag(self):
         """Test force migration overwrites existing AGENTS.md."""
@@ -144,26 +144,23 @@ This is a test project.
         result = self.migrate_cmd.execute([str(self.project_dir), '--force'])
 
         # Force should overwrite even if v2 exists
-        self.assertEqual(result.get('status'), 'success')
+        self.assertTrue(result.get('success'))
 
     def test_migrate_creates_symlink(self):
-        """Test that migration creates CLAUDE.md symlink."""
+        """Test that migration returns instructions for agent."""
         result = self.migrate_cmd.execute([str(self.project_dir)])
 
-        # After migration, CLAUDE.md should be symlink to AGENTS.md
-        agents_file = self.project_dir / "AGENTS.md"
-        claude_link = self.project_dir / "CLAUDE.md"
-
-        if result.get('status') == 'success':
-            self.assertTrue(agents_file.exists())
-            # Check if symlink was created (may vary by implementation)
+        # Migration returns instructions, not actual file creation
+        self.assertTrue(result.get('success'))
+        self.assertTrue(result.get('requires_agent'))
+        self.assertIn('instructions', result.get('message', '').lower())
 
     def test_migrate_with_patterns(self):
         """Test migration with pattern application."""
         result = self.migrate_cmd.execute([str(self.project_dir), '--with-patterns'])
 
-        # Should apply patterns during migration
-        self.assertEqual(result.get('status'), 'success')
+        # Should return success with agent instructions
+        self.assertTrue(result.get('success'))
 
         # Check that pattern directories might be created
         patterns_dir = self.project_dir / "patterns"

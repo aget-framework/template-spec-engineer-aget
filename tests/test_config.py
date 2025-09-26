@@ -201,7 +201,8 @@ class TestConfigModule(unittest.TestCase):
             'success': True,
             'tier_used': 'gh',
             'files_restored': 3,
-            'message': 'Rolled back to previous version'
+            'message': 'Rolled back to previous version',
+            'execution_time': 1.5
         }
         mock_rollback_class.return_value = mock_rollback
 
