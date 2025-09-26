@@ -1,28 +1,83 @@
-# CLI Agent Template - Architecture
+# AGET Distributed Architecture
 
 ## Overview
 
-The CLI Agent Template is a modular system for making any codebase agent-ready. It provides natural language command interfaces, session management, and housekeeping capabilities for CLI coding agents.
+AGET follows a **distributed laboratory model** where the public framework enables multiple private implementations. This architecture separates universal framework code from experimental and proprietary patterns.
+
+## Architecture Layers
 
 ```
-┌─────────────────────────────────────────┐
-│            User Commands                 │
-│     "wake up", "wind down", etc.         │
-└────────────────┬────────────────────────┘
-                 │
-┌────────────────▼────────────────────────┐
-│           AGENT.md                      │
-│   (Universal Agent Configuration)        │
-└────────────────┬────────────────────────┘
-                 │
-┌────────────────▼────────────────────────┐
-│         Session Protocol                 │
-│     (State Management + Git)             │
-└──┬──────────────┬─────────────────┬────┘
-   │              │                  │
-┌──▼──┐    ┌─────▼─────┐    ┌──────▼─────┐
-│Tests│    │Housekeeping│    │Documentation│
-└─────┘    └───────────┘    └────────────┘
+┌─────────────────────────────────────────────────┐
+│            PUBLIC LAYER (Open Source)            │
+│                                                  │
+│         aget-cli-agent-template (MIT)           │
+│      Framework, Protocol, Universal Patterns    │
+└──────────────────┬──────────────────────────────┘
+                   │ Fork & Customize
+     ┌─────────────┼─────────────┬─────────────┐
+     ▼             ▼             ▼             ▼
+┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐
+│ Lab A   │  │ Lab B   │  │ Lab C   │  │Reference│
+│CorpAGET│  │TeamAGET │  │MyAGET   │  │aget-aget│
+│(private)│  │(private)│  │(private)│  │(private)│
+└─────────┘  └─────────┘  └─────────┘  └─────────┘
+     ▲             ▲             ▲             ▲
+     └─────────────┴─────────────┴─────────────┘
+              Optional Contribution Back
+```
+
+## Component Responsibilities
+
+### Public Framework (aget-cli-agent-template)
+**Purpose**: Universal framework and protocol definition
+
+**Contains**:
+- Core AGET implementation (`aget/` module)
+- Universal patterns (`patterns/`)
+- Standard templates (`templates/`)
+- Framework tests (`tests/`)
+- Public documentation
+
+**Does NOT Contain**:
+- Experimental code
+- Company-specific patterns
+- Opinionated workflows
+- Private documentation
+
+### Private Laboratories (Multiple Instances)
+**Purpose**: Experimentation and customization
+
+**Examples**:
+- `aget-aget` - Reference lab (Gabor Melli's)
+- `corp-aget` - Enterprise patterns
+- `team-aget` - Team-specific workflows
+- `my-aget` - Personal experiments
+
+**Contains**:
+- Experimental patterns
+- Custom workflows
+- Private documentation
+- Failed experiments (learning)
+- Proprietary enhancements
+
+## Data Flow Patterns
+
+### 1. Universal Pattern Discovery
+```
+Private Lab                Public Framework
+Experiment → Validate → PR → Review → Merge → Available to All
+```
+
+### 2. Framework Bug Fix
+```
+Private Lab                     Public Framework
+Discover Bug → Fix & Test → PR → Fast Track Merge
+```
+
+### 3. Private Pattern Development
+```
+Private Lab Only
+Develop → Test → Use Internally → Keep Private
 ```
 
 ## Core Components
