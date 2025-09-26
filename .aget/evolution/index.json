@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-170603-925679-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T17:06:03.925888"
+    },
+    {
+      "filename": "2025-09-25-170603-924322-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T17:06:03.924546"
+    },
+    {
+      "filename": "2025-09-25-170603-921262-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T17:06:03.921491"
+    },
+    {
+      "filename": "2025-09-25-170603-913332-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T17:06:03.913597"
+    },
+    {
+      "filename": "2025-09-25-170603-909157-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T17:06:03.909498"
+    },
+    {
+      "filename": "2025-09-25-170603-904862-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T17:06:03.905190"
+    },
+    {
       "filename": "2025-09-25-170425-922764-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -563,50 +599,14 @@
       "type": "extraction",
       "title": "Extracted src from workspace/ to with-deps/",
       "created": "2025-09-25T13:13:19.543537"
-    },
-    {
-      "filename": "2025-09-25-131319-537663-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to sanitized/",
-      "created": "2025-09-25T13:13:19.537925"
-    },
-    {
-      "filename": "2025-09-25-131319-533645-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to nested-package/",
-      "created": "2025-09-25T13:13:19.533927"
-    },
-    {
-      "filename": "2025-09-25-131319-528216-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to test-package/",
-      "created": "2025-09-25T13:13:19.528916"
-    },
-    {
-      "filename": "2025-09-25-120409-446204-DEC.md",
-      "type": "decision",
-      "title": "Established formal documentation structure with sp...",
-      "created": "2025-09-25T12:04:09.446723"
-    },
-    {
-      "filename": "2025-09-25-120337-005666-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to full-dir/",
-      "created": "2025-09-25T12:03:37.006121"
-    },
-    {
-      "filename": "2025-09-25-120337-004508-EXT.md",
-      "type": "extraction",
-      "title": "Extracted single...",
-      "created": "2025-09-25T12:03:37.004739"
     }
   ],
   "stats": {
-    "total": 189,
+    "total": 195,
     "by_type": {
       "decision": 15,
       "discovery": 6,
-      "extraction": 168
+      "extraction": 174
     }
   }
 }
