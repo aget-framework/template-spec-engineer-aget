@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "filename": "2025-09-25-173107-716383-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to full-dir/",
+      "created": "2025-09-25T17:31:07.716785"
+    },
+    {
+      "filename": "2025-09-25-173107-715113-EXT.md",
+      "type": "extraction",
+      "title": "Extracted single...",
+      "created": "2025-09-25T17:31:07.715393"
+    },
+    {
+      "filename": "2025-09-25-173107-712110-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to with-deps/",
+      "created": "2025-09-25T17:31:07.712364"
+    },
+    {
+      "filename": "2025-09-25-173107-707604-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to sanitized/",
+      "created": "2025-09-25T17:31:07.707846"
+    },
+    {
+      "filename": "2025-09-25-173107-703818-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to nested-package/",
+      "created": "2025-09-25T17:31:07.704077"
+    },
+    {
+      "filename": "2025-09-25-173107-699172-EXT.md",
+      "type": "extraction",
+      "title": "Extracted src from workspace/ to test-package/",
+      "created": "2025-09-25T17:31:07.699451"
+    },
+    {
       "filename": "2025-09-25-171703-859786-EXT.md",
       "type": "extraction",
       "title": "Extracted src from workspace/ to full-dir/",
@@ -563,50 +599,14 @@
       "type": "extraction",
       "title": "Extracted src from workspace/ to nested-package/",
       "created": "2025-09-25T14:09:21.713628"
-    },
-    {
-      "filename": "2025-09-25-140921-706255-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to test-package/",
-      "created": "2025-09-25T14:09:21.706756"
-    },
-    {
-      "filename": "2025-09-25-140510-333538-DEC.md",
-      "type": "decision",
-      "title": "Created incremental test coverage improvement plan...",
-      "created": "2025-09-25T14:05:10.334162"
-    },
-    {
-      "filename": "2025-09-25-132606-037040-DEC.md",
-      "type": "decision",
-      "title": "Enhanced test coverage to 70% with new tests for m...",
-      "created": "2025-09-25T13:26:06.037862"
-    },
-    {
-      "filename": "2025-09-25-132528-264989-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to full-dir/",
-      "created": "2025-09-25T13:25:28.265720"
-    },
-    {
-      "filename": "2025-09-25-132528-263273-EXT.md",
-      "type": "extraction",
-      "title": "Extracted single...",
-      "created": "2025-09-25T13:25:28.263504"
-    },
-    {
-      "filename": "2025-09-25-132528-259541-EXT.md",
-      "type": "extraction",
-      "title": "Extracted src from workspace/ to with-deps/",
-      "created": "2025-09-25T13:25:28.259799"
     }
   ],
   "stats": {
-    "total": 201,
+    "total": 207,
     "by_type": {
       "decision": 15,
       "discovery": 6,
-      "extraction": 180
+      "extraction": 186
     }
   }
 }

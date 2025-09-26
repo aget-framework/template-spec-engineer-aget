@@ -4,13 +4,12 @@ import sys
 from pathlib import Path
 
 # Methods/features not available in Python 3.8
-PYTHON_39_PLUS = {
+PYTHON_39_PLUS = [
     'readlink',  # Path.readlink()
     'removeprefix',  # str.removeprefix()
     'removesuffix',  # str.removesuffix()
     'is_relative_to',  # Path.is_relative_to()
-    '__or__',  # dict union operator |
-}
+]
 
 def check_file(filepath):
     """Check single file for compatibility issues."""
@@ -24,6 +23,9 @@ def check_file(filepath):
                 # Find line number
                 for i, line in enumerate(code.splitlines(), 1):
                     if f'.{method}(' in line:
+                        # Skip if it's os.readlink (which is fine)
+                        if method == 'readlink' and 'os.readlink' in line:
+                            continue
                         issues.append(f"{filepath}:{i} - Uses {method}() (Python 3.9+)")
 
         # Check for dict union operator
@@ -49,6 +51,10 @@ def main():
     for pyfile in Path('.').rglob('*.py'):
         # Skip virtual environments and build directories
         if any(part in str(pyfile) for part in ['venv', '.tox', 'build', 'dist', '__pycache__']):
+            continue
+
+        # Skip this file to avoid false positives
+        if 'check_compatibility.py' in str(pyfile):
             continue
 
         files_checked += 1
