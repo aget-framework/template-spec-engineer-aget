@@ -57,9 +57,11 @@ class BackupManager:
 
                     if source.is_symlink():
                         # Save symlink info
+                        # Python 3.8 compatible way to read symlink
+                        import os
                         link_info = {
                             "is_symlink": True,
-                            "target": str(source.readlink())
+                            "target": os.readlink(str(source))
                         }
                         (dest.parent / f"{dest.name}.link").write_text(
                             json.dumps(link_info)

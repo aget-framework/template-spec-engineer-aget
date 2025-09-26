@@ -97,11 +97,16 @@ Every template must:
 
 ## Testing Workflows
 
-### Before Committing
+### Before Committing (CI Check)
+When user says "ci check", run these quick checks:
+1. Check Python 3.8 compatibility: `python3 scripts/check_compatibility.py`
+2. Run critical tests: `python3 -m pytest tests/test_critical_patterns.py -x -q`
+3. Validate patterns: `python3 scripts/validate_patterns.py`
+
+### Full Test Suite
 1. Run: `python3 -m pytest tests/`
 2. Check coverage: `python3 -m pytest --cov=. --cov-report=term-missing`
-3. Validate patterns: `python3 scripts/validate_patterns.py`
-4. Test a fresh install: `python3 -m aget init /tmp/test-project --separate`
+3. Test a fresh install: `python3 -m aget init /tmp/test-project --separate`
 
 ### Integration Testing
 ```bash
