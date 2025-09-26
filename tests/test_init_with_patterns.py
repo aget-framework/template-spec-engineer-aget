@@ -156,7 +156,10 @@ class TestInitWithPatterns:
 
         # Should be symlink or redirect file
         if claude_file.is_symlink():
-            assert claude_file.readlink() == Path("AGENTS.md")
+            # readlink() was added in Python 3.9, use resolve() for compatibility
+            import os
+            target = os.readlink(str(claude_file))
+            assert target == "AGENTS.md"
         else:
             content = claude_file.read_text()
             assert "AGENTS.md" in content
