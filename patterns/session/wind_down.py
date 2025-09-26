@@ -65,7 +65,18 @@ class WindDownProtocol:
         else:
             print(f"{self._yellow()}⚠ Could not create notes{self._reset()}")
 
-        # 3. Run tests if available
+        # 3. Check Python 3.8 compatibility
+        compat_result = self._check_compatibility()
+        result['actions'].append(compat_result)
+        if compat_result.get('success'):
+            if compat_result.get('issues', 0) == 0:
+                print(f"{self._green()}✓ Python 3.8 compatible{self._reset()}")
+            else:
+                print(f"{self._yellow()}⚠ {compat_result['issues']} compatibility issues found{self._reset()}")
+        else:
+            print(f"{self._dim()}○ Compatibility check skipped{self._reset()}")
+
+        # 4. Run tests if available
         test_result = self._run_tests()
         result['actions'].append(test_result)
         if test_result['tests_found']:
@@ -265,6 +276,52 @@ class WindDownProtocol:
                 'action': 'session_notes',
                 'success': False,
                 'reason': str(e)
+            }
+
+    def _check_compatibility(self) -> Dict[str, Any]:
+        """Check Python 3.8 compatibility if checker exists."""
+        compat_script = self.project_path / "scripts" / "check_compatibility.py"
+
+        if not compat_script.exists():
+            return {
+                'action': 'compatibility_check',
+                'success': False,
+                'reason': 'checker_not_found'
+            }
+
+        try:
+            result = subprocess.run(
+                ['python3', str(compat_script)],
+                cwd=self.project_path,
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+
+            # Count issues from output
+            issues = 0
+            if result.returncode != 0:
+                # Look for issue count in output
+                for line in result.stdout.splitlines():
+                    if 'Found' in line and 'compatibility issues' in line:
+                        # Extract number from "Found N Python 3.8 compatibility issues"
+                        parts = line.split()
+                        for i, part in enumerate(parts):
+                            if part.isdigit():
+                                issues = int(part)
+                                break
+
+            return {
+                'action': 'compatibility_check',
+                'success': True,
+                'issues': issues,
+                'compatible': result.returncode == 0
+            }
+        except (subprocess.TimeoutExpired, FileNotFoundError, Exception):
+            return {
+                'action': 'compatibility_check',
+                'success': False,
+                'reason': 'check_failed'
             }
 
     def _run_tests(self) -> Dict[str, Any]:
