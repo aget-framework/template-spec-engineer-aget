@@ -7,9 +7,9 @@
   "required_patterns": [
     {
       "name": "documentation/smart_reader.py",
-      "source": "https://github.com/aget-framework/aget-patterns",
+      "source": "included_in_template",
       "version": "1.0.0",
-      "status": "not_installed",
+      "status": "installed",
       "description": "Handles file/directory reading without EISDIR errors"
     }
   ],
@@ -27,9 +27,9 @@
   "optional_patterns": [
     {
       "name": "meta/project_scanner.py",
-      "source": "https://github.com/aget-framework/aget-patterns",
+      "source": "included_in_template",
       "version": "1.0.0",
-      "status": "not_installed",
+      "status": "installed",
       "description": "Scans projects for AGET compatibility"
     }
   ],

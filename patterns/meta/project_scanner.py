@@ -1,378 +1,331 @@
 #!/usr/bin/env python3
 """
-Project Scanner for AGET Migration Assessment
-Part of EP-7: Project Scanner Pattern
+AGET Project Scanner
+Scans all sub-projects in meta-repository for AGET migration readiness
 
-Scans repositories to assess AGET migration status and track versions.
-Supports partial migrations and gradual adoption.
+Exit Codes:
+  0 - All projects fully migrated
+  1 - Partial migration (some projects migrated)
+  2 - No migration started
+  3 - Script execution error
+
+Usage:
+  python3 project_scanner.py [options]
+
+Options:
+  --quiet, -q      Minimal output (just summary)
+  --verbose, -v    Detailed output with debug info
+  --json           Output in JSON format
+  --no-save        Don't save report to .aget/project_scan.json
+  --exit-zero      Always exit with 0 (for CI/CD compatibility)
 """
 
 import os
+import sys
 import json
-import yaml
+import argparse
+import subprocess
 from pathlib import Path
 from datetime import datetime
-from enum import Enum
-import argparse
-import sys
+from typing import Dict, List, Optional, Tuple
 
-class MigrationStatus(Enum):
-    """Migration status levels for projects."""
-    NOT_STARTED = "not_started"        # No AGET files present
-    EXPLORING = "exploring"            # Has README references but no files
-    PARTIAL = "partial"               # Some AGET patterns adopted
-    SUBSTANTIAL = "substantial"       # Most patterns adopted, some legacy
-    COMPLETE = "complete"            # Full AGET adoption
-    CUSTOMIZED = "customized"        # AGET + significant custom patterns
 
 class ProjectScanner:
-    """Scan projects for AGET migration status."""
-    
-    # Files that indicate AGET adoption
-    AGET_INDICATORS = {
-        'core': ['AGENTS.md', '.aget/version.json'],
-        'session': ['scripts/aget_session_protocol.py', 'scripts/session_protocol.py'],
-        'housekeeping': ['scripts/aget_housekeeping_protocol.py', 'scripts/housekeeping_protocol.py'],
-        'legacy': ['CLAUDE.md', '.claude_config', 'claude_*.py'],
-        'compatibility': ['.cursorrules', '.aider.conf.yml', '.windsurfrules']
-    }
-    
-    def __init__(self, root_path='.'):
-        self.root_path = Path(root_path)
-        self.projects = {}
-        self.summary = {
-            'total_projects': 0,
-            'migrated': 0,
-            'partial': 0,
-            'not_started': 0,
-            'scan_time': datetime.now().isoformat()
+    """Scans projects for AGET compatibility and migration status"""
+
+    def __init__(self, root_path: Path = None):
+        self.root = root_path or Path.cwd()
+        self.results = {
+            'scan_date': datetime.now().isoformat(),
+            'root_path': str(self.root),
+            'projects': {},
+            'summary': {
+                'total': 0,
+                'git_repos': 0,
+                'has_claude_md': 0,
+                'has_agents_md': 0,
+                'has_aget_version': 0,
+                'fully_migrated': 0,
+                'partially_migrated': 0,
+                'not_started': 0
+            }
         }
-    
-    def scan_directory(self, path):
-        """Scan a single directory for AGET status."""
-        project_path = Path(path)
-        if not project_path.exists():
-            return None
-        
-        status = {
-            'path': str(project_path),
-            'name': project_path.name,
-            'migration_status': MigrationStatus.NOT_STARTED,
-            'aget_version': None,
-            'migration_date': None,
-            'patterns_adopted': [],
-            'patterns_missing': [],
-            'legacy_files': [],
-            'compatibility_files': [],
-            'score': 0
-        }
-        
-        # Check for version tracking
-        version_file = project_path / '.aget' / 'version.json'
+
+    def is_git_repo(self, path: Path) -> bool:
+        """Check if directory is a git repository"""
+        return (path / '.git').exists()
+
+    def check_file_exists(self, path: Path, filename: str) -> bool:
+        """Check if a file exists in the given path"""
+        return (path / filename).exists()
+
+    def read_aget_version(self, path: Path) -> Optional[Dict]:
+        """Read AGET version info if present"""
+        version_file = path / '.aget' / 'version.json'
         if version_file.exists():
             try:
                 with open(version_file) as f:
-                    version_data = json.load(f)
-                    status['aget_version'] = version_data.get('version', 'unknown')
-                    status['migration_date'] = version_data.get('migration_date')
-                    status['migration_phase'] = version_data.get('phase', 'unknown')
+                    return json.load(f)
             except:
-                pass
-        
-        # Check for AGENTS.md with version header
-        agents_file = project_path / 'AGENTS.md'
+                return None
+        return None
+
+    def check_agents_md_header(self, path: Path) -> Optional[str]:
+        """Check AGENTS.md for @aget-version header"""
+        agents_file = path / 'AGENTS.md'
         if agents_file.exists():
             try:
-                content = agents_file.read_text()[:500]  # Check first 500 chars
-                if '@aget-version:' in content:
-                    for line in content.split('\n'):
+                with open(agents_file) as f:
+                    for line in f:
                         if '@aget-version:' in line:
-                            status['aget_version'] = line.split('@aget-version:')[1].strip()
+                            return line.strip()
+                        if line.startswith('##'):  # Stop at first section
                             break
             except:
                 pass
-        
-        # Score the migration level
-        score = 0
-        patterns = []
-        missing = []
-        
-        # Core files (40 points)
-        if agents_file.exists():
-            score += 20
-            patterns.append('AGENTS.md')
-        else:
-            missing.append('AGENTS.md')
-        
-        if (project_path / '.aget').exists():
-            score += 20
-            patterns.append('.aget directory')
-        else:
-            missing.append('.aget directory')
-        
-        # Session patterns (30 points)
-        session_files = ['scripts/aget_session_protocol.py', 'scripts/session_protocol.py']
-        if any((project_path / f).exists() for f in session_files):
-            score += 30
-            patterns.append('session protocols')
-        else:
-            missing.append('session protocols')
-        
-        # Housekeeping patterns (20 points)
-        housekeeping_files = ['scripts/aget_housekeeping_protocol.py', 'scripts/housekeeping_protocol.py']
-        if any((project_path / f).exists() for f in housekeeping_files):
-            score += 20
-            patterns.append('housekeeping protocols')
-        else:
-            missing.append('housekeeping protocols')
-        
-        # Pattern directories (10 points)
-        if (project_path / 'patterns').exists():
-            score += 10
-            patterns.append('patterns directory')
-            # Count pattern categories
-            pattern_dirs = [d for d in (project_path / 'patterns').iterdir() if d.is_dir()]
-            if pattern_dirs:
-                patterns.append(f"{len(pattern_dirs)} pattern categories")
-        
-        # Check for legacy files
-        legacy = []
-        for legacy_file in self.AGET_INDICATORS['legacy']:
-            if (project_path / legacy_file).exists():
-                legacy.append(legacy_file)
-        
-        # Check for compatibility files
-        compat = []
-        for compat_file in self.AGET_INDICATORS['compatibility']:
-            if (project_path / compat_file).exists():
-                compat.append(compat_file)
-        
-        # Determine migration status based on score
-        if score == 0:
-            status['migration_status'] = MigrationStatus.NOT_STARTED
-        elif score < 30:
-            status['migration_status'] = MigrationStatus.EXPLORING
-        elif score < 60:
-            status['migration_status'] = MigrationStatus.PARTIAL
-        elif score < 90:
-            status['migration_status'] = MigrationStatus.SUBSTANTIAL
-        else:
-            status['migration_status'] = MigrationStatus.COMPLETE
-        
-        # Check for customization
-        if score >= 60 and (project_path / 'patterns').exists():
-            custom_patterns = len([d for d in (project_path / 'patterns').iterdir() 
-                                 if d.is_dir() and d.name not in ['session', 'housekeeping', 'documentation']])
-            if custom_patterns > 2:
-                status['migration_status'] = MigrationStatus.CUSTOMIZED
-        
-        status['patterns_adopted'] = patterns
-        status['patterns_missing'] = missing
-        status['legacy_files'] = legacy
-        status['compatibility_files'] = compat
-        status['score'] = score
-        
-        return status
-    
-    def scan_all_projects(self):
-        """Scan all subdirectories for projects."""
-        # First check if current directory is itself a project
-        if (self.root_path / '.git').exists() or (self.root_path / 'AGENTS.md').exists():
-            root_status = self.scan_directory(self.root_path)
-            if root_status:
-                self.projects['.'] = root_status
-        
-        # Then scan subdirectories
-        for item in self.root_path.iterdir():
-            if item.is_dir() and not item.name.startswith('.'):
-                # Check if it's a git repo or has AGET files
-                if (item / '.git').exists() or (item / 'AGENTS.md').exists() or (item / 'CLAUDE.md').exists():
-                    status = self.scan_directory(item)
-                    if status:
-                        self.projects[item.name] = status
-        
-        # Update summary
-        self.summary['total_projects'] = len(self.projects)
-        for project in self.projects.values():
-            if project['migration_status'] == MigrationStatus.NOT_STARTED:
-                self.summary['not_started'] += 1
-            elif project['migration_status'] in [MigrationStatus.EXPLORING, MigrationStatus.PARTIAL]:
-                self.summary['partial'] += 1
+        return None
+
+    def analyze_project(self, project_path: Path) -> Dict:
+        """Analyze a single project for AGET status"""
+        project_name = project_path.name
+
+        # Skip non-directories and hidden directories
+        if not project_path.is_dir() or project_name.startswith('.'):
+            return None
+
+        analysis = {
+            'name': project_name,
+            'path': str(project_path),
+            'is_git_repo': self.is_git_repo(project_path),
+            'has_claude_md': self.check_file_exists(project_path, 'CLAUDE.md'),
+            'has_agents_md': self.check_file_exists(project_path, 'AGENTS.md'),
+            'has_makefile': self.check_file_exists(project_path, 'Makefile'),
+            'has_patterns_dir': self.check_file_exists(project_path, 'patterns'),
+            'has_scripts_dir': self.check_file_exists(project_path, 'scripts'),
+            'aget_version': None,
+            'migration_status': 'not_started',
+            'agents_md_header': None
+        }
+
+        # Check for AGET version
+        aget_info = self.read_aget_version(project_path)
+        if aget_info:
+            analysis['aget_version'] = aget_info.get('aget_version')
+            analysis['migration_status'] = aget_info.get('status', 'unknown')
+
+        # Check AGENTS.md header
+        analysis['agents_md_header'] = self.check_agents_md_header(project_path)
+
+        # Determine migration status if not explicitly set
+        if analysis['migration_status'] == 'not_started':
+            if analysis['has_agents_md'] and analysis['has_patterns_dir']:
+                analysis['migration_status'] = 'fully_migrated'
+            elif analysis['has_agents_md'] or analysis['has_patterns_dir']:
+                analysis['migration_status'] = 'partially_migrated'
+            elif analysis['has_claude_md']:
+                analysis['migration_status'] = 'claude_compatible'
             else:
-                self.summary['migrated'] += 1
-    
-    def generate_report(self, format='text'):
-        """Generate migration status report."""
-        if format == 'json':
-            return json.dumps({
-                'summary': self.summary,
-                'projects': {k: {**v, 'migration_status': v['migration_status'].value} 
-                            for k, v in self.projects.items()}
-            }, indent=2)
-        
-        # Text report
-        lines = []
-        lines.append("="*60)
-        lines.append("AGET Migration Status Report")
-        lines.append("="*60)
-        lines.append(f"Scan Time: {self.summary['scan_time']}")
-        lines.append(f"Total Projects: {self.summary['total_projects']}")
-        lines.append(f"  - Fully Migrated: {self.summary['migrated']}")
-        lines.append(f"  - Partial Migration: {self.summary['partial']}")
-        lines.append(f"  - Not Started: {self.summary['not_started']}")
-        lines.append("")
-        
-        # Group by status
-        by_status = {}
-        for name, project in self.projects.items():
-            status = project['migration_status']
-            if status not in by_status:
-                by_status[status] = []
-            by_status[status].append((name, project))
-        
-        # Report each group
-        status_order = [
-            MigrationStatus.COMPLETE,
-            MigrationStatus.CUSTOMIZED,
-            MigrationStatus.SUBSTANTIAL,
-            MigrationStatus.PARTIAL,
-            MigrationStatus.EXPLORING,
-            MigrationStatus.NOT_STARTED
-        ]
-        
-        status_icons = {
-            MigrationStatus.COMPLETE: "✅",
-            MigrationStatus.CUSTOMIZED: "🚀",
-            MigrationStatus.SUBSTANTIAL: "🟡",
-            MigrationStatus.PARTIAL: "🟠",
-            MigrationStatus.EXPLORING: "🔍",
-            MigrationStatus.NOT_STARTED: "⭕"
+                analysis['migration_status'] = 'not_applicable'
+
+        return analysis
+
+    def scan_all_projects(self) -> Dict:
+        """Scan all subdirectories for projects"""
+        # Special handling for known submodules
+        submodules = ['CCB', 'GM-RKB']
+
+        for item in self.root.iterdir():
+            # Skip certain directories
+            if item.name in ['scripts', 'patterns', 'SESSION_NOTES', '.git', '__pycache__',
+                            'scripts.backup', '.aget', 'node_modules', '.venv', 'venv']:
+                continue
+
+            analysis = self.analyze_project(item)
+            if analysis and analysis['is_git_repo']:
+                self.results['projects'][item.name] = analysis
+                self.update_summary(analysis)
+
+        return self.results
+
+    def update_summary(self, analysis: Dict):
+        """Update summary statistics"""
+        s = self.results['summary']
+        s['total'] += 1
+
+        if analysis['is_git_repo']:
+            s['git_repos'] += 1
+        if analysis['has_claude_md']:
+            s['has_claude_md'] += 1
+        if analysis['has_agents_md']:
+            s['has_agents_md'] += 1
+        if analysis['aget_version']:
+            s['has_aget_version'] += 1
+
+        status = analysis['migration_status']
+        if status == 'fully_migrated':
+            s['fully_migrated'] += 1
+        elif status in ['partially_migrated', 'migrating']:
+            s['partially_migrated'] += 1
+        elif status in ['not_started', 'claude_compatible']:
+            s['not_started'] += 1
+
+    def print_report(self):
+        """Print a formatted report of scan results"""
+        print("\n" + "="*60)
+        print("AGET Migration Status Report")
+        print("="*60)
+        print(f"Scan Date: {self.results['scan_date']}")
+        print(f"Root Path: {self.results['root_path']}")
+        print("\n" + "-"*60)
+        print("SUMMARY")
+        print("-"*60)
+
+        s = self.results['summary']
+        print(f"Total Git Repositories: {s['git_repos']}")
+        print(f"├─ With CLAUDE.md: {s['has_claude_md']}")
+        print(f"├─ With AGENTS.md: {s['has_agents_md']}")
+        print(f"└─ With AGET version: {s['has_aget_version']}")
+        print()
+        print(f"Migration Status:")
+        print(f"├─ Fully Migrated: {s['fully_migrated']}")
+        print(f"├─ Partially Migrated: {s['partially_migrated']}")
+        print(f"└─ Not Started: {s['not_started']}")
+
+        print("\n" + "-"*60)
+        print("PROJECT DETAILS")
+        print("-"*60)
+
+        # Sort projects by migration status
+        projects_by_status = {}
+        for name, proj in self.results['projects'].items():
+            status = proj['migration_status']
+            if status not in projects_by_status:
+                projects_by_status[status] = []
+            projects_by_status[status].append(proj)
+
+        # Display by status groups
+        status_order = ['fully_migrated', 'partially_migrated', 'migrating',
+                       'claude_compatible', 'not_started', 'not_applicable']
+
+        status_symbols = {
+            'fully_migrated': '✅',
+            'partially_migrated': '🔄',
+            'migrating': '🔄',
+            'claude_compatible': '📝',
+            'not_started': '⏳',
+            'not_applicable': '➖'
         }
-        
+
         for status in status_order:
-            if status in by_status:
-                lines.append(f"\n{status_icons[status]} {status.value.replace('_', ' ').title()}:")
-                lines.append("-" * 40)
-                
-                for name, project in by_status[status]:
-                    lines.append(f"  {name}:")
-                    if project['aget_version']:
-                        lines.append(f"    Version: {project['aget_version']}")
-                    if project['migration_date']:
-                        lines.append(f"    Migrated: {project['migration_date']}")
-                    lines.append(f"    Score: {project['score']}/100")
-                    
-                    if project['patterns_adopted']:
-                        lines.append(f"    ✓ Adopted: {', '.join(project['patterns_adopted'][:3])}")
-                    if project['patterns_missing']:
-                        lines.append(f"    ✗ Missing: {', '.join(project['patterns_missing'][:3])}")
-                    if project['legacy_files']:
-                        lines.append(f"    ⚠️ Legacy: {', '.join(project['legacy_files'])}")
-        
-        lines.append("\n" + "="*60)
-        lines.append("Recommendations:")
-        lines.append("-" * 40)
-        
-        # Generate recommendations
-        if self.summary['not_started'] > 0:
-            lines.append("• Run discovery mechanism (EP-1) on unmigrated projects")
-        if self.summary['partial'] > 0:
-            lines.append("• Use migration assistant (EP-2) to complete partial migrations")
-        
-        # Check for legacy cleanup opportunities
-        legacy_count = sum(1 for p in self.projects.values() if p['legacy_files'])
-        if legacy_count > 0:
-            lines.append(f"• Run migration cleanup (EP-11) on {legacy_count} projects with legacy files")
-        
-        return "\n".join(lines)
-    
-    def save_report(self, output_dir=None):
-        """Save detailed report to .aget directory."""
-        if output_dir is None:
-            output_dir = self.root_path / '.aget'
-        
-        output_dir = Path(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Save JSON report
-        report_file = output_dir / 'migration_report.json'
-        report_file.write_text(self.generate_report('json'))
-        
-        # Save text report
-        text_file = output_dir / 'migration_report.txt'
-        text_file.write_text(self.generate_report('text'))
-        
-        return report_file
+            if status in projects_by_status:
+                print(f"\n{status_symbols.get(status, '?')} {status.replace('_', ' ').upper()}:")
+                for proj in sorted(projects_by_status[status], key=lambda x: x['name']):
+                    indicators = []
+                    if proj['has_agents_md']:
+                        indicators.append('AGENTS.md')
+                    if proj['has_claude_md']:
+                        indicators.append('CLAUDE.md')
+                    if proj['has_patterns_dir']:
+                        indicators.append('patterns/')
+                    if proj['aget_version']:
+                        indicators.append(f"v{proj['aget_version']}")
 
+                    indicator_str = f" [{', '.join(indicators)}]" if indicators else ""
+                    print(f"  • {proj['name']}{indicator_str}")
 
-def apply_pattern(project_path: Path = None):
-    """
-    Apply the project scanner pattern.
+        print("\n" + "="*60)
 
-    This function is called by `aget apply meta/project_scanner`.
-    """
-    try:
-        if project_path is None:
-            project_path = Path.cwd()
+    def save_report(self, filename: str = None):
+        """Save scan results to file"""
+        if not filename:
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            filename = f"aget_scan_{timestamp}.json"
 
-        scanner = ProjectScanner(project_path)
-        scanner.scan()
+        output_path = self.root / '.aget' / filename
+        output_path.parent.mkdir(exist_ok=True)
 
-        print("🔍 AGET Migration Scanner")
-        print("=" * 50)
-        print(scanner.generate_report('text'))
+        with open(output_path, 'w') as f:
+            json.dump(self.results, f, indent=2)
 
-        return {
-            "status": "success",
-            "projects_scanned": scanner.summary['total_projects'],
-            "migrated": scanner.summary['migrated'],
-            "partial": scanner.summary['partial']
-        }
-
-    except Exception as e:
-        print(f"❌ Error scanning projects: {e}")
-        return {"status": "error", "message": str(e)}
+        print(f"\nReport saved to: {output_path}")
+        return output_path
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Scan projects for AGET migration status')
-    parser.add_argument('path', nargs='?', default='.',
-                       help='Root path to scan (default: current directory)')
-    parser.add_argument('--json', action='store_true',
-                       help='Output in JSON format')
+    """Main entry point with argument parsing and error handling"""
+    parser = argparse.ArgumentParser(
+        description='Scan projects for AGET migration status',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Exit Codes:
+  0 - All projects fully migrated
+  1 - Partial migration (some projects migrated)
+  2 - No migration started
+  3 - Script execution error
+        """
+    )
     parser.add_argument('--quiet', '-q', action='store_true',
-                       help='Minimal output')
-    parser.add_argument('--save', action='store_true',
-                       help='Save detailed report to .aget directory')
-    
-    args = parser.parse_args()
-    
-    scanner = ProjectScanner(args.path)
-    scanner.scan_all_projects()
-    
-    if args.save:
-        report_file = scanner.save_report()
-        if not args.quiet:
-            print(f"Report saved to: {report_file}")
-    
-    if args.quiet:
-        # Just return exit code
-        if scanner.summary['not_started'] == scanner.summary['total_projects']:
-            return 2  # No projects migrated
-        elif scanner.summary['migrated'] == scanner.summary['total_projects']:
-            return 0  # All projects migrated
-        else:
-            return 1  # Partial migration
-    
-    print(scanner.generate_report('json' if args.json else 'text'))
-    
-    # Exit codes
-    if scanner.summary['not_started'] == scanner.summary['total_projects']:
-        return 2
-    elif scanner.summary['migrated'] == scanner.summary['total_projects']:
-        return 0
-    else:
-        return 1
+                        help='Minimal output (just summary)')
+    parser.add_argument('--verbose', '-v', action='store_true',
+                        help='Detailed output with debug info')
+    parser.add_argument('--json', action='store_true',
+                        help='Output in JSON format')
+    parser.add_argument('--no-save', action='store_true',
+                        help="Don't save report to .aget/project_scan.json")
+    parser.add_argument('--exit-zero', action='store_true',
+                        help='Always exit with 0 (for CI/CD compatibility)')
 
-if __name__ == '__main__':
+    args = parser.parse_args()
+
+    try:
+        scanner = ProjectScanner()
+
+        # Set verbosity level
+        if args.verbose:
+            print(f"[DEBUG] Scanning root directory: {scanner.root}", file=sys.stderr)
+
+        results = scanner.scan_all_projects()
+
+        # Output based on format preference
+        if args.json:
+            print(json.dumps(results, indent=2))
+        elif args.quiet:
+            s = results['summary']
+            print(f"Migration: {s['fully_migrated']}/{s['git_repos']} projects")
+            if s['partially_migrated'] > 0:
+                print(f"In progress: {s['partially_migrated']} projects")
+        else:
+            scanner.print_report()
+
+        # Save report unless disabled
+        if not args.no_save:
+            scanner.save_report('project_scan.json')
+        elif args.verbose:
+            print("[DEBUG] Skipping report save (--no-save)", file=sys.stderr)
+
+        # Determine exit code
+        if args.exit_zero:
+            return 0
+
+        if results['summary']['git_repos'] == 0:
+            return 2  # No repos found
+        elif results['summary']['fully_migrated'] == results['summary']['git_repos']:
+            return 0  # All migrated
+        elif results['summary']['has_agents_md'] > 0:
+            return 1  # Some migration
+        else:
+            return 2  # No migration
+
+    except KeyboardInterrupt:
+        print("\nInterrupted by user", file=sys.stderr)
+        return 3
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        if args.verbose:
+            import traceback
+            traceback.print_exc(file=sys.stderr)
+        return 3
+
+
+if __name__ == "__main__":
     sys.exit(main())
