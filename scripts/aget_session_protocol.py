@@ -2,6 +2,9 @@
 """
 Session Protocol for CLI Agent Template
 Enhanced with state persistence and better session management
+
+ARCH-001: Self-contained architecture - no external dependencies
+All patterns must be installed locally, no parent directory references
 """
 
 import os
