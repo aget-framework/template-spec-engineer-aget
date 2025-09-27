@@ -1,11 +1,11 @@
 {
   "tracking_enabled": true,
   "interval_minutes": 15,
-  "project": "/Users/aget-framework/github/aget-cli-agent-template",
+  "project": ".",
   "methods": {
     "manual": {
       "instructions": "Run /cost periodically and log output",
-      "log_file": "/Users/aget-framework/github/aget-cli-agent-template/.aget/claude_session_costs.log"
+      "log_file": "./.aget/claude_session_costs.log"
     },
     "api": {
       "endpoint": "https://api.anthropic.com/v1/organizations/usage_report/claude_code",

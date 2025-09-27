@@ -234,11 +234,11 @@ class ProjectScanner:
 
 def main():
     """Main entry point."""
-    # Define projects to scan
+    # Define projects to scan - use relative paths
     projects = [
-        "/Users/aget-framework/github/aget-cli-agent-template",
-        "/Users/aget-framework/github/CCB",
-        "/Users/aget-framework/github/GM-RKB"
+        ".",
+        "../CCB",
+        "../GM-RKB"
     ]
 
     scanner = ProjectScanner()
@@ -247,7 +247,7 @@ def main():
     scanner.print_report()
 
     # Save results
-    output_path = "/Users/aget-framework/github/aget-cli-agent-template/.aget/v2-baseline.json"
+    output_path = "./.aget/v2-baseline.json"
     scanner.save_results(output_path)
 
     return 0

@@ -40,7 +40,7 @@ For dogfooding on aget-cli-agent-template itself:
 
 ```bash
 # Already in place - just set PYTHONPATH
-export PYTHONPATH=/Users/aget-framework/github/aget-cli-agent-template:$PYTHONPATH
+export PYTHONPATH=.:$PYTHONPATH
 
 # Test it works
 python3 -m aget --version

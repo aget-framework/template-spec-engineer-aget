@@ -1,1 +1,1 @@
-{"timestamp": "2025-09-24T10:36:55.008395", "project": "/Users/aget-framework/github/aget-cli-agent-template", "total_cost": 0.0841, "api_duration_seconds": 7.5, "wall_duration_seconds": 31.7, "lines_added": 0, "lines_removed": 0, "models": {"claude-3-5-haiku": {"input_tokens": 4400.0, "output_tokens": 51000.0, "cost": 0.0037}, "claude-opus-4-1": {"input_tokens": 4000.0, "output_tokens": 57000.0, "cost": 0.0804}}}
+{"note": "Template file - actual costs will be logged per project"}

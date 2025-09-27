@@ -28,22 +28,41 @@ AGET implements a specification-driven development framework with:
 
 ## Quick Start (30 Seconds)
 
+### Using the AGET Command
+
+The `aget` command works as a Python module. You can run it two ways:
+
+**From any directory:**
 ```bash
-# Clone and install AGET in your project
+python3 /path/to/aget-cli-agent-template/aget/__main__.py init
+python3 /path/to/aget-cli-agent-template/aget/__main__.py validate
+python3 /path/to/aget-cli-agent-template/aget/__main__.py extract --from workspace/tool.py --to products/
+```
+
+**From the aget-cli-agent-template directory:**
+```bash
+cd /path/to/aget-cli-agent-template
+python3 -m aget init
+python3 -m aget validate
+python3 -m aget extract --from workspace/tool.py --to products/
+```
+
+**Note:** If you get "command not found" when typing just `aget`, use one of the methods above. The tool is not globally installed by default.
+
+### Creating Your First Agent
+
+```bash
+# Clone AGET
 git clone https://github.com/aget-framework/aget-cli-agent-template.git
-cd aget-cli-agent-template
-python3 installer/install.py /path/to/your/project
 
-# Or use the new aget commands (v2 Enhanced):
-aget init --template agent --with-patterns  # One-command complete setup!
+# Navigate to where you want to create your agent
+cd ~/projects
+mkdir my-agent && cd my-agent
 
-# Tell your AI: "hey"
-# AI responds with project status and is ready to work
+# Initialize with agent template
+python3 /path/to/aget-cli-agent-template/aget/__main__.py init --template agent
 
-# Extract your libraries:
-aget extract --from src/ --to products/ --name my-library
-
-# That's it! Your project is now AI-agent ready
+# Your agent is ready! Tell your AI: "hey"
 ```
 
 For more installation options and customization, see [docs/GET_STARTED.md](docs/GET_STARTED.md)

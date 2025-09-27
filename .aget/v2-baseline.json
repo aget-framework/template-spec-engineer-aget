@@ -3,7 +3,7 @@
   "scanner_version": "1.0.0",
   "projects": {
     "aget-cli-agent-template": {
-      "path": "/Users/aget-framework/github/aget-cli-agent-template",
+      "path": ".",
       "name": "aget-cli-agent-template",
       "has_agents_md": true,
       "has_claude_md": true,
@@ -29,7 +29,7 @@
       ]
     },
     "CCB": {
-      "path": "/Users/aget-framework/github/CCB",
+      "path": "../CCB",
       "name": "CCB",
       "has_agents_md": true,
       "has_claude_md": true,
@@ -53,7 +53,7 @@
       ]
     },
     "GM-RKB": {
-      "path": "/Users/aget-framework/github/GM-RKB",
+      "path": "../GM-RKB",
       "name": "GM-RKB",
       "has_agents_md": true,
       "has_claude_md": true,
