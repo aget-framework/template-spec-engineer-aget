@@ -49,3 +49,4 @@ test_output/
 .session_state.json
 .session_config.json
 .archive/
+*.egg-info/
