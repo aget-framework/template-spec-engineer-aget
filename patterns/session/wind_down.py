@@ -19,6 +19,27 @@ class WindDownProtocol:
         self.state_file = self.project_path / ".session_state.json"
         self.session_notes_dir = self.project_path / "SESSION_NOTES"
 
+    # Color formatting methods
+    def _green(self) -> str:
+        """Return green color escape code."""
+        return "\033[92m"
+
+    def _yellow(self) -> str:
+        """Return yellow color escape code."""
+        return "\033[93m"
+
+    def _red(self) -> str:
+        """Return red color escape code."""
+        return "\033[91m"
+
+    def _dim(self) -> str:
+        """Return dim color escape code."""
+        return "\033[90m"
+
+    def _reset(self) -> str:
+        """Return reset color escape code."""
+        return "\033[0m"
+
     def execute(self) -> Dict[str, Any]:
         """
         Execute wind down protocol.
