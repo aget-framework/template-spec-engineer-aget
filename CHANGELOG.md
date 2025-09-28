@@ -5,6 +5,35 @@ All notable changes to AGET will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2025-09-28
+
+### Added
+- **Clear File Ownership Standard**:
+  - Framework scripts now use `aget_` prefix for clear identification
+  - Added `.aget/OWNERSHIP.md` guide for developers
+  - Migration script `aget_v21_migration.py` for upgrading existing projects
+
+- **Release Quality Tools**:
+  - `aget_check_permissions.py` - Comprehensive file permission validator
+  - `aget_pre_release.sh` - Pre-release checklist automation
+  - Both tools ensure template quality before releases
+
+### Changed
+- Renamed framework scripts with `aget_` prefix:
+  - `check_file_permissions.py` → `aget_check_permissions.py`
+  - `pre-release.sh` → `aget_pre_release.sh`
+  - Existing `housekeeping_protocol.py` and `session_protocol.py` already use prefix
+
+### Documentation
+- Added ownership standard documentation
+- Created migration guide for v2.0 → v2.1
+- Updated installer to respect new naming convention
+
+### Compatibility
+- Maintains backward compatibility with v2.0
+- Symlinks preserved for legacy script names
+- Non-breaking changes for existing agents
+
 ## [2.0.0-beta.1] - 2025-09-24
 
 ### Gate 3: Migration Tools - Scaffolding System
