@@ -197,7 +197,7 @@ Run `aget list` to see available patterns you can apply.
         aget_dir = project_path / ".aget"
         version_file = aget_dir / "version.json"
         version_data = {
-            "aget_version": "2.0.0-alpha",
+            "aget_version": "2.1.0",
             "created": "2025-09-24",
             "template": template_type,
             "tier": "basic"
@@ -364,10 +364,10 @@ Before proceeding, confirm you have:
 
     def _get_default_aget_content(self) -> str:
         """Fallback AGENTS_AGET.md content if template not found."""
-        return """# AGET Standard Protocols v2.0.0
+        return """# AGET Standard Protocols v2.1.0
 
 **Framework File** - Maintained by AGET, not project-specific
-**Version**: 2.0.0
+**Version**: 2.1.0
 
 ## Session Management Protocols
 
