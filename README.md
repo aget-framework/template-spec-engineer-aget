@@ -67,6 +67,111 @@ python3 /path/to/aget-cli-agent-template/aget/__main__.py init --template agent
 
 For more installation options and customization, see [docs/GET_STARTED.md](docs/GET_STARTED.md)
 
+## Installation
+
+### Prerequisites
+- Python 3.8 or higher
+- Git
+- Basic command-line familiarity
+
+### Method 1: Clone and Use Directly (Recommended)
+```bash
+# Clone the template repository
+git clone https://github.com/aget-framework/aget-cli-agent-template.git
+
+# Navigate to your project directory
+cd ~/your-project
+
+# Run aget commands using Python module syntax
+python3 /path/to/aget-cli-agent-template/aget/__main__.py init
+```
+
+### Method 2: Create Alias for Convenience
+Add to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.):
+```bash
+alias aget="python3 /path/to/aget-cli-agent-template/aget/__main__.py"
+```
+
+Then reload your shell:
+```bash
+source ~/.bashrc  # or ~/.zshrc
+```
+
+Now you can use:
+```bash
+aget init
+aget validate
+aget list
+```
+
+## Usage
+
+### Core Commands
+
+#### Initialize a New Agent
+```bash
+# Create agent with standard patterns (recommended)
+aget init --template agent --with-patterns
+
+# Create tool with minimal patterns
+aget init --template tool --with-patterns minimal
+
+# Create hybrid agent/tool
+aget init --template hybrid --with-patterns advanced
+```
+
+#### Validate Your Setup
+```bash
+# Check if your project meets AGET standards
+aget validate
+
+# Detailed validation with recommendations
+aget validate --verbose
+```
+
+#### List Available Patterns
+```bash
+# Show all available patterns
+aget list
+
+# Show installed patterns
+aget list --installed
+
+# Show patterns by category
+aget list --category session
+```
+
+#### Extract Tools to Products
+```bash
+# Extract a tool from workspace to products
+aget extract --from workspace/my_tool.py --to products/
+
+# Extract with dependencies
+aget extract --from workspace/analyzer.py --to products/ --with-deps
+```
+
+### Session Management Commands
+Your AI assistant will understand these natural language commands:
+
+- **`hey`** or **`wake up`** - Start a session, check status
+- **`wind down`** or **`save work`** - Save session with detailed notes
+- **`sign off`** or **`all done`** - Quick save and exit
+- **`tidy up`** - Clean temporary files
+- **`deep clean`** - Archive old files and reorganize
+- **`health check`** - Run diagnostics when something's wrong
+
+### Working with Patterns
+```bash
+# Install a specific pattern
+python3 patterns/session/session_manager.py --install
+
+# Run a pattern directly
+python3 patterns/housekeeping/cleanup.py --dry-run
+
+# Check pattern documentation
+python3 patterns/documentation/check_docs.py --help
+```
+
 ## Why Universal Standards?
 
 ### The Configuration Fragmentation Problem
