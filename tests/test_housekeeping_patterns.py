@@ -1,4 +1,3 @@
-/usr/bin/env python3
 """Test housekeeping patterns."""
 
 import sys

@@ -3,113 +3,113 @@
   "version": "1.0",
   "moves": [
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/AGET_IMPACT_REFLECTION.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/misc/AGET_IMPACT_REFLECTION.md",
+      "source": "./AGET_IMPACT_REFLECTION.md",
+      "target": "./docs/misc/AGET_IMPACT_REFLECTION.md",
       "category": "misc"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/MISSION.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/MISSION.md",
+      "source": "./MISSION.md",
+      "target": "./docs/MISSION.md",
       "category": "architecture"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/ARCHITECTURE.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/ARCHITECTURE.md",
+      "source": "./ARCHITECTURE.md",
+      "target": "./docs/ARCHITECTURE.md",
       "category": "architecture"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/RELEASE_NOTES_v2.0-alpha.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/releases/RELEASE_NOTES_v2.0-alpha.md",
+      "source": "./RELEASE_NOTES_v2.0-alpha.md",
+      "target": "./docs/releases/RELEASE_NOTES_v2.0-alpha.md",
       "category": "releases"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/DOCUMENTATION_ENHANCEMENT_PROPOSAL.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/DOCUMENTATION_ENHANCEMENT_PROPOSAL.md",
+      "source": "./DOCUMENTATION_ENHANCEMENT_PROPOSAL.md",
+      "target": "./docs/planning/DOCUMENTATION_ENHANCEMENT_PROPOSAL.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/GOVERNANCE_POINTER.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/GOVERNANCE_POINTER.md",
+      "source": "./GOVERNANCE_POINTER.md",
+      "target": "./docs/GOVERNANCE_POINTER.md",
       "category": "architecture"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/INCREMENTAL_SPECS_PLAN.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/INCREMENTAL_SPECS_PLAN.md",
+      "source": "./INCREMENTAL_SPECS_PLAN.md",
+      "target": "./docs/planning/INCREMENTAL_SPECS_PLAN.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/INTERNAL_DOCS_MIGRATION_PLAN.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/INTERNAL_DOCS_MIGRATION_PLAN.md",
+      "source": "./INTERNAL_DOCS_MIGRATION_PLAN.md",
+      "target": "./docs/planning/INTERNAL_DOCS_MIGRATION_PLAN.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/PRE_RELEASE_CLEANUP_PLAN.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/PRE_RELEASE_CLEANUP_PLAN.md",
+      "source": "./PRE_RELEASE_CLEANUP_PLAN.md",
+      "target": "./docs/planning/PRE_RELEASE_CLEANUP_PLAN.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/AGET_AGET_NEXT_ACTIONS.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/misc/AGET_AGET_NEXT_ACTIONS.md",
+      "source": "./AGET_AGET_NEXT_ACTIONS.md",
+      "target": "./docs/misc/AGET_AGET_NEXT_ACTIONS.md",
       "category": "misc"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/AGET_USE_CASES_AND_SPECS_PLAN.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/AGET_USE_CASES_AND_SPECS_PLAN.md",
+      "source": "./AGET_USE_CASES_AND_SPECS_PLAN.md",
+      "target": "./docs/planning/AGET_USE_CASES_AND_SPECS_PLAN.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/LAUNCH_CHECKLIST.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/LAUNCH_CHECKLIST.md",
+      "source": "./LAUNCH_CHECKLIST.md",
+      "target": "./docs/planning/LAUNCH_CHECKLIST.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/AGENTS_AGET_SPECIFIC.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/AGENTS_AGET_SPECIFIC.md",
+      "source": "./AGENTS_AGET_SPECIFIC.md",
+      "target": "./docs/AGENTS_AGET_SPECIFIC.md",
       "category": "architecture"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/CHARTER.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/CHARTER.md",
+      "source": "./CHARTER.md",
+      "target": "./docs/CHARTER.md",
       "category": "architecture"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/AGENTS_AGET.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/AGENTS_AGET.md",
+      "source": "./AGENTS_AGET.md",
+      "target": "./docs/AGENTS_AGET.md",
       "category": "architecture"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/RELEASE_NOTES.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/releases/RELEASE_NOTES.md",
+      "source": "./RELEASE_NOTES.md",
+      "target": "./docs/releases/RELEASE_NOTES.md",
       "category": "releases"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/5_WHYS_ANALYSIS.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/5_WHYS_ANALYSIS.md",
+      "source": "./5_WHYS_ANALYSIS.md",
+      "target": "./docs/planning/5_WHYS_ANALYSIS.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/NEXT_ACTIONS.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/misc/NEXT_ACTIONS.md",
+      "source": "./NEXT_ACTIONS.md",
+      "target": "./docs/misc/NEXT_ACTIONS.md",
       "category": "misc"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/RELEASE_READINESS_OCT7.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/RELEASE_READINESS_OCT7.md",
+      "source": "./RELEASE_READINESS_OCT7.md",
+      "target": "./docs/planning/RELEASE_READINESS_OCT7.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/SCRIPT_FIX_REPORT.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/SCRIPT_FIX_REPORT.md",
+      "source": "./SCRIPT_FIX_REPORT.md",
+      "target": "./docs/planning/SCRIPT_FIX_REPORT.md",
       "category": "planning"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/ROADMAP_v2.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/releases/ROADMAP_v2.md",
+      "source": "./ROADMAP_v2.md",
+      "target": "./docs/releases/ROADMAP_v2.md",
       "category": "releases"
     },
     {
-      "source": "/Users/aget-framework/github/aget-cli-agent-template/PRE_PUSH_HOOK_PLAN.md",
-      "target": "/Users/aget-framework/github/aget-cli-agent-template/docs/planning/PRE_PUSH_HOOK_PLAN.md",
+      "source": "./PRE_PUSH_HOOK_PLAN.md",
+      "target": "./docs/planning/PRE_PUSH_HOOK_PLAN.md",
       "category": "planning"
     }
   ]
