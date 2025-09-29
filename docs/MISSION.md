@@ -69,20 +69,24 @@ With AGET's opinionated approach:
 6. **Maintain Hygiene** - Clean as you go, not later
 7. **Test Assumptions** - Verify before building on them
 
-## When AGET Helps
+## Where AGET Works Today
 
-- Projects with multiple contributors
+- Individual developers wanting consistent patterns
 - Code that evolves over months/years
-- Systems requiring consistent patterns
-- Teams using multiple AI tools
 - One-off scripts that grow into tools
+- Switching between different AI assistants (Claude, Cursor, Aider)
+- Projects where context preservation matters
 
-## When To Use CLI Agents Directly
+## Where AGET Is Exploring
 
-- Quick prototypes
-- Exploratory coding
-- Personal scripts
-- Learning new technologies
+AGET represents early thinking about how CLI agents could work. In 2 years, some framework/standard will emerge for AI-assisted development. AGET aims to:
+
+- Test patterns that might influence future standards
+- Explore what "opinionated AI development" looks like
+- Document what works and what doesn't
+- Build evidence for best practices
+
+This is experimental. We're learning what helps and what doesn't.
 
 ---
 *CLI agents bring the speed. AGET brings the discipline.*
