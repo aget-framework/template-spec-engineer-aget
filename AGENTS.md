@@ -48,6 +48,41 @@ When user says "check coverage":
 3. Critical patterns (wake, wind_down, sign_off) must be >85%
 4. Report any gaps needing tests
 
+## Testing Best Practices
+
+### Directory Safety Pattern (CRITICAL)
+Tests that manipulate directories MUST use defensive programming to prevent cascade failures:
+
+```python
+# SAFE setUp - Handles invalid cwd
+def setUp(self):
+    self.test_dir = Path(tempfile.mkdtemp())
+    try:
+        self.original_cwd = Path.cwd()
+    except (FileNotFoundError, OSError):
+        # Previous test left us in deleted directory
+        import os
+        os.chdir("/tmp")
+        self.original_cwd = Path.cwd()
+
+# SAFE tearDown - Handles errors gracefully
+def tearDown(self):
+    import os
+    try:
+        os.chdir(self.original_cwd)
+    except (FileNotFoundError, OSError):
+        os.chdir("/tmp")  # Fallback to safe location
+    if self.test_dir.exists():
+        shutil.rmtree(self.test_dir)
+```
+
+### Testing Guidelines
+1. **Always wrap `Path.cwd()` in try/except** when tests change directories
+2. **Prefer pytest fixtures** over manual setUp/tearDown when possible
+3. **Use absolute paths** for file checks instead of relative paths
+4. **Ensure tearDown handles partial failures** gracefully
+5. **Never assume filesystem state** is stable between tests
+
 ### Release Validation
 When user says "release check":
 1. Run all tests: `python3 -m pytest tests/ -v`
