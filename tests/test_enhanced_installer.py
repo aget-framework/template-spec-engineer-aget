@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Enhanced tests for the installer with better coverage
 """

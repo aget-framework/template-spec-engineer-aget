@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Example test that ACTUALLY RUNS - breaks the zero-test inertia.
 This proves the test framework works and makes test #2 easier to write.

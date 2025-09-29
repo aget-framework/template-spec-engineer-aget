@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Enhanced tests for session patterns - covering error cases and improvements."""
 
 import sys

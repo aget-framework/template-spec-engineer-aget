@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Test suite for meta patterns (project scanner).
 Tests multi-project scanning and migration assessment capabilities.

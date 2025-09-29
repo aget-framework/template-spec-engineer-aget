@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Test Gate 2 Features - Pattern Library Foundation
 Tests for aget apply, aget list, and pattern registry.

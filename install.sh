@@ -6,7 +6,7 @@
 #   curl -sSL https://raw.githubusercontent.com/aget-framework/aget-cli-agent-template/main/install.sh | bash
 #   ./install.sh [OPTIONS] [INSTALL_DIR] [TEMPLATE]
 #
-# Version: 2.0.0
+# Version: 2.1.0
 # License: MIT
 
 # ============================================================================
@@ -35,7 +35,7 @@ fi
 # ============================================================================
 
 # Script metadata
-readonly SCRIPT_VERSION="2.0.0"
+readonly SCRIPT_VERSION="2.1.0"
 readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
