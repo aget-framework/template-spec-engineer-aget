@@ -67,6 +67,63 @@ python3 /path/to/aget-cli-agent-template/aget/__main__.py init --template agent
 
 For more installation options and customization, see [docs/GET_STARTED.md](docs/GET_STARTED.md)
 
+## 🚀 Try It Now! (2 Minutes)
+
+Experience AGET with your AI assistant immediately:
+
+```bash
+# 1. Clone and enter the template
+git clone https://github.com/aget-framework/aget-cli-agent-template.git
+cd aget-cli-agent-template
+
+# 2. Open with your AI assistant (Claude, Cursor, etc.)
+claude .  # or: cursor . | code . | aider
+
+# 3. Tell your AI assistant:
+"hey"
+```
+
+Your AI will respond with project status, available patterns, and be ready for natural language commands like:
+- `"run tests"` - Execute test suite
+- `"check documentation"` - Analyze docs quality
+- `"tidy up"` - Clean temporary files
+- `"wind down"` - Save session and commit
+
+### Live Example Session
+
+```
+You: hey
+
+AI: Good morning! Let me check your environment...
+    ✓ Working directory: /Users/you/aget-cli-agent-template
+    ✓ Git status: On branch main, clean
+    ✓ Python version: 3.11.5
+    ✓ Available patterns: 15 installed
+    Ready for your commands!
+
+You: create a simple hello world script in workspace
+
+AI: Creating hello.py in workspace...
+    [Creates workspace/hello.py with proper structure]
+    ✓ File created with executable permissions
+    ✓ Added docstring and type hints
+    Would you like to run it?
+
+You: yes, run it
+
+AI: Running workspace/hello.py...
+    Hello, World!
+    ✓ Script executed successfully
+
+You: wind down
+
+AI: Saving session...
+    ✓ Created session notes: SESSION_NOTES/2025-09-28.md
+    ✓ Committed changes: "feat: Add hello world example"
+    Session duration: 2 minutes
+    Have a great day!
+```
+
 ## Installation
 
 ### Prerequisites
