@@ -80,7 +80,13 @@ class TestApplyCommand(unittest.TestCase):
     def setUp(self):
         """Create temporary test directory."""
         self.test_dir = Path(tempfile.mkdtemp())
-        self.original_cwd = Path.cwd()
+        try:
+            self.original_cwd = Path.cwd()
+        except (FileNotFoundError, OSError):
+            # Previous test left us in deleted directory
+            import os
+            os.chdir("/tmp")
+            self.original_cwd = Path.cwd()
 
         # Initialize test project
         init_cmd = InitCommand()

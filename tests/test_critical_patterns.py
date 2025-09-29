@@ -23,7 +23,13 @@ class TestCriticalPatternsEnhanced(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.test_dir = Path(tempfile.mkdtemp())
-        self.original_cwd = Path.cwd()
+        try:
+            self.original_cwd = Path.cwd()
+        except (FileNotFoundError, OSError):
+            # Previous test left us in deleted directory
+            import os
+            os.chdir("/tmp")
+            self.original_cwd = Path.cwd()
 
         # Create minimal project structure
         (self.test_dir / ".aget").mkdir()

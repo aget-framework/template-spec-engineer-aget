@@ -18,7 +18,19 @@ class TestAGETBasics(unittest.TestCase):
 
     def test_agents_file_exists(self):
         """AGENTS.md must exist - it's the core config file"""
-        agents_file = Path("AGENTS.md")
+        # Ensure we're in the project root
+        try:
+            current = Path.cwd()
+        except (FileNotFoundError, OSError):
+            # Previous test left us in deleted directory
+            import os
+            # Change to test file's parent directory (project root)
+            os.chdir(Path(__file__).parent.parent)
+            current = Path.cwd()
+
+        # Look for AGENTS.md in project root (parent of tests/)
+        project_root = Path(__file__).parent.parent
+        agents_file = project_root / "AGENTS.md"
         self.assertTrue(
             agents_file.exists(),
             "AGENTS.md is required for AGET configuration"
@@ -26,7 +38,19 @@ class TestAGETBasics(unittest.TestCase):
 
     def test_aget_directory_structure(self):
         """Verify .aget/ directory can be created/exists"""
-        aget_dir = Path(".aget")
+        # Ensure we're in the project root
+        try:
+            current = Path.cwd()
+        except (FileNotFoundError, OSError):
+            # Previous test left us in deleted directory
+            import os
+            # Change to test file's parent directory (project root)
+            os.chdir(Path(__file__).parent.parent)
+            current = Path.cwd()
+
+        # Use project root
+        project_root = Path(__file__).parent.parent
+        aget_dir = project_root / ".aget"
         if not aget_dir.exists():
             # Test that we CAN create it (write permissions)
             try:
