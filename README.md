@@ -19,7 +19,7 @@
 - **Contributors** needing private workspace for external projects
 - **Analysts** examining codebases without modifying
 - **Data Scientists** organizing standalone analysis (Spotify, financial, etc.)
-- **Teams** wanting consistent AI collaboration patterns
+- **Developers** wanting consistent patterns across projects
 - **Learners** using AI to understand and build software
 
 ## What This Provides
@@ -27,7 +27,7 @@
 AGET implements a specification-driven development framework with:
 - **Spec templates**: Define what you want before building
 - **Session management**: `hey` → work → `wind down` → `sign off`
-- **AI collaboration**: Specs become the contract with your AI partner
+- **AI interaction**: Natural language commands that work consistently
 - **Progressive understanding**: Start empty, grow knowledge over time
 - **Universal compatibility**: Works with all major AI assistants
 
@@ -242,7 +242,7 @@ python3 patterns/documentation/check_docs.py --help
 
 ### The Configuration Fragmentation Problem
 
-The current landscape of AI coding assistants has created a significant maintenance burden for development teams. Each tool requires its own configuration format:
+The current landscape of AI coding assistants creates configuration overhead. Each tool requires its own format:
 
 - **Claude Code**: Reads `CLAUDE.md` for agent-specific instructions
 - **Cursor**: Requires `.cursorrules` for behavior configuration
@@ -250,7 +250,7 @@ The current landscape of AI coding assistants has created a significant maintena
 - **Aider**: Expects `.aider.conf.yml` for settings
 - **GitHub Copilot**: Uses `.github/copilot-instructions.md`
 
-This fragmentation forces teams to maintain multiple configuration files with largely duplicated content. A typical multi-tool setup requires developers to synchronize changes across 3-5 different configuration formats, increasing the risk of inconsistencies and configuration drift.
+This fragmentation means maintaining multiple configuration files with duplicated content. Using multiple tools requires synchronizing changes across 3-5 different formats.
 
 ## What You Get
 
