@@ -33,42 +33,36 @@ AGET implements a specification-driven development framework with:
 
 ## Quick Start (30 Seconds)
 
-### Using the AGET Command
+### How AGET Works
 
-The `aget` command works as a Python module. You can run it two ways:
+AGET is not a traditional CLI tool. You interact through your AI assistant using natural language:
 
-**From any directory:**
+1. **Clone AGET** into your project:
 ```bash
-python3 /path/to/aget-cli-agent-template/aget/__main__.py init
-python3 /path/to/aget-cli-agent-template/aget/__main__.py validate
-python3 /path/to/aget-cli-agent-template/aget/__main__.py extract --from workspace/tool.py --to products/
-```
-
-**From the aget-cli-agent-template directory:**
-```bash
-cd /path/to/aget-cli-agent-template
-python3 -m aget init
-python3 -m aget validate
-python3 -m aget extract --from workspace/tool.py --to products/
-```
-
-**Note:** If you get "command not found" when typing just `aget`, use one of the methods above. The tool is not globally installed by default.
-
-### Creating Your First Agent
-
-```bash
-# Clone AGET
 git clone https://github.com/aget-framework/aget-cli-agent-template.git
-
-# Navigate to where you want to create your agent
-cd ~/projects
-mkdir my-agent && cd my-agent
-
-# Initialize with agent template
-python3 /path/to/aget-cli-agent-template/aget/__main__.py init --template agent
-
-# Your agent is ready! Tell your AI: "hey"
+cd aget-cli-agent-template
 ```
+
+2. **Open with your AI assistant**:
+```bash
+claude .  # or: cursor . | aider . | windsurf .
+```
+
+3. **Start with natural language**:
+```
+You: hey
+AI: [Checks environment, reports status, ready for commands]
+
+You: initialize this as an agent project
+AI: [Sets up agent structure with workspace/, products/, docs/]
+
+You: create a Python scraper tool
+AI: [Builds tool in workspace/, adds tests, documentation]
+```
+
+### Behind the Scenes
+
+Your AI assistant discovers and uses AGET patterns automatically. You never type `aget` commands directly - the AI handles that based on your natural language requests.
 
 For more installation options and customization, see [docs/GET_STARTED.md](docs/GET_STARTED.md)
 
@@ -135,6 +129,8 @@ AI: Saving session...
 
 ## Installation
 
+> **⚠️ Important**: AGET is not a traditional CLI tool. You don't run `aget` commands directly. Instead, your AI assistant uses AGET patterns based on your natural language requests.
+
 ### Prerequisites
 - Python 3.8 or higher
 - Git
@@ -172,7 +168,9 @@ aget list
 
 ## Usage
 
-### Core Commands
+> **Note**: The commands below are what your AI assistant can execute behind the scenes. You interact through natural language like "hey", "initialize this", "run tests", not by typing these commands.
+
+### Core Commands (AI Executes These)
 
 #### Initialize a New Agent
 ```bash
