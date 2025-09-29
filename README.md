@@ -95,7 +95,7 @@ Your AI will respond with project status, available patterns, and be ready for n
 You: hey
 
 AI: Good morning! Let me check your environment...
-    ✓ Working directory: /Users/you/aget-cli-agent-template
+    ✓ Working directory: ~/aget-cli-agent-template
     ✓ Git status: On branch main, clean
     ✓ Python version: 3.11.5
     ✓ Available patterns: 15 installed
@@ -386,7 +386,7 @@ your-project/
 ```
 You: hey
 Agent: Running wake protocol...
-       ✓ Working directory: /Users/you/project
+       ✓ Working directory: ~/project
        ✓ Git status: 3 uncommitted changes
        ✓ Tests: 47 passing
        ✓ Documentation: Grade B
