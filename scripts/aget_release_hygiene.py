@@ -183,6 +183,35 @@ class HygieneChecker:
 
         return len(missing) == 0
 
+    def check_readme_privacy(self) -> bool:
+        """Check README files for privacy violations"""
+        privacy_issues = []
+
+        # Patterns that suggest private information
+        private_patterns = [
+            r'my-[A-Z]+-aget',  # Private agent names
+            r'/Users/[^/]+/',   # Personal file paths
+            r'aget-framework',      # Specific username (except in LICENSE)
+            r'my-.*-aget.*v2\.',  # Version info with private agents
+        ]
+
+        readme_files = list(self.root.rglob("README.md"))
+        for readme in readme_files:
+            if "LICENSE" in str(readme):
+                continue
+
+            content = readme.read_text()
+            for pattern in private_patterns:
+                import re
+                if re.search(pattern, content, re.IGNORECASE):
+                    if not (pattern == r'aget-framework' and 'LICENSE' in content):
+                        privacy_issues.append(f"Privacy concern in {readme.name}: pattern '{pattern}'")
+
+        if privacy_issues:
+            self.warnings.extend(privacy_issues)
+
+        return len(privacy_issues) == 0
+
     def check_empty_directories(self) -> bool:
         """Check for empty directories that might be unnecessary"""
         empty_dirs = []
@@ -214,6 +243,7 @@ class HygieneChecker:
             ("Duplicate files", self.check_duplicates),
             ("Essential files", self.check_essential_files),
             (".gitignore coverage", self.check_gitignore),
+            ("README privacy", self.check_readme_privacy),
             ("Empty directories", self.check_empty_directories)
         ]
 

@@ -101,19 +101,23 @@ AI: Good morning! Let me check your environment...
     ✓ Available patterns: 15 installed
     Ready for your commands!
 
-You: create a simple hello world script in workspace
+You: let's build a Python web scraper tool
 
-AI: Creating hello.py in workspace...
-    [Creates workspace/hello.py with proper structure]
-    ✓ File created with executable permissions
-    ✓ Added docstring and type hints
-    Would you like to run it?
+AI: I'll help you create a web scraper. Let me start by creating the project structure...
+    [Creates workspace/scraper.py with requests and BeautifulSoup]
+    ✓ Created main scraper module
+    ✓ Added error handling and rate limiting
+    ✓ Included user-agent headers
+    Shall I add tests?
 
-You: yes, run it
+You: yes, and make it installable
 
-AI: Running workspace/hello.py...
-    Hello, World!
-    ✓ Script executed successfully
+AI: Creating package structure...
+    [Creates setup.py, requirements.txt, tests/]
+    ✓ Package structure created
+    ✓ Unit tests added (3 passing)
+    ✓ Installation tested successfully
+    You can now: pip install -e .
 
 You: wind down
 
