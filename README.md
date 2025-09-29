@@ -11,7 +11,7 @@
 - **develop branch**: Next features (v2.2.0)
 - See [.aget/BRANCHING.md](.aget/BRANCHING.md) for details
 
-> **📍 Strategic Vision & Governance**: Vision and governance documents now live in [aget-aget](https://github.com/aget-framework/aget-aget). This repository focuses on stable implementation. See [GOVERNANCE_POINTER.md](GOVERNANCE_POINTER.md) for details.
+> **📍 Strategic Vision & Governance**: Vision and governance documents now live in [aget-aget](https://github.com/aget-framework/aget-aget). This repository focuses on stable implementation. See [GOVERNANCE_POINTER.md](docs/GOVERNANCE_POINTER.md) for details.
 
 ## Who This Is For
 
@@ -421,10 +421,10 @@ Agent: Running emergency diagnostics...
 
 ## Documentation
 
-- [Quick Start Guide](docs/QUICK_START.md) - Get running in 30 seconds
-- [Understanding Patterns](docs/PATTERNS_EXPLAINED.md) - Learn how patterns work
-- [Why This Matters](docs/WHY_THIS_MATTERS.md) - The value proposition
-- [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
+- [Getting Started](docs/GET_STARTED.md) - Get running in 30 seconds
+- [Understanding Patterns](docs/EXPLORE_FEATURES.md) - Learn how patterns work
+- [Why AGET](docs/UNDERSTAND_AGET.md) - The value proposition
+- [Troubleshooting](docs/FIX_PROBLEMS.md) - Common issues and solutions
 - [Framework Concept](https://www.aget-framework.com/RKB/CLI_Agent_Template_Framework) - Academic reference
 
 ## Upgrading

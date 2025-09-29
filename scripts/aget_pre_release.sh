@@ -187,6 +187,32 @@ else
 fi
 echo ""
 
+# Check 10: README links validation
+echo "10. Checking README links..."
+BROKEN_LINKS=0
+# Extract markdown links from README and check if files exist
+while IFS= read -r link; do
+    # Extract just the path from the markdown link
+    path=$(echo "$link" | sed 's/.*(\([^)]*\))/\1/')
+    # Skip URLs (http/https)
+    if [[ "$path" =~ ^https?:// ]]; then
+        continue
+    fi
+    # Check if file exists
+    if [ ! -f "$ROOT_DIR/$path" ]; then
+        echo -e "${RED}   ❌ Broken link: $path${NC}"
+        BROKEN_LINKS=$((BROKEN_LINKS + 1))
+    fi
+done < <(grep -o '\[.*\]([^)]*\.md)' "$ROOT_DIR/README.md" 2>/dev/null)
+
+if [ $BROKEN_LINKS -eq 0 ]; then
+    echo -e "${GREEN}✅ All README links are valid${NC}"
+else
+    echo -e "${RED}❌ Found $BROKEN_LINKS broken links${NC}"
+    ERRORS=$((ERRORS + 1))
+fi
+echo ""
+
 # Summary
 echo "===================================================="
 echo "Pre-Release Check Summary"
