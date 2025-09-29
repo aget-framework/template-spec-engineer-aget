@@ -3,8 +3,8 @@
 ## Branch Structure
 
 ### Primary Branches
-- **main** - Stable, production-ready code (current: v2.0.0-stable)
-- **develop** - Integration branch for next release (current: v2.1.0)
+- **main** - Stable, production-ready code (current: v2.1.0)
+- **develop** - Integration branch for next release (current: v2.2.0-dev)
 
 ### Supporting Branches
 - **release/vX.Y.Z** - Release candidates before merging to main
@@ -14,18 +14,16 @@
 ## Current State (as of 2025-09-28)
 
 ```
-main (v2.0.0-stable) ← Users clone this by default
+main (v2.1.0) ← Users clone this by default
   ↑
-release/v2.1.0 ← Release candidate testing
-  ↑
-develop (v2.1.0-dev) ← Active development
+develop (v2.2.0-dev) ← Active development
 ```
 
 ## Version Tags
 
-- `v2.0.0-stable` - Current stable release on main
-- `v2.1.0-rc1` - Release candidate for testing
-- `v2.1.0` - (future) When released to main
+- `v2.1.0` - Current stable release on main
+- `v2.0.0` - Previous stable release
+- `v2.2.0-dev` - Next version in development
 
 ## For Users
 
@@ -72,8 +70,8 @@ For agents needing stable references:
 ```
 ~/github/
 ├── aget-cli-agent-template/      # Working copy (any branch)
-├── aget-template-v2.0.0-stable/  # Frozen at v2.0.0
-└── aget-template-v2.1.0-dev/     # Tracks develop branch
+├── aget-template-v2.1.0/         # Frozen at v2.1.0
+└── aget-template-v2.2.0-dev/     # Tracks develop branch
 ```
 
 ## Key Principles
