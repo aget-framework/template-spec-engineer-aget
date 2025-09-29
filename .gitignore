@@ -51,3 +51,10 @@ test_output/
 .archive/
 *.egg-info/
 .session_state.backup
+
+# Cleanup artifacts
+*.moved
+*.backup
+*.original
+*.old
+test_*.py  # Test files should be in tests/
