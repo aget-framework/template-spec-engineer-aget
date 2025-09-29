@@ -50,3 +50,4 @@ test_output/
 .session_config.json
 .archive/
 *.egg-info/
+.session_state.backup

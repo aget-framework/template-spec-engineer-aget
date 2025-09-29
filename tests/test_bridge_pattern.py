@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+/usr/bin/env python3
 """Test the bridge pattern with mock agent data."""
 
 import sys

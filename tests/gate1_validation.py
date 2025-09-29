@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+/usr/bin/env python3
 """
 Gate 1 Go/No-Go Validation Suite
 Tests all criteria from SPRINT-001-GATE1.md
