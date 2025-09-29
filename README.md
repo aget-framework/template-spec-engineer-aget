@@ -467,8 +467,4 @@ Patterns evolved from real-world usage in production codebases, especially the R
 
 ## Mission
 
-**"Our Universe, a little more beautiful"** - Every pattern shared, every workflow refined, every collaboration enhanced makes our universe a little more beautiful. [Read our full mission](MISSION.md).
-
----
-
-*Making human-AI collaboration more beautiful, one pattern at a time.*
+Help CLI developers build better software faster with AI assistance. [Details](docs/MISSION.md).
