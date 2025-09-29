@@ -1,103 +1,89 @@
-# AGET Mission: Our Universe, A Little More Beautiful
-
-## Mission Statement
+# AGET Mission
 
 **Help CLI-using creators to build better software enjoyably faster (using CLI coding agents)**
 
-> "Every pattern shared, every workflow refined, every collaboration enhanced makes our universe a little more beautiful." - Gabor Melli
+## The Context
 
-## The Beauty We Create
+CLI coding agents are powerful but unopinionated. They'll code any way you ask - which is both their strength and weakness.
 
-AGET isn't just about configuring AI agents. It's about making human-AI collaboration more beautiful through:
+## What AGET Provides: Opinionated Best Practices
 
-### Beautiful Simplicity
-Where once there was configuration chaos across multiple tools, now there's elegant unity. One pattern works everywhere. The complex becomes simple. The fragmented becomes whole.
+AGET brings engineering discipline to CLI agent development through proven practices:
 
-### Beautiful Collaboration
-Where once we worked alone, now we work together - humans and AI as partners. Each conversation builds on the last. Each session preserves wisdom. Each pattern shared multiplies capability across the community.
+### Planning Before Coding
+- **NOGOPLAN**: Incremental GO/NO-GO gated plans where every gate has clear intention
+- **5-Whys Analysis**: Root cause analysis before fixing symptoms
+- **Decision Documentation**: Record why, not just what
 
-### Beautiful Evolution
-Where once software was static, now it evolves through use. Patterns emerge from practice, not theory. The best ideas rise naturally. Individual discoveries become community treasures.
+### Incremental Development
+- **Gate-Based Progress**: Complete one gate before starting the next
+- **Abort Points**: Know when to stop and pivot
+- **Intention-First**: Every action tied to a clear purpose
+- **Batch Validation**: Test assumptions before deep implementation
 
-### Beautiful Accessibility
-Where once technical barriers excluded many, now natural language includes all. "Wake up" instead of complex commands. Conversational patterns instead of configuration files. Knowledge work, not just code work.
+### Session Discipline
+- **Wake/Work/Wind Down**: Structured work sessions with context preservation
+- **Checkpoint Creation**: Save state at meaningful milestones
+- **Evolution Tracking**: Decisions and discoveries recorded as they happen
+- **Clean Handoffs**: Next session starts where last one ended
 
-## How AGET Makes Things More Beautiful
+### Quality Gates
+- **Pre-Release Checks**: 10-point validation before any release
+- **Hygiene Scoring**: Quantified cleanliness metrics
+- **Link Validation**: No broken documentation
+- **Ethos Alignment**: Technical voice, not marketing speak
 
-### For Individual Creators
-- **Less friction**: Smooth workflows replace stuttering starts
-- **More flow**: Stay in creative zone instead of context-switching
-- **Preserved wisdom**: Your learnings accumulate, not evaporate
-- **Amplified capability**: AI becomes true collaborator, not just tool
+### Engineering Patterns
+- **File Ownership**: Clear boundaries (aget_ prefix for framework)
+- **Migration Paths**: Never break existing users
+- **Rollback Ready**: Every change reversible
+- **Test-First Mindset**: Validation before implementation
 
-### For Teams and Communities
-- **Shared patterns**: One person's discovery helps everyone
-- **Collective evolution**: Community wisdom emerges and compounds
-- **Reduced redundancy**: Solve problems once, benefit forever
-- **Increased innovation**: Stand on shoulders of giants
+## Why These Opinions Matter
 
-### For the Universe of Knowledge Work
-- **Democratized intelligence**: AI assistance for all, not just coders
-- **Accelerated learning**: Patterns spread at speed of git
-- **Compounding improvements**: Each contribution makes next one easier
-- **Emergent beauty**: Order arising from collaborative chaos
+Without disciplined practices, CLI agents can produce:
+```
+- Quick fixes that create technical debt
+- Undocumented decisions lost to history
+- Big-bang changes that fail spectacularly
+- Context lost between sessions
+- Inconsistent quality
+```
 
-## The Deeper Beauty
+With AGET's opinionated approach:
+```
+✓ Incremental progress with clear abort points
+✓ Documented reasoning for future reference
+✓ Gate-based development that catches issues early
+✓ Preserved context across sessions
+✓ Consistent, measurable quality
+```
 
-AGET embodies a philosophy that **tools should enhance human creativity, not constrain it**:
+## The AGET Way
 
-- Patterns free us from repetition
-- Automation handles mundane, humans handle meaningful
-- AI amplifies intention, not replaces it
-- Structure enables freedom, not restricts it
+1. **Plan with NOGOPLAN** - Don't dive in, map the gates
+2. **Analyze with 5-Whys** - Find root causes, not symptoms
+3. **Progress Incrementally** - One gate at a time
+4. **Validate Early** - GO/NO-GO decisions at each gate
+5. **Document Decisions** - Evolution tracking for future you
+6. **Maintain Hygiene** - Clean as you go, not later
+7. **Test Assumptions** - Verify before building on them
 
-## The Fractal Beauty
+## When AGET Helps
 
-Like fractals, AGET's beauty appears at every scale:
+- Projects with multiple contributors
+- Code that evolves over months/years
+- Systems requiring consistent patterns
+- Teams using multiple AI tools
+- One-off scripts that grow into tools
 
-**Micro**: A single command ("wake up") that just works
-**Individual**: A developer's workflow becoming frictionless
-**Project**: A codebase becoming truly collaborative
-**Community**: Patterns flowing between projects
-**Ecosystem**: AI and humans co-evolving together
-**Universal**: Knowledge work itself becoming more beautiful
+## When To Use CLI Agents Directly
 
-## Our Commitment
-
-Every decision in AGET asks: **"Does this make our universe a little more beautiful?"**
-
-- Does it reduce friction or add it?
-- Does it include more people or exclude them?
-- Does it preserve wisdom or lose it?
-- Does it share value or hoard it?
-- Does it evolve naturally or force artificially?
-
-## The Vision Realized
-
-Imagine a universe where:
-- Every knowledge worker has an AI collaborator perfectly tuned to their needs
-- Every discovery immediately benefits everyone
-- Every repeated task becomes a reusable pattern
-- Every project builds on humanity's collective wisdom
-- Every interaction between human and AI makes both better
-
-This is the universe AGET is building. Not through grand gestures, but through countless small improvements. Each pattern. Each session. Each contribution.
-
-## Join Us
-
-When you use AGET, you're not just configuring an AI agent. You're participating in making our universe a little more beautiful:
-
-- Your patterns help others
-- Your feedback improves the framework
-- Your usage shapes evolution
-- Your success inspires community
-
-Together, we're not just building better tools. We're building a more beautiful way of working, learning, and creating.
+- Quick prototypes
+- Exploratory coding
+- Personal scripts
+- Learning new technologies
 
 ---
-
-**"Our Universe, a little more beautiful"** - This isn't just Gabor Melli's mission. It's AGET's promise.
-
-*Every wake up. Every wind down. Every pattern shared. Every workflow refined.*
-
-*Beauty, compounding through collaboration.*
+*CLI agents bring the speed. AGET brings the discipline.*
+*Together: Fast AND reliable.*
