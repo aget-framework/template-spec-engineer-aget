@@ -1,5 +1,9 @@
 # AGET Mission: Our Universe, A Little More Beautiful
 
+## Mission Statement
+
+**Help CLI-using creators to build better software enjoyably faster (using CLI coding agents)**
+
 > "Every pattern shared, every workflow refined, every collaboration enhanced makes our universe a little more beautiful." - Gabor Melli
 
 ## The Beauty We Create

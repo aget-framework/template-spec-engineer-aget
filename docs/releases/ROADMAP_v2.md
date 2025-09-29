@@ -7,9 +7,10 @@
 
 ## Mission Statement
 
-**"Help software creators achieve their vision (with their linguistic AI collaborator)"**
+**"Help CLI-using creators to build better software enjoyably faster (using CLI coding agents)"**
 
-- Primary mission: Help software creators achieve their vision
+- Primary mission: Help CLI-using creators build better software
+- Enjoyably faster: Through conversational AI interaction
 - Amplified mission: With AI collaborator when awakened
 - See [docs/MISSION.md](docs/MISSION.md) for full mission details
 

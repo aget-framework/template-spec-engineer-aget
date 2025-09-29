@@ -1,6 +1,6 @@
 # AGET: CLI Agent Template
 
-> **Mission: Help software creators achieve their vision with AI**
+> **Mission: Help CLI-using creators to build better software enjoyably faster (using CLI coding agents)**
 
 **Agent Template (AGET)** - Cognitive augmentation framework for software and data work. Transform any project into a CLI agent-ready environment with conversational command patterns. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
