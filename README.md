@@ -4,11 +4,11 @@
 
 **Agent Template (AGET)** - Cognitive augmentation framework for software and data work. Transform any project into a CLI agent-ready environment with conversational command patterns. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
-**Current Version**: v2.1.0
+**Current Version**: v2.2.0
 
 ## Branch Strategy
-- **main branch**: Stable release (v2.1.0)
-- **develop branch**: Next features (v2.2.0)
+- **main branch**: Stable release (v2.2.0)
+- **develop branch**: Next features (v2.3.0+)
 - See [.aget/BRANCHING.md](.aget/BRANCHING.md) for details
 
 > **📍 Strategic Vision & Governance**: Vision and governance documents now live in [aget-aget](https://github.com/aget-framework/aget-aget). This repository focuses on stable implementation. See [GOVERNANCE_POINTER.md](docs/GOVERNANCE_POINTER.md) for details.
@@ -43,9 +43,13 @@ git clone https://github.com/aget-framework/aget-cli-agent-template.git
 cd aget-cli-agent-template
 ```
 
-2. **Open with your AI assistant**:
+2. **Open with your AI coding assistant**:
 ```bash
-claude .  # or: cursor . | aider . | windsurf .
+# Claude Code (primary testing)
+claude .
+
+# Also works with: Cursor, Aider, Windsurf, Codex CLI, and other CLI agents
+cursor . | aider . | windsurf .
 ```
 
 3. **Start with natural language**:
