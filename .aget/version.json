@@ -1,19 +1,24 @@
 {
-  "version": "1.0.0",
-  "migration_date": "2025-09-21",
-  "phase": "complete",
-  "template_version": "standard",
+  "aget_version": "2.2.0",
+  "created": "2025-09-21",
+  "template": "agent",
+  "tier": "basic",
+  "updated_to_v22": "2025-09-30",
+  "migration_type": "template_upgrade",
+  "intelligence_enabled": true,
   "patterns": {
     "session": "1.0.0",
     "housekeeping": "1.0.0",
     "documentation": "1.0.0",
     "recovery": "1.0.0",
-    "meta": "0.1.0"
+    "meta": "0.1.0",
+    "intelligence": "1.0.0",
+    "specification": "1.1.0"
   },
   "compatibility": {
-    "backwards_compatible": true,
-    "breaking_changes": [],
+    "backwards_compatible": false,
+    "breaking_changes": ["CLAUDE.md must be symlink to AGENTS.md"],
     "deprecated": []
   },
-  "notes": "Reference implementation of AGET CLI Agent Template"
+  "notes": "v2.2.0 Reference Template - Intelligence-enabled AGET with specification creation capabilities"
 }

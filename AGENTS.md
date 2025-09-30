@@ -1,5 +1,7 @@
 # Agent Configuration - AGET CLI Agent Template
 
+@aget-version: 2.2.0
+
 ## 🚨 CRITICAL: INITIALIZATION PROCEDURE (REQUIRED)
 
 **You MUST follow these steps IMMEDIATELY:**
@@ -21,9 +23,15 @@
 Make CLI coding agents better collaborators through conversational command patterns and clean separation of framework vs project concerns.
 
 ### Current Version
-- **v2.0.0-alpha** (Include Architecture implemented)
-- **Target Release**: October 7, 2025
+- **v2.2.0** (Intelligence-enabled with specification creation)
+- **Released**: September 30, 2025
 - **Coverage Target**: >80% for critical patterns
+
+### v2.2.0 Features
+- **Intelligence Components**: Ambiguity detection for specifications
+- **Specification Creation**: EARS (Easy Approach to Requirements Syntax) format support
+- **CLAUDE.md Symlink**: Must be symlink to AGENTS.md (breaking change)
+- **Enhanced Documentation**: Formal specification workflow integrated
 
 ## AGET-Specific Development Commands
 
@@ -247,5 +255,50 @@ Before any session, confirm you have:
 **Remember**: You are maintaining the framework that makes all other projects agent-ready!
 
 ---
-*AGET v2.0 - Making CLI coding agents better collaborators*
-*This configuration demonstrates the include architecture we promote*
+
+## Specification Creation (v2.2.0)
+
+### When to Create Specs
+User says: "create spec", "formal specification", "EARS spec", or "document capabilities formally"
+
+### Specification Workflow
+
+**Step 1: Read Format Documentation**
+- File: `.aget/docs/SPEC_FORMAT_v1.1.md`
+- Contains: EARS patterns, YAML structure, maturity levels, examples
+
+**Step 2: Create Spec File**
+- Location: `.aget/specs/{DOMAIN}_SPEC_v{VERSION}.yaml`
+- Format: YAML with EARS temporal patterns
+- Maturity levels:
+  - **bootstrapping**: Simple capability list (no EARS)
+  - **minimal**: EARS patterns with basic structure
+  - **standard**: Full validation, test references
+  - **exemplary**: Constitutional governance, comprehensive
+
+**Step 3: Use Intelligence Tools**
+- Run ambiguity detector on each capability
+- During creation: Use detector logic to flag potential ambiguities
+- Present flags to user for decision
+- Add clarifications based on suggestions
+
+### Intelligence Integration
+
+**Ambiguity Detection (Automatic):**
+- Proactively identify ambiguities during spec creation
+- Use patterns from `.aget/intelligence/ambiguity_corpus.yaml`
+- Present ambiguity flags with confidence scores
+- User decides: accept flag, clarify, or reject
+- Add clarifications to capability with `ambiguity_check` metadata
+
+### EARS Pattern Quick Reference
+
+1. **Ubiquitous**: The system shall [response]
+2. **State-driven**: While [condition], the system shall [response]
+3. **Event-driven**: When [trigger], the system shall [response]
+4. **Optional**: Where [feature], the system shall [response]
+5. **Unwanted**: If [condition], then the system shall [response]
+
+---
+*AGET v2.2.0 - Making CLI coding agents better collaborators*
+*Intelligence-enabled specification creation with EARS patterns*
