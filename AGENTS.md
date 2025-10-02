@@ -1,6 +1,6 @@
 # Agent Configuration - AGET CLI Agent Template
 
-@aget-version: 2.2.0
+@aget-version: 2.3.0
 
 ## 🚨 CRITICAL: INITIALIZATION PROCEDURE (REQUIRED)
 
@@ -23,15 +23,17 @@
 Make CLI coding agents better collaborators through conversational command patterns and clean separation of framework vs project concerns.
 
 ### Current Version
-- **v2.2.0** (Intelligence-enabled with specification creation)
-- **Released**: September 30, 2025
+- **v2.3.0 "Collaboration"** (Multi-agent collaboration infrastructure)
+- **Released**: October 2, 2025
 - **Coverage Target**: >80% for critical patterns
 
-### v2.2.0 Features
-- **Intelligence Components**: Ambiguity detection for specifications
-- **Specification Creation**: EARS (Easy Approach to Requirements Syntax) format support
-- **CLAUDE.md Symlink**: Must be symlink to AGENTS.md (breaking change)
-- **Enhanced Documentation**: Formal specification workflow integrated
+### v2.3.0 Features
+- **Pattern Versioning**: Semantic versioning for all 24 patterns (versions.yaml)
+- **Session Metadata**: Structured YAML frontmatter for session tracking
+- **Specification Framework**: EARS-based formal capability documentation
+- **Collaboration Tools**: Pattern compatibility checking, version bumping
+- **Intelligence Components**: Ambiguity detection for specifications (v2.2)
+- **Breaking Changes**: Pattern versioning required, session metadata schema v1.0
 
 ## AGET-Specific Development Commands
 

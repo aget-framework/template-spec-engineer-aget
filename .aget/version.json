@@ -1,24 +1,30 @@
 {
-  "aget_version": "2.2.0",
+  "aget_version": "2.3.0",
   "created": "2025-09-21",
   "template": "agent",
   "tier": "basic",
-  "updated_to_v22": "2025-09-30",
+  "updated_to_v23": "2025-10-02",
   "migration_type": "template_upgrade",
   "intelligence_enabled": true,
+  "collaboration_enabled": true,
   "patterns": {
-    "session": "1.0.0",
+    "session": "1.1.0",
     "housekeeping": "1.0.0",
     "documentation": "1.0.0",
     "recovery": "1.0.0",
     "meta": "0.1.0",
     "intelligence": "1.0.0",
-    "specification": "1.1.0"
+    "specification": "1.1.0",
+    "versioning": "1.0.0"
   },
   "compatibility": {
     "backwards_compatible": false,
-    "breaking_changes": ["CLAUDE.md must be symlink to AGENTS.md"],
+    "breaking_changes": [
+      "CLAUDE.md must be symlink to AGENTS.md",
+      "Pattern versioning system required",
+      "Session metadata schema v1.0"
+    ],
     "deprecated": []
   },
-  "notes": "v2.2.0 Reference Template - Intelligence-enabled AGET with specification creation capabilities"
+  "notes": "v2.3.0 Collaboration Template - Pattern versioning, session metadata, and multi-agent collaboration infrastructure"
 }

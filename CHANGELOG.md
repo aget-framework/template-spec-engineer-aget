@@ -5,6 +5,42 @@ All notable changes to AGET will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2025-10-02 - "Collaboration"
+
+### Added
+- **Pattern Versioning System**:
+  - `.aget/patterns/versions.yaml` - Semantic versioning for all 24 patterns
+  - `.aget/tools/bump_pattern.py` - Version bump automation
+  - `.aget/tools/check_pattern_compatibility.py` - Compatibility validation
+  - `docs/PATTERN_VERSIONING.md` - Complete versioning guide
+
+- **Session Metadata System**:
+  - `.aget/schemas/session_metadata_v1.0.yaml` - YAML schema for session frontmatter
+  - `.aget/schemas/session_metadata_v1.0.json` - JSON schema for validation
+  - `.aget/tools/generate_session_metadata.py` - Metadata generation tool
+  - `.aget/tools/validate_session_metadata.py` - Schema validation tool
+  - `docs/SESSION_METADATA_MIGRATION_GUIDE.md` - Migration instructions
+
+- **Specification Framework**:
+  - `.aget/docs/SPEC_FORMAT_v1.1.md` - EARS-based specification format
+  - Support for formal capability documentation with aerospace patterns
+  - Four maturity levels: bootstrapping, minimal, standard, exemplary
+
+### Changed
+- Session pattern upgraded to v1.1.0 (session metadata support)
+- Version file now tracks collaboration features
+
+### Documentation
+- Complete guides for all v2.3 features
+- Migration path from v2.2 to v2.3
+- Pattern versioning best practices
+
+### Compatibility
+- Not backward compatible with v2.2 (breaking changes)
+- Requires pattern versioning system
+- Requires session metadata schema v1.0
+- AGETs must update to v2.3 for ecosystem compatibility
+
 ## [2.1.0] - 2025-09-28
 
 ### Added
