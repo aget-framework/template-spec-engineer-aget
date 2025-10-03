@@ -29,20 +29,20 @@ develop (v2.2.0-dev) ← Active development
 
 ### Getting Stable Version (Default)
 ```bash
-git clone https://github.com/aget-framework/aget-cli-agent-template.git
+git clone https://github.com/aget-framework/aget-worker-template.git
 # You get main branch (stable)
 ```
 
 ### Getting Development Version
 ```bash
-git clone -b develop https://github.com/aget-framework/aget-cli-agent-template.git
+git clone -b develop https://github.com/aget-framework/aget-worker-template.git
 # You get latest development features
 ```
 
 ### Getting Specific Version
 ```bash
-git clone https://github.com/aget-framework/aget-cli-agent-template.git
-cd aget-cli-agent-template
+git clone https://github.com/aget-framework/aget-worker-template.git
+cd aget-worker-template
 git checkout v2.0.0-stable  # or any tag
 ```
 
@@ -69,7 +69,7 @@ git push origin feature/my-feature
 For agents needing stable references:
 ```
 ~/github/
-├── aget-cli-agent-template/      # Working copy (any branch)
+├── aget-worker-template/         # Working copy (any branch)
 ├── aget-template-v2.1.0/         # Frozen at v2.1.0
 └── aget-template-v2.2.0-dev/     # Tracks develop branch
 ```
