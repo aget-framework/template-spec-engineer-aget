@@ -1,6 +1,6 @@
 # Agent Configuration - AGET CLI Agent Template
 
-@aget-version: 2.3.0
+@aget-version: 2.4.0
 
 ## 🚨 CRITICAL: INITIALIZATION PROCEDURE (REQUIRED)
 
@@ -23,17 +23,21 @@
 Make CLI coding agents better collaborators through conversational command patterns and clean separation of framework vs project concerns.
 
 ### Current Version
-- **v2.3.0 "Collaboration"** (Multi-agent collaboration infrastructure)
-- **Released**: October 2, 2025
+- **v2.4.0 "Clarity"** (Naming conventions and organizational structure)
+- **Released**: October 3, 2025
 - **Coverage Target**: >80% for critical patterns
 
-### v2.3.0 Features
-- **Pattern Versioning**: Semantic versioning for all 24 patterns (versions.yaml)
-- **Session Metadata**: Structured YAML frontmatter for session tracking
-- **Specification Framework**: EARS-based formal capability documentation
-- **Collaboration Tools**: Pattern compatibility checking, version bumping
-- **Intelligence Components**: Ambiguity detection for specifications (v2.2)
-- **Breaking Changes**: Pattern versioning required, session metadata schema v1.0
+### v2.4.0 Features - Naming Conventions
+- **Suffix Signaling**: `-AGET` (action-taking) vs `-aget` (information-only)
+  - `my-github-AGET` = Can modify systems (write, commit, push)
+  - `my-analytics-aget` = Read-only (analyze, report, recommend)
+- **aget_group Field**: Organizational grouping for portfolio agents
+- **managed_by Field**: Supervisor tracking for fleet coordination
+- **Breaking Changes**: Naming convention required, aget_group for grouped agents
+
+### v2.3.0 Features (Previous)
+- Pattern Versioning, Session Metadata, Specification Framework
+- Collaboration Tools, Intelligence Components
 
 ## AGET-Specific Development Commands
 
