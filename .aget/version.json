@@ -1,8 +1,9 @@
 {
-  "aget_version": "2.3.0",
+  "aget_version": "2.5.0",
   "created": "2025-09-21",
   "template": "agent",
   "tier": "basic",
+  "updated_to_v25": "2025-10-06",
   "updated_to_v23": "2025-10-02",
   "migration_type": "template_upgrade",
   "intelligence_enabled": true,
@@ -22,9 +23,10 @@
     "breaking_changes": [
       "CLAUDE.md must be symlink to AGENTS.md",
       "Pattern versioning system required",
-      "Session metadata schema v1.0"
+      "Session metadata schema v1.0",
+      "Contract tests required for wake and identity protocols"
     ],
     "deprecated": []
   },
-  "notes": "v2.3.0 Collaboration Template - Pattern versioning, session metadata, and multi-agent collaboration infrastructure"
+  "notes": "v2.5.0 Validation Template - Contract tests for wake/identity protocols, validation framework for agent compliance"
 }

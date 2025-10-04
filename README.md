@@ -4,11 +4,11 @@
 
 **Agent Template (AGET)** - Cognitive augmentation framework for software and data work. Transform any project into a CLI agent-ready environment with conversational command patterns. Works with Claude Code, Cursor, Aider, Windsurf, and all major AI coding assistants.
 
-**Current Version**: v2.3.0 "Collaboration"
+**Current Version**: v2.5.0 "Validation"
 
 ## Branch Strategy
-- **main branch**: Stable release (v2.3.0 "Collaboration")
-- **develop branch**: Next features (v2.4.0+)
+- **main branch**: Stable release (v2.5.0 "Validation")
+- **develop branch**: Next features (v2.6.0+)
 - See [.aget/BRANCHING.md](.aget/BRANCHING.md) for details
 
 > **📍 Strategic Vision & Governance**: Vision and governance documents now live in [aget-aget](https://github.com/aget-framework/aget-aget). This repository focuses on stable implementation. See [GOVERNANCE_POINTER.md](docs/GOVERNANCE_POINTER.md) for details.
@@ -432,6 +432,33 @@ Agent: Running emergency diagnostics...
 ## Upgrading
 
 Already using the template? See [UPGRADING.md](UPGRADING.md) for how to apply template enhancements to your existing projects. The guide provides a five-phased approach that preserves your customizations while getting new features.
+
+## Testing
+
+This agent template includes contract tests to validate core protocols:
+- **Wake protocol contract**: Identity reporting validation
+- **Identity contract**: Metadata consistency checks
+
+### Running Tests
+
+```bash
+# Run all tests
+python3 -m pytest tests/ -v
+
+# Run contract tests only
+python3 -m pytest tests/test_wake_contract.py tests/test_identity_contract.py -v
+```
+
+### What Contract Tests Validate
+
+- Agent reports identity correctly (name, version)
+- Version metadata is consistent across files
+- Identity fields remain stable (separate from operational state)
+- Addresses identity conflation issues (#76)
+
+See `tests/README.md` for detailed test documentation.
+
+---
 
 ## Contributing
 
