@@ -225,6 +225,7 @@ Define capabilities before building:
 - **[Pattern Explained](docs/PATTERNS_EXPLAINED.md)** - How patterns work
 - **[Why This Matters](docs/WHY_THIS_MATTERS.md)** - Philosophy and rationale
 - **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues
+- **[Testing Guide](tests/README.md)** - Contract tests, test philosophy, and running tests
 - **[docs/README.md](docs/README.md)** - Documentation index
 
 ---
