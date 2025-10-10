@@ -1,10 +1,17 @@
 spec:
   id: SPEC-ADVISOR-TEMPLATE
-  version: 1.0.0
+  version: 2.0.0
   maturity: standard
   format_version: '1.1'
-  description: Advisor Agent Template capabilities - Read-only advisory agents with persona differentiation
+  description: Advisor Agent Template capabilities - Advisory agents with persona differentiation and scoped write permissions (v2.6.0+)
   system_name: template-advisor-aget
+  changelog:
+    - version: 2.0.0
+      date: '2025-10-10'
+      changes: "Added scoped write permission model (CAP-028, CAP-029, CAP-030) - v2.6.0 feature"
+    - version: 1.0.0
+      date: '2025-10-10'
+      changes: "Initial advisor template specification with 27 capabilities"
 
 capabilities:
   # Role Enforcement
@@ -255,22 +262,88 @@ capabilities:
       - test_persona_is_valid
       - test_wake_displays_advisory_mode
       - test_wake_displays_persona
+      - test_write_scope_declared_if_scoped  # v2.6.0+
+      - test_write_scope_paths_valid  # v2.6.0+
+      - test_scoped_write_maintains_external_readonly  # v2.6.0+
+
+  # Scoped Write Permissions (v2.6.0+)
+  CAP-028:
+    domain: memory_management
+    statement: "WHERE advisor operates in v2.6.0+, the SYSTEM shall allow File_Modification and File_Creation WITHIN Write_Scope_Allowed_Paths"
+    pattern: optional
+    precondition: version_2_6_0_or_higher
+    inputs: ["file path", "write operation"]
+    outputs: ["permission check result", "file written"]
+    enforcement: "Contract test test_write_scope_paths_valid"
+    allowed_paths:
+      - ".aget/sessions/"
+      - ".aget/memory/"
+      - ".aget/tracking/"
+      - ".aget/checkpoints/"
+      - ".aget/evolution/"
+    notes: "Enables session memory and goal tracking while maintaining external read-only safety"
+    version_introduced: "2.6.0"
+
+  CAP-029:
+    domain: role_boundaries
+    statement: "The SYSTEM shall prevent File_Modification and File_Creation OUTSIDE Write_Scope_Allowed_Paths"
+    pattern: ubiquitous
+    inputs: ["file path", "write operation"]
+    outputs: ["permission denied"]
+    enforcement: "Contract test test_scoped_write_maintains_external_readonly"
+    forbidden_paths:
+      - "AGENTS.md"
+      - "README.md"
+      - "version.json"
+      - "src/"
+      - "tests/"
+      - "workspace/"
+      - "products/"
+      - "data/"
+      - "docs/"
+      - "*"  # Wildcard forbids all files not explicitly allowed
+    notes: "Maintains v2.5.0 read-only safety for external files"
+    version_introduced: "2.6.0"
+
+  CAP-030:
+    domain: memory_management
+    statement: "WHEN advisor completes Coaching_Session, the SYSTEM shall persist Session_Notes to .aget/sessions/ directory"
+    pattern: event-driven
+    trigger: session_completion
+    inputs: ["session notes", "commitments", "progress", "date"]
+    outputs: ["session file created", "file path"]
+    allowed_locations: [".aget/sessions/"]
+    example_filename: "SESSION_YYYY-MM-DD_topic.md"
+    use_case: "Executive coaching with session continuity - track goals, homework, accountability across sessions"
+    notes: "Enables continuity across sessions without manual user workarounds"
+    version_introduced: "2.6.0"
 
 metadata:
   created: '2025-10-10'
-  aget_version: 2.5.0
+  updated: '2025-10-10'
+  aget_version: 2.6.0
+  capability_count: 30  # v1.0: 27 capabilities, v2.0: +3 scoped write capabilities
   notes: |
     Standard maturity - Complete EARS patterns, enforcement mechanisms documented.
-    Advisor template for read-only advisory agents with 5 persona types.
-    Based on L95 (role enforcement), L114 (requirements first), L118 (role clarity), D11 (terminology).
-    Hybrid enforcement: Declarations (version.json) + Contract tests + Documentation protocols.
-    Persona differentiation is behavioral (metadata-only), not technically enforced.
+    Advisor template for advisory agents with 5 persona types and scoped write permissions.
+
+    v2.0.0 Changes (2025-10-10):
+    - Added scoped write permission model (CAP-028, CAP-029, CAP-030)
+    - Enables internal memory (.aget/sessions/, .aget/memory/, .aget/tracking/)
+    - Maintains external read-only safety (user files, src/, tests/, AGENTS.md)
+    - 3 new contract tests (19 total: 16 original + 3 scoped write)
+
+    v1.0.0 Baseline:
+    - Based on L95 (role enforcement), L114 (requirements first), L118 (role clarity), D11 (terminology)
+    - Hybrid enforcement: Declarations (version.json) + Contract tests + Documentation protocols
+    - Persona differentiation is behavioral (metadata-only), not technically enforced
   framework_learnings:
     - L95: Advisor Role Enforcement Requirements
     - L114: Requirements Before Solutions (Advisor Mode)
     - L118: Advisor Role Clarity in Multi-Agent Sessions
     - D11: Terminology Disambiguation (Supervisor/Coordinator/Advisor)
     - ADVISOR_MODE_PROTOCOL_v1.0: Operational guidelines
+    - SESSION_2025-10-10_advisor-validation: Finding 3 - Memory requirements for advisors
 
 dependencies: {}
 

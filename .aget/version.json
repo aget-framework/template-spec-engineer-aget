@@ -1,5 +1,5 @@
 {
-  "aget_version": "2.5.0",
+  "aget_version": "2.6.0",
   "created": "2025-10-10",
   "template": "advisor",
   "tier": "specialized",
@@ -9,13 +9,36 @@
   "roles": ["advisor"],
   "persona": null,
   "advisory_capabilities": {
-    "read_only": true,
+    "read_only": "scoped",
     "can_execute": false,
-    "can_modify_files": false,
-    "can_create_files": false,
+    "can_modify_files": "scoped",
+    "can_create_files": "scoped",
     "can_recommend": true,
     "can_analyze": true,
     "can_critique": true,
+    "write_scope": {
+      "enforcement": "contract_test",
+      "allowed_paths": [
+        ".aget/sessions/",
+        ".aget/memory/",
+        ".aget/tracking/",
+        ".aget/checkpoints/",
+        ".aget/evolution/"
+      ],
+      "forbidden_paths": [
+        "src/",
+        "tests/",
+        "workspace/",
+        "products/",
+        "data/",
+        "docs/",
+        "AGENTS.md",
+        "README.md",
+        "version.json",
+        "*"
+      ],
+      "rationale": "Advisors need internal memory for session continuity while maintaining external read-only safety"
+    },
     "supported_personas": [
       "teacher",
       "mentor",

@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-"""v2.5 Wake Protocol Contract Tests - Advisor Template
+"""v2.5/v2.6 Wake Protocol Contract Tests - Advisor Template
 
 Tests that wake protocol correctly reports agent identity, version, capabilities,
 and advisor-specific information (advisory mode, persona).
-Part of AGET framework v2.5 advisor template validation.
+
+v2.5.0: Global read-only (boolean values)
+v2.6.0: Scoped write permissions (string "scoped" values)
+
+Part of AGET framework advisor template validation.
 """
 
 import pytest
@@ -91,10 +95,11 @@ def test_wake_displays_advisory_mode():
             assert "advisory_capabilities" in data, \
                 "Advisor agents must have advisory_capabilities section"
 
-            # Verify read-only mode declared
+            # Verify read-only mode declared (v2.5.0: true, v2.6.0: "scoped")
             caps = data["advisory_capabilities"]
-            assert caps.get("read_only") is True, \
-                "Advisory mode requires read_only capability"
+            read_only = caps.get("read_only")
+            assert read_only is True or read_only == "scoped", \
+                f"Advisory mode requires read_only capability (true or 'scoped'), got {read_only}"
 
             # Note: Actual wake output validation would require running wake protocol
             # This test validates the configuration that wake protocol will display
