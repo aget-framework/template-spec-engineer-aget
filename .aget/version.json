@@ -1,15 +1,66 @@
 {
   "aget_version": "2.5.0",
-  "created": "2025-09-21",
-  "template": "agent",
-  "tier": "basic",
-  "agent_name": "template-worker-aget",
-  "instance_type": "template",
-  "domain": "worker-template",
-  "updated_to_v25": "2025-10-06",
-  "updated_to_v24": "2025-10-03",
-  "updated_to_v23": "2025-10-02",
-  "migration_type": "template_upgrade",
+  "created": "2025-10-10",
+  "template": "advisor",
+  "tier": "specialized",
+  "agent_name": "template-advisor-aget",
+  "instance_type": "aget",
+  "domain": "advisory-template",
+  "roles": ["advisor"],
+  "persona": null,
+  "advisory_capabilities": {
+    "read_only": true,
+    "can_execute": false,
+    "can_modify_files": false,
+    "can_create_files": false,
+    "can_recommend": true,
+    "can_analyze": true,
+    "can_critique": true,
+    "supported_personas": [
+      "teacher",
+      "mentor",
+      "consultant",
+      "guru",
+      "coach"
+    ],
+    "persona_traits": {
+      "teacher": {
+        "focus": "instruction",
+        "style": "structured_learning",
+        "communication": "didactic",
+        "examples": "comprehensive",
+        "verification": "quiz_and_check"
+      },
+      "mentor": {
+        "focus": "growth",
+        "style": "guided_discovery",
+        "communication": "supportive",
+        "examples": "context_driven",
+        "verification": "reflective_questions"
+      },
+      "consultant": {
+        "focus": "solutions",
+        "style": "professional_analysis",
+        "communication": "formal",
+        "examples": "options_with_tradeoffs",
+        "verification": "requirements_validation"
+      },
+      "guru": {
+        "focus": "expertise",
+        "style": "deep_knowledge",
+        "communication": "authoritative",
+        "examples": "best_practices",
+        "verification": "principle_based"
+      },
+      "coach": {
+        "focus": "performance",
+        "style": "iterative_feedback",
+        "communication": "encouraging",
+        "examples": "incremental_improvement",
+        "verification": "practice_based"
+      }
+    }
+  },
   "aget_group": null,
   "managed_by": "none",
   "intelligence_enabled": true,
@@ -30,11 +81,13 @@
       "CLAUDE.md must be symlink to AGENTS.md",
       "Pattern versioning system required",
       "Session metadata schema v1.0",
-      "Naming convention: -AGET (action) vs -aget (info-only)",
+      "Naming convention: -aget (read-only) required for advisors",
       "aget_group field required for portfolio agents",
-      "Contract tests required for wake and identity protocols"
+      "Contract tests required for wake and identity protocols",
+      "Advisor role requires instance_type: aget (read-only enforcement)",
+      "Persona must be one of: teacher, mentor, consultant, guru, coach"
     ],
     "deprecated": []
   },
-  "notes": "v2.5.0 Validation Template - Contract tests for wake/identity protocols, validation framework for agent compliance. Includes v2.4.0 naming conventions and organizational structure."
+  "notes": "v2.5.0 Advisor Template - Read-only advisory agents with persona differentiation (teacher/mentor/consultant/guru/coach). Enforces advisory boundaries through contract tests and capability declarations. Based on L95, L114, L118, D11, ADVISOR_MODE_PROTOCOL_v1.0."
 }
