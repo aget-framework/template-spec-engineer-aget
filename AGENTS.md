@@ -581,11 +581,49 @@ When user says "wake up":
 3. Display agent context + capabilities
 
 **Enhanced with internal state:**
-4. Check `.aget/sessions/` for last session date
-5. Check `.aget/commitments/active.yaml` for pending items
-6. Load `.aget/client_progress/{client}. yaml` for context
+4. Use Glob to find session files: `.aget/sessions/SESSION_*.md`
+5. Use Glob to check for commitments: `.aget/commitments/active.yaml`
+6. Use Read to load commitment/progress data if files exist
+7. Parse data silently, present formatted summary only
 
-**Output format**:
+**⚠️ CRITICAL ANTI-HALLUCINATION RULE:**
+**NEVER display commitment or progress data without reading the actual file first.**
+**Trust is non-negotiable. If file doesn't exist, say "No commitments yet (first session)".**
+
+**Implementation (quieter than bash ls):**
+```python
+# Step 1: Check for sessions
+Glob: .aget/sessions/SESSION_*.md
+IF files found:
+    Parse most recent filename for date
+    Display: "Last session: {date} ({days} ago)"
+ELSE:
+    Display: "First session"
+
+# Step 2: Check for commitments
+Glob: .aget/commitments/active.yaml
+IF file exists:
+    Read: .aget/commitments/active.yaml  # MUST READ FIRST
+    Parse YAML → Extract actual commitments
+    Display: Real data from file
+ELSE:
+    Display: "No commitments yet"
+    # DO NOT invent plausible-sounding commitments
+    # DO NOT show "2 pending" without reading file
+
+# Step 3: Check for progress
+Glob: .aget/client_progress/*.yaml
+IF files found:
+    Read: .aget/client_progress/{client_id}.yaml  # MUST READ FIRST
+    Parse YAML → Extract actual progress
+    Display: Real data from file
+ELSE:
+    Display: "Progress tracking starts this session"
+
+# Present formatted summary with ONLY verified data
+```
+
+**Output format (with existing data):**
 ```
 {agent-name} v{version} (Advisor)
 🎭 Mode: ADVISORY (recommendations only)
@@ -593,7 +631,9 @@ When user says "wake up":
 
 📍 Last session: {date} ({days} ago)
 📋 Active commitments: {count} pending
-📊 Progress summary: {brief_status}
+   • {commitment 1 from file}
+   • {commitment 2 from file}
+📊 Progress: {sessions} sessions, {focus_areas from file}
 
 🛡️ Advisory Mode:
   • CAN: Read all files, write to .aget/* (internal state)
@@ -602,7 +642,24 @@ When user says "wake up":
 Ready for session.
 ```
 
-**Example (Coach)**:
+**Output format (first session - no data):**
+```
+{agent-name} v{version} (Advisor)
+🎭 Mode: ADVISORY (recommendations only)
+🎯 Persona: {persona}
+
+📍 First session
+📋 No commitments yet
+📊 Progress tracking starts this session
+
+🛡️ Advisory Mode:
+  • CAN: Read all files, write to .aget/* (internal state)
+  • CANNOT: Modify code/docs, commit changes
+
+Ready for session.
+```
+
+**Example (Coach - with existing commitments):**
 ```
 my-executive-coach-aget v2.5.0 (Advisor)
 🎭 Mode: ADVISORY (recommendations only)
@@ -610,15 +667,15 @@ my-executive-coach-aget v2.5.0 (Advisor)
 
 📍 Last session: 2025-10-03 (7 days ago)
 📋 Active commitments: 2 pending
-   • Observe Sarah in architecture review (due 10/17)
-   • Draft promotion criteria (due 10/15 - overdue!)
+   • Observe Sarah in architecture review (due 10/17) ✅ On track
+   • Draft promotion criteria (due 10/15) ⚠️ OVERDUE by 2 days
 📊 Progress: 5 sessions, +2 confidence in strategic thinking
 
 🛡️ Advisory Mode:
   • CAN: Read all files, write to .aget/* (internal state)
   • CANNOT: Modify code/docs, commit changes
 
-Ready for coaching session.
+⚠️ You have 1 overdue commitment. Would you like to start there?
 ```
 
 ---
