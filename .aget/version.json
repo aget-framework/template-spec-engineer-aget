@@ -1,5 +1,5 @@
 {
-  "aget_version": "2.6.0",
+  "aget_version": "2.5.0",
   "created": "2025-10-10",
   "template": "advisor",
   "tier": "specialized",
@@ -8,36 +8,47 @@
   "domain": "advisory-template",
   "roles": ["advisor"],
   "persona": null,
+  "features": {
+    "internal_state_enabled": true,
+    "session_persistence": true,
+    "progress_tracking": true,
+    "commitment_tracking": true,
+    "scoped_write_permissions": true
+  },
   "advisory_capabilities": {
-    "read_only": "scoped",
+    "read_only": "external_systems",
+    "can_write_internal_state": true,
     "can_execute": false,
-    "can_modify_files": "scoped",
-    "can_create_files": "scoped",
+    "can_modify_files": "scoped_to_internal_state",
+    "can_create_files": "scoped_to_internal_state",
     "can_recommend": true,
     "can_analyze": true,
     "can_critique": true,
     "write_scope": {
-      "enforcement": "contract_test",
+      "enforcement": "strict",
       "allowed_paths": [
-        ".aget/sessions/",
-        ".aget/memory/",
-        ".aget/tracking/",
-        ".aget/checkpoints/",
-        ".aget/evolution/"
+        ".aget/sessions/**",
+        ".aget/client_progress/**",
+        ".aget/commitments/**",
+        ".aget/context/**",
+        ".aget/learning_history/**",
+        ".aget/checkpoints/**",
+        ".aget/evolution/**"
       ],
       "forbidden_paths": [
-        "src/",
-        "tests/",
-        "workspace/",
-        "products/",
-        "data/",
-        "docs/",
+        "src/**",
+        "tests/**",
+        "workspace/**",
+        "products/**",
+        "data/**",
+        "docs/**",
         "AGENTS.md",
+        "CLAUDE.md",
         "README.md",
         "version.json",
-        "*"
+        "**"
       ],
-      "rationale": "Advisors need internal memory for session continuity while maintaining external read-only safety"
+      "rationale": "Advisory with internal state: Advisors maintain session continuity and progress tracking (.aget/**) while not modifying external systems (user's code/docs)"
     },
     "supported_personas": [
       "teacher",
