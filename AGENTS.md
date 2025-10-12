@@ -1104,6 +1104,75 @@ Advisors can operate "next to" executor agents:
 
 ---
 
+## Configuration Size Management (v2.6.0)
+
+**Policy**: AGENTS.md must remain under 40,000 characters to ensure reliable Claude Code processing (L146).
+
+**Current status**:
+```bash
+# Check this configuration's size
+wc -c AGENTS.md
+# Target: <35,000 chars (warning threshold)
+# Limit: 40,000 chars (hard limit)
+```
+
+### Why Size Matters
+
+Large configuration files (>40k characters) cause performance degradation:
+- Visible processing delays ("Synthesizing..." indicator)
+- Increased latency on all commands (wake up, wind down, etc.)
+- Degraded user experience
+
+**Performance correlation**:
+| Size | Wake Latency | User Experience |
+|------|--------------|-----------------|
+| <25k | <0.5s | Excellent (immediate) |
+| 25-35k | <1s | Fast (minimal delay) |
+| 35-40k | 1-2s | Borderline noticeable |
+| >40k | 2-3s | Noticeable delay (⚠️) |
+
+### Management Strategy
+
+**Before adding features**:
+```bash
+# Check current size
+current=$(wc -c < AGENTS.md)
+
+# If approaching 35k, extract content first
+if [ $current -gt 35000 ]; then
+  echo "⚠️ Approaching limit: Extract content before adding"
+fi
+```
+
+**What to extract** (priority order):
+1. **Non-active personas** → `.aget/docs/personas/` (if instance uses single persona)
+2. **Reference material** → `.aget/docs/frameworks/` (detailed knowledge bases)
+3. **Detailed procedures** → `.aget/docs/protocols/` (keep quick reference inline)
+4. **Examples** → `.aget/docs/examples/` (verbose interaction examples)
+
+**What to keep inline**:
+- Agent identity and active persona
+- Core principles (short form)
+- Wake/Wind Down protocols (frequently used)
+- Role boundaries (CAN/CANNOT)
+- Quick references (1-2 lines per concept)
+
+### Contract Test
+
+Configuration size is validated by contract tests:
+```bash
+python3 -m pytest tests/test_configuration_size.py -v
+```
+
+Tests verify:
+1. AGENTS.md < 40,000 characters (hard limit)
+2. Warning if > 30,000 characters (approaching limit)
+3. Documentation exists for overflow guidance
+
+**Pattern**: L146 (Configuration Size Management)
+
+---
+
 ## Version Promotion Protocol
 
 When upgrading advisor agent to new AGET version:
