@@ -1,7 +1,7 @@
 # CLI Agent Template - Makefile
 # Provides command shortcuts for common operations
 
-.PHONY: help wake wind-down sign-off housekeeping spring-clean sanity-check test install
+.PHONY: help wake wind-down sign-off housekeeping spring-clean sanity-check test install lint format check
 
 help: ## Show this help
 	@echo "CLI Agent Template - Available Commands:"
@@ -52,3 +52,13 @@ validate: ## Validate all patterns
 
 status: ## Show template and pattern status
 	@python3 installer/status.py
+
+lint: ## Run linting checks
+	@python3 -m ruff check aget/ tests/
+
+format: ## Format code
+	@python3 -m ruff format aget/ tests/
+
+check: ## Run all checks (tests, lint)
+	@$(MAKE) lint
+	@$(MAKE) test
