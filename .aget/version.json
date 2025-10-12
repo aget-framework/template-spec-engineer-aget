@@ -1,6 +1,7 @@
 {
-  "aget_version": "2.5.0",
+  "aget_version": "2.6.0",
   "created": "2025-10-10",
+  "migrated_to_v2.6.0": "2025-10-11",
   "template": "advisor",
   "tier": "specialized",
   "agent_name": "template-advisor-aget",
@@ -16,11 +17,11 @@
     "scoped_write_permissions": true
   },
   "advisory_capabilities": {
-    "read_only": "external_systems",
+    "read_only": "scoped",
     "can_write_internal_state": true,
     "can_execute": false,
-    "can_modify_files": "scoped_to_internal_state",
-    "can_create_files": "scoped_to_internal_state",
+    "can_modify_files": "scoped",
+    "can_create_files": "scoped",
     "can_recommend": true,
     "can_analyze": true,
     "can_critique": true,
@@ -36,17 +37,17 @@
         ".aget/evolution/**"
       ],
       "forbidden_paths": [
-        "src/**",
-        "tests/**",
-        "workspace/**",
-        "products/**",
-        "data/**",
-        "docs/**",
+        "src/",
+        "tests/",
+        "workspace/",
+        "products/",
+        "data/",
+        "docs/",
         "AGENTS.md",
         "CLAUDE.md",
         "README.md",
         "version.json",
-        "**"
+        "*"
       ],
       "rationale": "Advisory with internal state: Advisors maintain session continuity and progress tracking (.aget/**) while not modifying external systems (user's code/docs)"
     },
@@ -123,5 +124,5 @@
     ],
     "deprecated": []
   },
-  "notes": "v2.5.0 Advisor Template - Read-only advisory agents with persona differentiation (teacher/mentor/consultant/guru/coach). Enforces advisory boundaries through contract tests and capability declarations. Based on L95, L114, L118, D11, ADVISOR_MODE_PROTOCOL_v1.0."
+  "notes": "v2.6.0 Advisor Template - Advisory agents with internal state and scoped write permissions. Persona differentiation (teacher/mentor/consultant/guru/coach). Enforces advisory boundaries through contract tests and capability declarations. Based on L95, L114, L118, D11, L147, ADVISOR_MODE_PROTOCOL_v1.0."
 }
