@@ -5,6 +5,126 @@ All notable changes to AGET will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 2025-10-13 - "Portfolio Governance"
+
+### Added
+- **Portfolio Governance System**:
+  - Portfolio field in version.json for organizational grouping
+  - Portfolio-aware advisory operations
+  - Classification support for sensitive engagements
+  - Security boundary enforcement for advisor agents
+
+- **Organizational Memory Patterns**:
+  - Enhanced learning document structure (L51)
+  - Standardized session metadata (v1.0)
+  - Cross-agent knowledge sharing for advisors
+
+- **Learning Discovery Framework**:
+  - Systematic learning capture from advisory sessions
+  - Learning reference validation tools
+  - Advisory insight documentation templates
+
+### Changed
+- Enhanced wake protocol with portfolio awareness
+- Updated identity protocol to include portfolio field
+- Improved advisory session documentation
+
+### Documentation
+- Portfolio manifests guide for advisor deployments
+- Learning document standard (v1.0)
+- Session metadata standard for advisory work
+
+### Compatibility
+- Backward compatible with v2.6
+- New portfolio field optional (defaults to null)
+- Existing advisor agents work without portfolio assignment
+
+## [2.6.0] - 2025-10-11 - "Configuration Management"
+
+### Added
+- **Configuration Size Management**:
+  - 40,000 character limit for AGENTS.md (L146)
+  - Size monitoring for persona-rich configurations
+  - Content extraction strategies for advisor configs
+
+- **Framework Positioning**:
+  - Clarified advisor role in AGET ecosystem
+  - Updated positioning vs autonomous advisors
+  - Landscape analysis for advisory agents
+
+- **Contract Test Validation**:
+  - Enhanced 30-test suite for advisor boundaries
+  - Read-only validation improvements
+  - Persona protocol compliance testing
+
+### Documentation
+- Configuration size management for advisors
+- Framework positioning analysis
+- Advisor-specific best practices
+
+### Compatibility
+- Fully backward compatible with v2.5
+- No breaking changes to advisor contracts
+
+## [2.5.0] - 2025-10-06 - "Validation"
+
+### Added
+- **Contract Testing Framework**:
+  - 30 comprehensive contract tests (advisor-specific)
+  - Automated validation of advisory boundaries
+  - Persona protocol testing
+  - Read-only enforcement validation
+
+- **Identity Protocol**:
+  - Standardized agent_name field (must match directory)
+  - Fixed instance_type: "aget" (advisory agents)
+  - Domain field for advisory specialization
+  - Persona field (teacher/mentor/consultant/guru/coach)
+
+- **Validation Framework**:
+  - Advisory boundary verification
+  - Version compliance checking
+  - Persona configuration validation
+  - Deployment verification standards (L93)
+
+### Documentation
+- Testing guide for advisor agents
+- Contract test documentation (30 tests)
+- Identity protocol standards
+- Persona differentiation guide
+
+### Compatibility
+- Backward compatible with v2.4
+- All new advisor agents must pass 30 contract tests
+- v2.5.0 established as advisor version floor
+
+## [2.4.0] - 2025-10-03 - "Naming Conventions"
+
+### Added
+- **Naming Convention Standard**:
+  - Suffix-based capability signaling (advisor-aget pattern)
+  - Template naming convention (template-advisor-aget)
+  - Visual consistency with framework templates
+
+- **Organizational Grouping**:
+  - aget_group field in version.json
+  - Organization migration to aget-framework
+  - Repository standardization for advisors
+
+### Changed
+- Repository follows template-advisor-aget pattern
+- Template organization moved to aget-framework
+- Advisory template distinguished from worker template
+
+### Documentation
+- Naming convention guide for advisors
+- Organization structure documentation
+- Migration guide from v2.3
+
+### Compatibility
+- Backward compatible with v2.3
+- Old repository URLs redirect automatically
+
 ## [2.3.0] - 2025-10-02 - "Collaboration"
 
 ### Added
