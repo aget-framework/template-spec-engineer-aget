@@ -74,3 +74,19 @@ def test_identity_persistence_across_invocations():
         for field in operational_fields:
             assert field not in data, \
                 f"Identity conflation: Operational field '{field}' in version.json (should be in session state)"
+
+
+def test_portfolio_field_exists():
+    """Portfolio field must exist in version.json for v2.7.0+ (portfolio governance)."""
+    version_file = Path(".aget/version.json")
+    assert version_file.exists(), "version.json not found"
+
+    with open(version_file) as f:
+        data = json.load(f)
+        assert "portfolio" in data, "portfolio field missing in version.json (required in v2.7.0+)"
+
+        # Portfolio must be None (template/unassigned) or valid classification
+        portfolio = data["portfolio"]
+        valid_portfolios = [None, "main", "personal", "domain"]
+        assert portfolio in valid_portfolios, \
+            f"Invalid portfolio value: '{portfolio}' (must be one of: {valid_portfolios})"

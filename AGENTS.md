@@ -1,6 +1,6 @@
 # Agent Configuration - Advisor AGET Template
 
-@aget-version: 2.6.0
+@aget-version: 2.7.0
 
 ## Agent Compatibility
 This configuration follows the AGENTS.md open-source standard for universal agent configuration.
@@ -9,10 +9,10 @@ Works with Claude Code, Cursor, Aider, Windsurf, and other CLI coding agents.
 
 ## Project Context
 
-**template-advisor-aget** - Advisory Agent Template v2.6.0
+**template-advisor-aget** - Advisory Agent Template v2.7.0
 
 ### Purpose
-Template for creating read-only advisory agents with persona differentiation (teacher, mentor, consultant, guru, coach). Enforces advisory boundaries through contract tests and capability declarations.
+Template for creating read-only advisory agents with persona differentiation (teacher, mentor, consultant, guru, coach). Portfolio governance support with scoped write permissions respecting portfolio boundaries (.aget/** only). Enforces advisory boundaries through contract tests and capability declarations.
 
 ###Based on Framework Learnings
 - **L95**: Advisor Role Enforcement - Instructions alone don't maintain role boundaries
@@ -26,6 +26,51 @@ Template for creating read-only advisory agents with persona differentiation (te
 - **Advisory focus**: Guidance, analysis, recommendations only
 - **Persona-based**: Five distinct advisory styles
 - **Hybrid enforcement**: Declarations + contract tests
+- **Portfolio-aware**: Respects portfolio boundaries in scoped writes (v2.7.0)
+
+---
+
+## Portfolio Configuration (v2.7.0)
+
+**Purpose**: Organize advisor agents by sensitivity level for appropriate handling and governance.
+
+**Portfolio Field** in `.aget/version.json`:
+```json
+{
+  "portfolio": "main"  // or "personal", "domain", null
+}
+```
+
+**Classifications**:
+- **main** (private): Standard advisory agents with general-purpose guidance
+- **personal** (very_personal): Personal/confidential advisory agents (coaching, mentoring)
+- **domain** (confidential): Domain-specific advisory agents with proprietary context
+- **null**: Template or unassigned agent
+
+**When to Assign Portfolio**:
+- During advisor agent creation from template
+- Based on advisory context sensitivity and confidentiality requirements
+- Coordinated with supervisor for fleet organization
+
+**Portfolio-Specific Behaviors for Advisors**:
+- Scoped write permissions respect portfolio boundaries
+- Internal state writes (.aget/**) remain within portfolio boundaries
+- Issue routing respects portfolio classification
+- Learning propagation filtered by sensitivity level
+- Cross-portfolio advisory guidance restricted
+
+**Example**:
+```bash
+# After cloning advisor template
+vim .aget/version.json  # Set "portfolio": "personal" for personal coaching
+```
+
+**Validation**: Contract tests verify portfolio field exists and is valid.
+
+**Advisory Persona + Portfolio Pairing**:
+- **Coach** persona + **CCB** portfolio = Personal executive coaching
+- **Consultant** persona + **DOMAIN** portfolio = Proprietary domain consulting
+- **Teacher** persona + **Main** portfolio = General technical instruction
 
 ---
 
