@@ -1,16 +1,16 @@
 {
   "aget_version": "2.7.0",
-  "created": "2025-10-10",
-  "migrated_to_v2.7.0": "2025-10-13",
-  "migrated_to_v2.6.0": "2025-10-11",
+  "created": "2025-10-19",
+  "migrated_to_v2.7.0": "2025-10-19",
+  "migrated_to_v2.6.0": "2025-10-19",
   "template": "advisor",
   "tier": "specialized",
-  "agent_name": "template-advisor-aget",
+  "agent_name": "template-spec-engineer-aget",
   "instance_type": "aget",
-  "domain": "advisory-template",
+  "domain": "specification-engineering",
   "portfolio": null,
   "roles": ["advisor"],
-  "persona": null,
+  "persona": "consultant",
   "features": {
     "internal_state_enabled": true,
     "session_persistence": true,
@@ -127,5 +127,5 @@
     ],
     "deprecated": []
   },
-  "notes": "v2.7.0 Advisor Template - Portfolio governance support with persona-specific advisory modes. Scoped write permissions respect portfolio boundaries (.aget/** only). Multi-portfolio classification (CCB/DOMAIN/Main). Based on L95, L114, L118, D11, L147, ADVISOR_MODE_PROTOCOL_v1.0."
+  "notes": "v2.7.0 Spec Engineer Template - Reverse engineers AGET agents into formal EARS specifications. Consultant persona for professional analysis and solutions focus. Leverages coding agent semantic understanding for pattern extraction. Proven methodology: Advanced extraction (Oct 2025, 6,800 lines → 30 capabilities). Scoped write permissions (.aget/** only)."
 }
