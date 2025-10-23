@@ -241,6 +241,7 @@ For existing users of v1:
 - [ ] AGET_VOCABULARY.md
 - [ ] DIRECTORY_STANDARDS.md
 - [ ] ORIGIN_STORY.md
+- [ ] .aget/docs/VISION.md - Specification-driven development vision (future CR)
 
 ### Tools
 - [ ] Template installer (`aget init`)
