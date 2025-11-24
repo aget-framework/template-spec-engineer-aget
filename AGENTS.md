@@ -1069,15 +1069,112 @@ my-{domain}-advisor-aget/
 │   ├── docs/                 # Domain-specific documentation
 │   ├── evolution/            # Learning and decision tracking
 │   └── checkpoints/          # State snapshots
+├── .memory/                  # Layer 4: Advisor relationship state (v2.9+)
+│   ├── clients/              # Client-specific context
+│   └── engagements/          # Engagement tracking
+├── sessions/                 # Layer 5: Session logs and work artifacts
 ├── AGENTS.md                 # This file (agent configuration)
 ├── CLAUDE.md                 # Symlink to AGENTS.md
 ├── tests/
 │   ├── test_identity_contract.py
 │   ├── test_wake_contract.py
-│   └── test_advisor_contract.py
+│   └── test_spec_engineer_contract.py
 ├── workspace/                # Private workspace for analysis
 └── README.md                 # Public-facing documentation
 ```
+
+---
+
+## .memory/ Directory (Layer 4 - Advisors Only)
+
+**Purpose**: Store advisor-specific relationship state, client context, and engagement tracking.
+
+**New in v2.9**: Formal Layer 4 for advisor agents to maintain ongoing client relationships and engagement state separate from framework knowledge (.aget/) and work product (sessions/).
+
+### The .memory/ Boundary Test
+
+**Question**: Does this represent ongoing relationship state with a specific client/engagement?
+
+- **YES** → `.memory/` (client context, engagement tracking, relationship history)
+- **NO** → `.aget/` (framework knowledge, process learnings) or `sessions/` (work product, deliverables)
+
+### What Belongs in .memory/
+
+✅ **Client relationship state:**
+- Client background, specification preferences, communication style
+- Quality goals, specification standards
+- Interaction history, key insights from past engagements
+
+✅ **Engagement tracking:**
+- Specification engineering engagement scope, objectives
+- Progress tracking (spec maturity over time)
+- Engagement-specific standards and templates
+
+✅ **Relationship continuity:**
+- What worked/didn't work with this client's specifications
+- Client-specific spec patterns and conventions
+- Historical baselines for spec quality metrics
+
+### What Does NOT Belong in .memory/
+
+❌ **Framework knowledge** → Store in `.aget/evolution/`:
+- Process learnings that apply broadly
+- Specification methodology patterns
+- Tool usage patterns
+- General best practices
+
+❌ **Work product** → Store in `sessions/`:
+- Session logs and conversation records
+- Specification documents
+- Analysis findings
+- Recommendations for specific reviews
+
+❌ **Configuration** → Store in `.aget/`:
+- Agent identity and version
+- Capability declarations
+- Specification templates (unless client-specific)
+
+### Structure
+
+```
+.memory/
+├── clients/              # Client-specific context and relationship state
+│   ├── {client_id}/     # Per-client directory
+│   │   ├── context.yaml # Client spec preferences, standards, goals
+│   │   ├── history.md   # Specification history, key insights
+│   │   └── notes/       # Session notes, observations
+│   └── .gitkeep
+├── engagements/          # Engagement-specific state
+│   ├── {engagement_id}/ # Per-engagement directory
+│   │   ├── brief.yaml   # Engagement scope, objectives
+│   │   ├── progress.md  # Spec quality tracking, milestones
+│   │   └── artifacts/   # Engagement-specific deliverables
+│   └── .gitkeep
+└── README.md            # Usage guidelines (see .memory/README.md)
+```
+
+### Privacy Considerations
+
+**If your advisor handles sensitive information**, consider:
+- Adding sensitive paths to `.gitignore`
+- Using placeholders in examples (`{client_id}`, `{engagement_id}`)
+- Following your organization's data governance standards
+- Establishing data retention policies
+
+### When to Use .memory/
+
+**Use .memory/** when you need to:
+- Track ongoing specification engineering relationships across multiple sessions
+- Maintain engagement state and spec quality progress
+- Preserve client-specific spec standards and preferences
+- Store relationship history that informs future specifications
+
+**Don't use .memory/** for:
+- Single-session spec reviews (use `sessions/` only)
+- Framework improvements (use `.aget/evolution/`)
+- General spec templates (use `.aget/templates/`)
+
+**See also**: `.memory/README.md` for detailed usage guidelines and examples.
 
 ---
 
