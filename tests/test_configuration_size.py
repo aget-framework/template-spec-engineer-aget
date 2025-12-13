@@ -47,7 +47,7 @@ def test_agents_md_reasonable_size():
 
 def test_documentation_exists_for_overflow():
     """.aget/docs/ directory should exist for detailed documentation."""
-    docs_dir = Path(".aget/docs")
+    docs_dir = Path(__file__).parent.parent / ".aget/docs")
 
     # If AGENTS.md is large, docs directory should exist for overflow
     agents_file = Path("AGENTS.md")
