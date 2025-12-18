@@ -20,8 +20,8 @@ def test_rubric_scores_range_0_to_3():
     assessment = RubricAssessment(Path('/tmp/test'))
 
     # Valid scores
-    assessment.assess_category('conversation_traceability', 0)
-    assessment.assess_category('feature_observability', 1)
+    assessment.assess_category('development_history', 0)
+    assessment.assess_category('code_observability', 1)
     assessment.assess_category('decision_documentation', 2)
     assessment.assess_category('pattern_clarity', 3)
     assessment.assess_category('constraint_discovery', 2)
@@ -29,10 +29,10 @@ def test_rubric_scores_range_0_to_3():
 
     # Invalid scores should raise
     with pytest.raises(ValueError):
-        assessment.assess_category('conversation_traceability', 4)
+        assessment.assess_category('development_history', 4)
 
     with pytest.raises(ValueError):
-        assessment.assess_category('conversation_traceability', -1)
+        assessment.assess_category('development_history', -1)
 
 
 def test_weighted_total_calculation():
@@ -40,8 +40,8 @@ def test_weighted_total_calculation():
     assessment = RubricAssessment(Path('/tmp/test'))
 
     # All 3s = 18 total, 100% weighted
-    assessment.assess_category('conversation_traceability', 3)
-    assessment.assess_category('feature_observability', 3)
+    assessment.assess_category('development_history', 3)
+    assessment.assess_category('code_observability', 3)
     assessment.assess_category('decision_documentation', 3)
     assessment.assess_category('pattern_clarity', 3)
     assessment.assess_category('constraint_discovery', 3)
@@ -57,8 +57,8 @@ def test_recommendation_thresholds():
     """Test 3: Recommendation levels at correct thresholds."""
     # Highly extractable (15-18)
     assessment_high = RubricAssessment(Path('/tmp/test'))
-    assessment_high.assess_category('conversation_traceability', 3)
-    assessment_high.assess_category('feature_observability', 3)
+    assessment_high.assess_category('development_history', 3)
+    assessment_high.assess_category('code_observability', 3)
     assessment_high.assess_category('decision_documentation', 3)
     assessment_high.assess_category('pattern_clarity', 2)
     assessment_high.assess_category('constraint_discovery', 2)
@@ -71,8 +71,8 @@ def test_recommendation_thresholds():
 
     # Moderately extractable (11-14)
     assessment_mod = RubricAssessment(Path('/tmp/test'))
-    assessment_mod.assess_category('conversation_traceability', 2)
-    assessment_mod.assess_category('feature_observability', 2)
+    assessment_mod.assess_category('development_history', 2)
+    assessment_mod.assess_category('code_observability', 2)
     assessment_mod.assess_category('decision_documentation', 2)
     assessment_mod.assess_category('pattern_clarity', 2)
     assessment_mod.assess_category('constraint_discovery', 2)
@@ -85,8 +85,8 @@ def test_recommendation_thresholds():
 
     # Not extractable (<6)
     assessment_low = RubricAssessment(Path('/tmp/test'))
-    assessment_low.assess_category('conversation_traceability', 0)
-    assessment_low.assess_category('feature_observability', 1)
+    assessment_low.assess_category('development_history', 0)
+    assessment_low.assess_category('code_observability', 1)
     assessment_low.assess_category('decision_documentation', 1)
     assessment_low.assess_category('pattern_clarity', 1)
     assessment_low.assess_category('constraint_discovery', 1)
@@ -103,8 +103,8 @@ def test_not_extractable_recommendation_action():
     assessment = RubricAssessment(Path('/tmp/test'))
 
     # Score below 6
-    assessment.assess_category('conversation_traceability', 0)
-    assessment.assess_category('feature_observability', 0)
+    assessment.assess_category('development_history', 0)
+    assessment.assess_category('code_observability', 0)
     assessment.assess_category('decision_documentation', 1)
     assessment.assess_category('pattern_clarity', 1)
     assessment.assess_category('constraint_discovery', 1)
