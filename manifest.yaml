@@ -1,0 +1,35 @@
+apiVersion: aget.framework/v1
+kind: TemplateManifest
+
+metadata:
+  name: template-spec-engineer-aget
+  version: 1.0.0
+  agent_type: Spec Engineer
+  created: "2025-12-25"
+  author: private-aget-framework-AGET
+  status: active
+  description: Specification engineer template for spec authoring
+
+composition:
+  base_template: developer
+  capabilities:
+    - name: memory-management
+      version: ">=1.0.0"
+    - name: domain-knowledge
+      version: ">=1.0.0"
+      config:
+        domain: specification-engineering
+    - name: structured-outputs
+      version: ">=1.0.0"
+      config:
+        formats:
+          - yaml
+          - markdown
+          - specs
+  composition_rules:
+    conflict_resolution: error
+
+validation:
+  dag_validated: true
+  conflicts_checked: true
+  last_validated: "2025-12-25"
