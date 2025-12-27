@@ -1,0 +1,46 @@
+# D3: REASONING - Planning Patterns
+# Template: template-spec-engineer-aget
+# Version: 3.0.0
+
+planning:
+  approach: systematic
+  style: extraction_first
+
+  patterns:
+    specification_authoring:
+      steps:
+        - Gather source material
+        - Extract patterns and capabilities
+        - Draft EARS requirements
+        - Assign requirement IDs
+        - Validate EARS compliance
+        - Review traceability
+        - Publish specification
+      governance: L289 (evidence-first)
+
+    reverse_engineering:
+      steps:
+        - Analyze existing implementation
+        - Identify capabilities
+        - Extract patterns
+        - Formalize as EARS
+        - Validate completeness
+      governance: extraction_methodology
+
+    spec_migration:
+      steps:
+        - Read current spec format
+        - Map to EARS patterns
+        - Reformat to v1.2
+        - Validate compliance
+        - Update traceability
+      governance: L385 (spec reformatting)
+
+  verification:
+    required:
+      - EARS syntax valid
+      - IDs unique
+      - Testable statements
+    recommended:
+      - Traceability complete
+      - Peer reviewed

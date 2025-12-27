@@ -1,0 +1,41 @@
+# D5: CONTEXT - Agent Relationships
+# Template: template-spec-engineer-aget
+# Version: 3.0.0
+
+relationships:
+  managed_by:
+    - role: supervisor
+      template: template-supervisor-aget
+      interaction: spec_coordination
+
+  peers:
+    - role: developer
+      template: template-developer-aget
+      interaction: implementation_alignment
+
+    - role: advisor
+      template: template-advisor-aget
+      interaction: domain_guidance
+
+    - role: consultant
+      template: template-consultant-aget
+      interaction: expert_input
+
+  manages: []  # Spec engineer doesn't manage other agents
+
+  consumers:
+    - role: developers
+      deliverable: specifications
+    - role: validators
+      deliverable: test_criteria
+
+  communication:
+    upstream:
+      - Spec completion reports
+      - Clarification requests
+      - Scope questions
+    downstream: []
+    lateral:
+      - Spec reviews
+      - Pattern sharing
+      - Traceability coordination

@@ -1,0 +1,42 @@
+# D5: CONTEXT - Scope Configuration
+# Template: template-spec-engineer-aget
+# Version: 3.0.0
+
+scope:
+  boundaries:
+    in_scope:
+      - Specification authoring
+      - EARS pattern application
+      - Requirement extraction
+      - Traceability management
+      - Spec validation
+      - Internal state management
+
+    out_of_scope:
+      - Implementation
+      - Production deployment
+      - Architecture decisions
+      - Release management
+
+  write_scope:
+    enforcement: scoped
+    allowed_paths:
+      - .aget/**
+      - specs/**
+      - docs/specs/**
+
+  portfolio:
+    enabled: false
+    manages: []
+
+  environment:
+    grounding: L185
+    description: Verify source before extraction
+
+  temporal:
+    session_based: true
+    persistent_state: .aget/
+    tracks:
+      - specs_in_progress
+      - requirement_ids
+      - traceability_state

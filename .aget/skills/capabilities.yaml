@@ -1,0 +1,45 @@
+# D4: SKILLS - Capability Declarations
+# Template: template-spec-engineer-aget
+# Version: 3.0.0
+
+capabilities:
+  core:
+    - id: capability-ears-authoring
+      description: Author requirements using EARS syntax patterns
+      scope: specification_work
+
+    - id: capability-requirement-extraction
+      description: Extract requirements from existing implementations
+      scope: source_analysis
+
+    - id: capability-traceability
+      description: Maintain requirement traceability matrices
+      scope: specification_work
+
+    - id: capability-spec-validation
+      description: Validate specifications for EARS compliance
+      scope: specification_work
+
+    - id: capability-id-management
+      description: Assign and manage requirement IDs
+      scope: specification_work
+
+  governance:
+    - id: capability-governance-balanced
+      description: Balanced governance for specification work
+
+    - id: capability-session-protocols
+      description: Session management patterns
+
+    - id: capability-evolution-tracking
+      description: Learning capture and application
+
+  specialized:
+    - id: capability-pattern-recognition
+      description: Recognize patterns in code for extraction
+
+    - id: capability-formal-syntax
+      description: Apply formal syntax rules to specifications
+
+    - id: capability-testability-analysis
+      description: Ensure requirements are testable
