@@ -1,35 +1,80 @@
-apiVersion: aget.framework/v1
-kind: TemplateManifest
+# AGET Template Manifest v3.0
+# Template: template-spec-engineer-aget
+# 5D Composition Architecture
 
-metadata:
+manifest_version: "3.0"
+
+template:
   name: template-spec-engineer-aget
-  version: 1.0.0
-  agent_type: Spec Engineer
-  created: "2025-12-25"
+  archetype: Spec_Engineer
+  description: Specification engineering template for EARS authoring
+  version: 3.0.0
+  created: "2025-12-27"
   author: private-aget-framework-AGET
-  status: active
-  description: Specification engineer template for spec authoring
+  inherits_from: template-developer-aget
 
 composition:
-  base_template: developer
-  capabilities:
-    - name: memory-management
-      version: ">=1.0.0"
-    - name: domain-knowledge
-      version: ">=1.0.0"
-      config:
-        domain: specification-engineering
-    - name: structured-outputs
-      version: ">=1.0.0"
-      config:
-        formats:
-          - yaml
-          - markdown
-          - specs
-  composition_rules:
-    conflict_resolution: error
+  persona:
+    archetype: "$ref: .aget/persona/archetype.yaml"
+    style: "$ref: .aget/persona/style.yaml"
+    governance: capability-governance-balanced
 
-validation:
-  dag_validated: true
-  conflicts_checked: true
-  last_validated: "2025-12-25"
+  memory:
+    structure: "$ref: .aget/memory/"
+    inheritance:
+      - domain
+      - organizational
+      - experiential
+
+  reasoning:
+    decision_authority: "$ref: .aget/reasoning/decision_authority.yaml"
+    planning: "$ref: .aget/reasoning/planning_patterns.yaml"
+
+  skills:
+    capabilities: "$ref: .aget/skills/capabilities.yaml"
+    phases: "$ref: .aget/skills/phase_mapping.yaml"
+
+  context:
+    relationships: "$ref: .aget/context/relationships.yaml"
+    scope: "$ref: .aget/context/scope.yaml"
+
+capabilities:
+  - capability-governance-balanced
+  - capability-session-protocols
+  - capability-evolution-tracking
+  - capability-ears-authoring
+  - capability-requirement-extraction
+  - capability-traceability
+  - capability-spec-validation
+  - capability-id-management
+  - capability-pattern-recognition
+  - capability-formal-syntax
+
+asdlc_phases:
+  primary: [1]
+  secondary: [0, 4]
+  cross_cutting: []
+
+inviolables:
+  inherited:
+    - id: INV-CORE-001
+      source: aget_framework
+      statement: The SYSTEM shall NOT execute Destructive_Action WITHOUT User_Confirmation
+    - id: INV-CORE-002
+      source: aget_framework
+      statement: The SYSTEM shall NOT modify Production_Data WITHOUT Explicit_Authorization
+
+  agent_specific:
+    - id: INV-SPE-001
+      statement: The SYSTEM shall NOT publish Specification WITHOUT EARS_Compliance_Validation
+      rationale: Archetype-specific safety constraint
+      enforcement: validation
+
+contract_tests:
+  required:
+    - test_version_json_required_fields
+    - test_manifest_v3_schema
+    - test_5d_directories_exist
+  recommended:
+    - test_governance_files_exist
+    - test_identity_json_valid

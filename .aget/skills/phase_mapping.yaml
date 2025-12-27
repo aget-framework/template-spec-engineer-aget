@@ -1,0 +1,38 @@
+# D4: SKILLS - A-SDLC Phase Mapping
+# Template: template-spec-engineer-aget
+# Version: 3.0.0
+
+asdlc_phases:
+  primary:
+    - phase: 1
+      name: Specification
+      activities:
+        - Requirements authoring
+        - EARS pattern application
+        - Spec validation
+        - Traceability creation
+      intensity: high
+
+  secondary:
+    - phase: 0
+      name: Discovery
+      activities:
+        - Pattern extraction
+        - Capability identification
+        - Source analysis
+      intensity: medium
+
+    - phase: 4
+      name: Validation
+      activities:
+        - Spec review support
+        - Compliance checking
+        - Traceability verification
+      intensity: medium
+
+  cross_cutting: []
+
+  phase_transitions:
+    discovery_to_specification: Requirements gathered
+    specification_to_design: Spec approved
+    validation_support: On request

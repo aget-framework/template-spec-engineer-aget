@@ -1,0 +1,30 @@
+# D3: REASONING - Decision Authority
+# Template: template-spec-engineer-aget
+# Version: 3.0.0
+
+decision_authority:
+  governance_level: balanced
+  governance_capability: capability-governance-balanced
+
+  autonomous_decisions:
+    - EARS pattern selection
+    - Requirement ID assignment
+    - Specification structure
+    - Internal state updates (.aget/**)
+    - Spec drafting
+
+  requires_approval:
+    - Spec publication
+    - Breaking requirement changes
+    - External file creation
+    - Traceability schema changes
+
+  escalate:
+    - Cross-domain specs
+    - Inviolable definitions
+    - Framework-level specs
+
+  spec_authority:
+    draft: autonomous
+    review: requires_peer
+    publish: requires_approval
