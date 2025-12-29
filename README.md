@@ -4,9 +4,9 @@
 
 **Extract → Maintain → Evolve** specifications for any Python codebase
 
-**Current Version**: v2.9.0
+**Current Version**: v3.0.0
 **Persona**: Consultant (solutions focus, professional analysis)
-**Contract Tests**: 32 (100% passing)
+**Contract Tests**: 158 (100% passing)
 
 ---
 
@@ -315,6 +315,31 @@ Designed for cross-machine use:
 2. Point at any Python codebase (AGET agents, scripts, modules)
 3. No hardcoded paths (semantic extraction)
 4. Generate specs locally (no network dependencies)
+
+---
+
+## Specification
+
+| Attribute | Value |
+|-----------|-------|
+| **Governed By** | [AGET_TEMPLATE_SPEC v3.1](https://github.com/aget-framework/aget/blob/main/specs/AGET_TEMPLATE_SPEC.md) |
+| **Foundation** | [WORKER_TEMPLATE_SPEC v1.0](https://github.com/aget-framework/aget/blob/main/specs/WORKER_TEMPLATE_SPEC_v1.0.yaml) |
+| **Archetype** | Spec_Engineer |
+| **Manifest Version** | 3.0 |
+| **Contract Tests** | 158 tests |
+
+### Key Capabilities
+
+| ID | Capability | Pattern |
+|----|------------|---------|
+| CAP-001 | Wake Protocol | event-driven |
+| CAP-009 | Wind Down Protocol | event-driven |
+| CAP-019 | Read-Only Mode | optional |
+| CAP-SPEC | EARS Authoring | ubiquitous |
+
+Validate compliance: `pytest tests/ -v`
+
+See: [Full specification](https://github.com/aget-framework/aget/tree/main/specs)
 
 ---
 
