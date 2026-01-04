@@ -221,7 +221,7 @@ Quality expectations by code complexity (progression path):
 - **Accuracy**: 70-80% (complex behavior)
 - **Overall**: 60-70% quality
 
-**Advanced Precedent** (Advanced Use Case):
+**Advanced Precedent** (Large-Scale Use Case):
 - **Input**: 6,800 lines (AGET agent with extensive session/evolution history)
 - **Output**: 30 capabilities, 70%+ quality
 - **Demonstrates**: Feasibility at application scale (validate at script level first)
@@ -264,7 +264,7 @@ def calculate_tax(amount, rate):
 - Many capabilities (20-40+)
 - Complex interactions
 
-**Example**: Full AGET agent → 30 capabilities (validated precedent)
+**Example**: Full AGET agent → 30 capabilities (validated at scale)
 
 ---
 
@@ -272,7 +272,7 @@ def calculate_tax(amount, rate):
 
 - **USAGE_GUIDE.md**: Quick start, troubleshooting, requirements
 - **PERSONA_GUIDE.md**: Consultant rationale, implementation guidelines
-- **EXTRACTION_METHODOLOGY.md**: 5-phase algorithm, validated precedent, validation
+- **EXTRACTION_METHODOLOGY.md**: 5-phase algorithm, validation methodology
 
 ---
 
