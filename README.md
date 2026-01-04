@@ -264,7 +264,7 @@ def calculate_tax(amount, rate):
 - Many capabilities (20-40+)
 - Complex interactions
 
-**Example**: Full AGET agent → 30 capabilities (Advanced precedent)
+**Example**: Full AGET agent → 30 capabilities (validated precedent)
 
 ---
 
@@ -272,7 +272,7 @@ def calculate_tax(amount, rate):
 
 - **USAGE_GUIDE.md**: Quick start, troubleshooting, requirements
 - **PERSONA_GUIDE.md**: Consultant rationale, implementation guidelines
-- **EXTRACTION_METHODOLOGY.md**: 5-phase algorithm, Advanced precedent, validation
+- **EXTRACTION_METHODOLOGY.md**: 5-phase algorithm, validated precedent, validation
 
 ---
 
