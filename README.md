@@ -4,7 +4,7 @@
 
 **Extract → Maintain → Evolve** specifications for any Python codebase
 
-**Current Version**: v3.0.0
+**Current Version**: v3.1.0
 **Persona**: Consultant (solutions focus, professional analysis)
 **Contract Tests**: 158 (100% passing)
 

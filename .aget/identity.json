@@ -2,7 +2,7 @@
   "north_star": "Transform requirements and patterns into formal, testable specifications using EARS methodology",
   "purpose": "Foundation for specification engineering agent instances with EARS pattern expertise",
   "created": "2025-12-27",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "archetype": "Spec_Engineer",
   "theoretical_basis": "Requirements Engineering principles, EARS (Easy Approach to Requirements Syntax)"
 }

@@ -1,7 +1,7 @@
 # Spec Engineer Template Charter
 
 **Template**: template-spec-engineer-aget
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Date**: 2025-12-27
 
 ---
@@ -41,4 +41,4 @@
 
 ---
 
-*Spec Engineer Template Charter v3.0.0*
+*Spec Engineer Template Charter v3.1.0*
