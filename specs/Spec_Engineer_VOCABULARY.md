@@ -1,11 +1,13 @@
-# Spec_Engineer Domain Vocabulary
+# Spec Engineer Domain Vocabulary
 
-**Version**: 1.0.0
+**Version**: 1.1.0
 **Status**: Active
 **Owner**: template-spec-engineer-aget
 **Created**: 2026-01-10
+**Updated**: 2026-01-11
 **Scope**: Template vocabulary (DRIVES instance behavior per L481)
 **Archetype**: Spec_Engineer
+**Template**: VOCABULARY_TEMPLATE_v3.3
 
 ---
 
@@ -90,6 +92,37 @@ Verification:
   skos:broader: Spec_Engineer_Core_Concepts
   skos:inScheme: Spec_Engineer_Vocabulary
 ```
+
+---
+
+## Concept Relationships
+
+```yaml
+relationships:
+  hierarchical:
+    - parent: Spec_Engineer_Core_Concepts
+      children: [Requirement, EARS_Pattern, Capability, Constraint, Verification]
+
+  associative:
+    - subject: Requirement
+      predicate: skos:related
+      object: EARS_Pattern
+    - subject: Capability
+      predicate: skos:related
+      object: Verification
+```
+
+---
+
+## EKO Cross-References
+
+Per AGET_EXECUTABLE_KNOWLEDGE_SPEC.md:
+
+| Vocabulary Term | EKO Term | Relationship |
+|-----------------|----------|--------------|
+| Requirement | EKO:Specification_Element | skos:exactMatch |
+| EARS_Pattern | EKO:Specification_Pattern | skos:closeMatch |
+| Capability | EKO:System_Capability | skos:broadMatch |
 
 ---
 
