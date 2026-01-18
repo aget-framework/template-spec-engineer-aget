@@ -4,7 +4,7 @@
 
 **Extract → Maintain → Evolve** specifications for any Python codebase
 
-**Current Version**: v3.3.0
+**Current Version**: v3.4.0 "Session Skills Maturity"
 **Persona**: Consultant (solutions focus, professional analysis)
 **Contract Tests**: 158 (100% passing)
 
