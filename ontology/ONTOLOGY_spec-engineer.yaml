@@ -1,0 +1,306 @@
+# ONTOLOGY: Spec-Engineer Archetype v1.0
+# SKOS-aligned concept definitions for requirements engineering and specification
+#
+# Archetype: spec-engineer
+# Created: 2026-02-14
+# Author: private-aget-framework-AGET
+# Format: SKOS-inspired YAML (aget-framework convention)
+# Concepts: 8
+# Project: ARC-001 (Archetype Customization v3.5)
+
+apiVersion: aget.framework/v1
+kind: OntologySpec
+metadata:
+  name: spec-engineer-archetype-ontology
+  version: 1.0.0
+  created: 2026-02-14
+  author: private-aget-framework-AGET
+  archetype: spec-engineer
+  description: >
+    Formal vocabulary for spec-engineer archetype agents. Defines concepts for
+    requirements engineering, specification authoring, and validation.
+  extends: ONTOLOGY_personal_ai_systems_v1.0.yaml
+
+# ============================================================================
+# CONCEPT SCHEME
+# ============================================================================
+
+conceptScheme:
+  uri: aget:ontology/spec-engineer
+  prefLabel: Spec-Engineer Archetype Ontology
+  definition: >
+    A vocabulary for describing spec-engineer agent capabilities including
+    requirement elicitation, specification writing, and validation design.
+  hasTopConcept:
+    - aget:archetype/spec-engineer/Requirement
+    - aget:archetype/spec-engineer/Specification
+    - aget:archetype/spec-engineer/Validation
+  relatedScheme:
+    - aget:ontology/personal-ai-systems
+
+# ============================================================================
+# CONCEPTS
+# ============================================================================
+
+concepts:
+
+  # --------------------------------------------------------------------------
+  # Concept: Requirement
+  # --------------------------------------------------------------------------
+  - id: SPE-001
+    uri: aget:archetype/spec-engineer/Requirement
+    prefLabel: Requirement
+    altLabel:
+      - Req
+      - Need
+      - Constraint
+    definition: >
+      A statement of what a system must do or a quality it must have.
+      Requirements are the foundation of specifications.
+    scopeNote: >
+      AGET: EARS format (R-XXX-NNN). Requirements types: functional,
+      non-functional, constraint. Per L482, requirements use EARS templates.
+    theoreticalBasis:
+      primary: Requirements Engineering
+      source: IEEE 830
+      reference: https://en.wikipedia.org/wiki/Software_requirements_specification
+    broader: null
+    narrower:
+      - aget:archetype/spec-engineer/Functional_Requirement
+      - aget:archetype/spec-engineer/Non_Functional_Requirement
+    related:
+      - aget:archetype/spec-engineer/Specification
+      - aget:archetype/spec-engineer/Validation
+    example:
+      - "R-CLI-001: The agent SHALL load SKILL.md contents"
+      - "R-SESSION-002: The agent SHALL run wake_up.py silently"
+    inScheme: aget:ontology/spec-engineer
+    cluster: Requirements
+
+  # --------------------------------------------------------------------------
+  # Concept: Functional_Requirement
+  # --------------------------------------------------------------------------
+  - id: SPE-002
+    uri: aget:archetype/spec-engineer/Functional_Requirement
+    prefLabel: Functional_Requirement
+    altLabel:
+      - Feature
+      - Behavior
+      - Capability
+    definition: >
+      A requirement specifying a function or behavior the system must
+      perform. Answers "what the system does."
+    scopeNote: >
+      EARS templates: Ubiquitous, Event-Driven, State-Driven.
+      Functional requirements are testable through behavior verification.
+    theoreticalBasis:
+      primary: Functional Specification
+      source: Requirements Engineering
+    broader: aget:archetype/spec-engineer/Requirement
+    narrower: null
+    related:
+      - aget:archetype/spec-engineer/Non_Functional_Requirement
+    inScheme: aget:ontology/spec-engineer
+    cluster: Requirements
+
+  # --------------------------------------------------------------------------
+  # Concept: Non_Functional_Requirement
+  # --------------------------------------------------------------------------
+  - id: SPE-003
+    uri: aget:archetype/spec-engineer/Non_Functional_Requirement
+    prefLabel: Non_Functional_Requirement
+    altLabel:
+      - NFR
+      - Quality_Requirement
+      - Constraint
+    definition: >
+      A requirement specifying a quality attribute or constraint rather
+      than specific behavior. Answers "how well the system does it."
+    scopeNote: >
+      Examples: performance, security, usability, maintainability.
+      NFRs often span multiple functions.
+    theoreticalBasis:
+      primary: Quality Attributes
+      source: ISO 25010
+    broader: aget:archetype/spec-engineer/Requirement
+    narrower: null
+    related:
+      - aget:archetype/spec-engineer/Functional_Requirement
+    inScheme: aget:ontology/spec-engineer
+    cluster: Requirements
+
+  # --------------------------------------------------------------------------
+  # Concept: Specification
+  # --------------------------------------------------------------------------
+  - id: SPE-004
+    uri: aget:archetype/spec-engineer/Specification
+    prefLabel: Specification
+    altLabel:
+      - Spec
+      - Document
+      - Standard
+    definition: >
+      A formal document containing organized requirements for a system,
+      component, or capability.
+    scopeNote: >
+      AGET: *_SPEC.md format. Specifications are normative and versioned.
+      Changes follow CP process.
+    theoreticalBasis:
+      primary: Software Specification
+      source: IEEE Standards
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/spec-engineer/Requirement
+      - aget:archetype/spec-engineer/Vocabulary
+    example:
+      - "AGET_TEMPLATE_SPEC.md"
+      - "SKILL-006_aget-create-project.yaml"
+    inScheme: aget:ontology/spec-engineer
+    cluster: Specification
+
+  # --------------------------------------------------------------------------
+  # Concept: Vocabulary
+  # --------------------------------------------------------------------------
+  - id: SPE-005
+    uri: aget:archetype/spec-engineer/Vocabulary
+    prefLabel: Vocabulary
+    altLabel:
+      - Glossary
+      - Terminology
+      - Ontology
+    definition: >
+      The defined terms and concepts used in specifications. Vocabulary
+      provides semantic foundation for requirements.
+    scopeNote: >
+      AGET: *_VOCABULARY.md files. Per L482, vocabulary uses SKOS format.
+      Vocabulary enables consistent communication.
+    theoreticalBasis:
+      primary: Controlled Vocabulary
+      source: W3C SKOS
+      reference: https://www.w3.org/TR/skos-reference/
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/spec-engineer/Specification
+    inScheme: aget:ontology/spec-engineer
+    cluster: Specification
+
+  # --------------------------------------------------------------------------
+  # Concept: Validation
+  # --------------------------------------------------------------------------
+  - id: SPE-006
+    uri: aget:archetype/spec-engineer/Validation
+    prefLabel: Validation
+    altLabel:
+      - Verification
+      - V_Test
+      - Check
+    definition: >
+      The process of confirming that implementation satisfies requirements.
+      Validation ensures "we built the right thing."
+    scopeNote: >
+      AGET: V-tests in PROJECT_PLANs (V-G0.1, V-G1.1, etc.). Validation
+      maps requirements to test cases.
+    theoreticalBasis:
+      primary: Verification and Validation
+      source: IEEE 1012
+      reference: https://en.wikipedia.org/wiki/Verification_and_validation
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/spec-engineer/Requirement
+      - aget:archetype/spec-engineer/Traceability
+    inScheme: aget:ontology/spec-engineer
+    cluster: Validation
+
+  # --------------------------------------------------------------------------
+  # Concept: Traceability
+  # --------------------------------------------------------------------------
+  - id: SPE-007
+    uri: aget:archetype/spec-engineer/Traceability
+    prefLabel: Traceability
+    altLabel:
+      - Trace
+      - Linkage
+      - Mapping
+    definition: >
+      The ability to link requirements to their source (backward) and
+      to implementation/tests (forward).
+    scopeNote: >
+      AGET: R-XXX → V-XXX → test mapping. Traceability enables impact
+      analysis and coverage verification.
+    theoreticalBasis:
+      primary: Requirements Traceability
+      source: IEEE 830
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/spec-engineer/Requirement
+      - aget:archetype/spec-engineer/Validation
+    inScheme: aget:ontology/spec-engineer
+    cluster: Validation
+
+  # --------------------------------------------------------------------------
+  # Concept: Change_Proposal
+  # --------------------------------------------------------------------------
+  - id: SPE-008
+    uri: aget:archetype/spec-engineer/Change_Proposal
+    prefLabel: Change_Proposal
+    altLabel:
+      - CP
+      - RFC
+      - Amendment
+    definition: >
+      A formal request to modify a specification, including rationale,
+      impact analysis, and proposed changes.
+    scopeNote: >
+      AGET: CP process for spec changes. Changes require version bump
+      and impact assessment.
+    theoreticalBasis:
+      primary: Change Management
+      source: Configuration Management
+    broader: null
+    narrower: null
+    related:
+      - aget:archetype/spec-engineer/Specification
+    inScheme: aget:ontology/spec-engineer
+    cluster: Specification
+
+# ============================================================================
+# RELATIONSHIPS
+# ============================================================================
+
+relationships:
+  - subject: aget:archetype/spec-engineer/Functional_Requirement
+    predicate: skos:broader
+    object: aget:archetype/spec-engineer/Requirement
+    note: Functional requirements are a type of requirement
+
+  - subject: aget:archetype/spec-engineer/Non_Functional_Requirement
+    predicate: skos:broader
+    object: aget:archetype/spec-engineer/Requirement
+    note: NFRs are a type of requirement
+
+  - subject: aget:archetype/spec-engineer/Validation
+    predicate: skos:related
+    object: aget:archetype/spec-engineer/Requirement
+    note: Validation verifies requirements
+
+# ============================================================================
+# METADATA
+# ============================================================================
+
+provenance:
+  project: ARC-001
+  created: 2026-02-14
+  author: private-aget-framework-AGET
+  methodology: Derived from spec-engineer archetype SPEC-ENGINEER_SPEC.md
+
+validation:
+  conceptCount: 8
+  clusters: 3
+  theoreticalGrounding: 100%
+  skosCompliance: partial
+
+# End of ONTOLOGY_spec-engineer.yaml
