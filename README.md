@@ -16,6 +16,8 @@ The Spec-Engineer archetype brings **requirements engineering rigor** to specifi
 
 **For evaluators**: If you need an AI that can formalize requirements into aerospace-grade specifications, the Spec-Engineer archetype brings EARS methodology to your requirements process.
 
+**Domain knowledge that compounds**: Spec-engineer agents build persistent understanding of your requirements landscape — specification patterns, domain terminology, and validation criteria. Unlike tools that start fresh each session, your agent accumulates specification context that makes each requirement more precise and each validation more thorough.
+
 ---
 
 ## Skills
@@ -92,6 +94,7 @@ python3 -m pytest tests/ -v
 | **Validation** | Human intuition | Systematic ambiguity detection |
 | **Testability** | Hoped for | Verified at specification time |
 | **Patterns** | Ad-hoc | Ubiquitous, event-driven, state-driven |
+| **Domain memory** | Starts fresh each session | Accumulates specification expertise over time |
 
 ---
 
