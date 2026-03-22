@@ -100,6 +100,7 @@ When facing any substantial change or multi-step task:
 | Create project | /aget-create-project | Starting multi-gate work |
 | Review project | /aget-review-project | Mid-flight assessment |
 | File issue | /aget-file-issue | Reporting bugs or gaps |
+| Enhance spec | /aget-enhance-spec | Improving specification maturity |
 | Check health | /aget-check-health | Verifying agent structure |
 | Validate spec | /aget-validate-spec | Checking specification completeness |
 | Generate requirement | /aget-generate-requirement | Creating EARS-formatted requirements |
