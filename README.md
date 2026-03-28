@@ -2,7 +2,7 @@
 
 > Transform requirements into formal specifications using EARS methodology
 
-**Version**: v3.10.0 | **Archetype**: Spec-Engineer | **Skills**: 2 specialized + 15 universal
+**Version**: v3.11.0 | **Archetype**: Spec-Engineer | **Skills**: 2 specialized + 15 universal
 
 ---
 
@@ -114,7 +114,7 @@ Skills are provided by the template. Agents and rules directories are scaffolded
 
 | Attribute | Value |
 |-----------|-------|
-| **Framework** | [AGET v3.10.0](https://github.com/aget-framework/aget) |
+| **Framework** | [AGET v3.11.0](https://github.com/aget-framework/aget) |
 | **Archetype** | Spec-Engineer |
 | **Skills** | 17 total (2 archetype + 15 universal) |
 | **Ontology** | 7 concepts, 2 clusters |
