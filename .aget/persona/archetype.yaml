@@ -39,6 +39,8 @@ archetype:
       - Requirement formalization
       - Traceability mapping
 
+  governance_intensity: rigorous
+
   theoretical_basis:
     primary: Requirements Engineering
     secondary: EARS methodology (Alistair Mavin)
