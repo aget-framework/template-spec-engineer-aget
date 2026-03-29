@@ -83,6 +83,12 @@ When facing any substantial change or multi-step task:
 
 ---
 
+### Governance Capabilities
+
+| Attribute | Value |
+|-----------|-------|
+| Governance Intensity | Rigorous |
+
 ## Purpose
 
 > Transform requirements and patterns into formal, testable specifications using EARS methodology.
