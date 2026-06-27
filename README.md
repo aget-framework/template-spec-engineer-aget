@@ -2,7 +2,7 @@
 
 > Transform requirements into formal specifications using EARS methodology
 
-**Version**: v3.12.0 | **Archetype**: Spec-Engineer | **Skills**: 2 specialized + 15 universal
+**Version**: v3.23.1 | **Archetype**: Spec-Engineer | **Skills**: 2 specialized + 15 universal
 
 ---
 
