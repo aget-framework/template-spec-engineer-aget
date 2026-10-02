@@ -6,6 +6,9 @@
 - `scripts/study_topic.py` no longer reports a novel topic when the score floor suppressed its hits: the zero-result branch now says that suppressed hits exist and that the result is not a novel-topic verdict.
 
 ### Changed
+- The 2026-04-12 migration record under `.aget/evolution/` no longer carries the maintainer's local home path: the backup path it records now starts with `~`.
+- `manifest.yaml` `template.version` now reads 3.36.0. It had stayed at 3.4.0 since January 2026 while the other version fields moved.
+- The project-context line in `AGENTS.md` now ends `v3.36.0`. It had stayed at `v3.13.0`.
 - Advanced the template's framework identity and migration history to v3.36.0 (`.aget/version.json`, `AGENTS.md`, `README.md`).
 - Apart from the study-topic fix, no template payload ships in this release. The framework's fleet migration kit is not shipped in this template; a supervisor copies it from a clone of the core repository.
 - Not in this release: the repaired `scripts/close_authorization_guard.py`. This template still ships the guard at its 3.34.0 version; the repair is deferred to the next release. See `handoffs/CORRECTIONS_v3.35.0.md` rows 4 and 5 in `aget-framework/aget` for what to do until then.
