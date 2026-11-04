@@ -1,7 +1,7 @@
 # Agent Configuration
 
-@aget-version: 3.37.0
-@aget-canonical-specs: https://github.com/aget-framework/aget/tree/v3.37.0/specs — reliance-only conformance (D-1, 2026-07-04): this template runs the version's features; specs are canonical-referenced, not copied locally
+@aget-version: 3.37.1
+@aget-canonical-specs: https://github.com/aget-framework/aget/tree/v3.37.1/specs — reliance-only conformance (D-1, 2026-07-04): this template runs the version's features; specs are canonical-referenced, not copied locally
 
 ## Agent Compatibility
 This configuration follows the AGENTS.md open-source standard for universal agent configuration.
@@ -15,7 +15,7 @@ Works with Claude Code, Codex CLI, Gemini CLI, and other CLI coding agents.
 This template creates specification engineering agents focused on transforming requirements and patterns into formal, testable specifications.
 
 ## Project Context
-template-spec-engineer-aget - Spec Engineer AGET template - v3.37.0
+template-spec-engineer-aget - Spec Engineer AGET template - v3.37.1
 
 **Note**: Update this section when instantiating template:
 - Change project name to your spec engineer agent name

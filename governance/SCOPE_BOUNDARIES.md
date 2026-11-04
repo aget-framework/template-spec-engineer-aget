@@ -1,7 +1,7 @@
 # Spec Engineer Template Scope Boundaries
 
 **Template**: template-spec-engineer-aget
-**Version**: 3.37.0
+**Version**: 3.37.1
 **Date**: 2025-12-27
 
 ---
